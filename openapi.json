@@ -1,0 +1,18 @@
+{
+    "openapi":"3.0.3",
+    "info": {
+      "title":"Rest Api Crud and Authentication",
+      "description": "Template api for crud and authentication using jwt",
+      "version":"1.0",
+      "contact": {
+        "name": "Muhammad Rizky Saputra",
+        "email": "mrizksaputra17@gmail.com",
+        "url": "https://github.com/rizky14045"
+      }
+    },
+    "servers": [
+      {"url":"https://api.server.test/v1"}
+    ],
+    "paths": {
+    }
+  }
