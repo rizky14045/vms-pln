@@ -16,4 +16,32 @@ class ResponseHelper {
         ], $code_status);
 
     }
+
+    public static function successServiceResponse(
+        int $code_status,
+        bool $status,
+        string $message = '',
+        $data = null
+    ): array {
+        return [
+            'code_status' => $code_status,
+            'status' => $status,
+            'message' => $message,
+            'data' => $data,
+        ];
+    }
+
+    public static function errorServiceResponse(
+        int $code_status,
+        bool $status,
+        string $message = '',
+        $errors = null
+    ): array {
+        return [
+            'code_status' => $code_status,
+            'status' => $status,
+            'message' => $message,
+            'errors' => $errors,
+        ];
+    }
 }

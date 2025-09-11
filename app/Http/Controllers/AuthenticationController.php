@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\View\View;
 use App\Service\UserService;
+use App\Services\VaultSiteService;
 use Illuminate\Http\Request;
 
 class AuthenticationController extends Controller
 {
-
+    protected $vaultSiteService;
     public function __construct(
-        protected UserService $userService,
-        protected VaultSite $vaultSite
-    ) {}
+        VaultSiteService $vaultSiteService
+    ) {
+        $this->vaultSiteService = $vaultSiteService;
+    }
     
     public function viewLogin(): View {
         return view('login');
@@ -61,7 +63,7 @@ class AuthenticationController extends Controller
             "DownloadCard" => true,
         ];
 
-        $response = $soap->addCard($data);
+        $response = $this->vaultSiteService->addCard($data);
 
         return response()->json($response);
     }
