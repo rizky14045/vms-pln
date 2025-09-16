@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthenticationController;
 
@@ -15,7 +16,8 @@ use App\Http\Controllers\AuthenticationController;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/register-visitor', [HomeController::class, 'registerVisitor'])->name('register-visitor');
 
 
 Route::controller(AuthenticationController::class)->group(function () {
