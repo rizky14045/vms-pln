@@ -5,7 +5,12 @@
     <div style="width:464px" class="mx-auto bg-white dark:bg-neutral-800 rounded-xl shadow-lg px-6 py-6">
         {{-- Title --}}
         
-        <h2 class="text-2xl font-bold mb-6 text-center">Tambah Area</h2>
+        <div class="relative w-full">
+            <div>
+                <a href="{{ route('areas.index') }}" class="text-gray-500 absolute left-0">< kembali</a>
+            </div>
+            <h2 class="text-2xl font-bold mb-6 text-center">Tambah Area</h2>
+        </div>
 
         <form action="{{ route('areas.store') }}" method="POST">
             @csrf

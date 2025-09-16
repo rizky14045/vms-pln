@@ -4,10 +4,59 @@ namespace App\Services;
 
 use App\Helper\ResponseHelper;
 use App\Models\Area;
+use Carbon\Carbon;
 use Exception;
 
 class AreaService
 {
+    public function getAllAreas(array $filters = [])
+    {
+        try {
+            $query = Area::query();
+
+            // Filter search
+            if (!empty($filters['search'])) {
+                $search = $filters['search'];
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                      ->orWhere('description', 'like', "%{$search}%");
+                });
+            }
+
+            // Filter tanggal
+            if (!empty($filters['start_date']) && !empty($filters['end_date'])) {
+                $query->whereBetween('created_at', [
+                    Carbon::parse($filters['start_date'])->startOfDay(),
+                    Carbon::parse($filters['end_date'])->endOfDay()
+                ]);
+            } elseif (!empty($filters['start_date'])) {
+                $query->whereDate('created_at', '>=', Carbon::parse($filters['start_date'])->startOfDay());
+            } elseif (!empty($filters['end_date'])) {
+                $query->whereDate('created_at', '<=', Carbon::parse($filters['end_date'])->endOfDay());
+            }
+
+            // Order & OrderBy
+            $order   = $filters['order']   ?? 'desc';
+            $orderBy = $filters['orderby'] ?? 'created_at';
+
+            $areas = $query->orderBy($orderBy, $order)->get();
+
+            return ResponseHelper::successServiceResponse(
+                200,
+                true,
+                'Get all areas success',
+                $areas
+            );
+        } catch (Exception $e) {
+            return ResponseHelper::errorServiceResponse(
+                500,
+                false,
+                'Get all areas failed',
+                $e->getMessage()
+            );
+        }
+    }
+
     public function createArea(array $areaData)
     {
         try {

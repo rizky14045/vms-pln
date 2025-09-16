@@ -10,7 +10,8 @@
         'type' => 'button',
         'variant' => 'primary',
         'size' => 'md',
-        'class' => 'mt-6'
+        'class' => 'mt-6',
+        'link' => route('areas.create')
     ])
 
     <!-- Container Form Tambah Area -->
@@ -39,20 +40,25 @@
     </div>
 
     <!-- List Area -->
-    <div id="areaList" class="mt-8 space-y-3">
-        <!-- Contoh area -->
-        <div class="p-4 border rounded-lg bg-gray-50 dark:bg-neutral-700">
+    <div id="areaList" class="space-y-4 mt-4">
+        @foreach ($areas as $area)
+        <div class="p-5 border rounded-xl bg-white dark:bg-neutral-800 shadow-sm">
             <div class="flex justify-between items-center">
-                <span class="font-medium">Area Utama 1</span>
-                <button class="btnAddChild bg-green-600 text-white px-3 py-1 rounded-md"
-                    data-parent="1">+ Tambah Anak</button>
+                <h3 class="font-semibold text-lg text-gray-900 dark:text-white">
+                    {{ $area->name }}
+                </h3>
+                {{-- @include('components.button', [
+                    'text' => '+',
+                    'type' => 'button',
+                    'variant' => 'primary',
+                    'size' => 'sm',
+                    'class' => '',
+                    'id' => 'btnAddChild',
+                    'data' => ['parent' => $area->id]
+                ]) --}}
             </div>
-            <div class="ml-6 mt-2 text-sm text-gray-600 dark:text-gray-300">
-                <ul class="list-disc">
-                    <li>Sub Area A <button class="btnAddChild text-blue-500 ml-2" data-parent="2">+ Tambah Anak</button></li>
-                </ul>
-            </div>
-        </div>
+        </div>            
+        @endforeach
     </div>
 </div>
 @endsection

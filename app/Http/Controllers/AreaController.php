@@ -30,9 +30,30 @@ class AreaController extends Controller
         return Validator::make($data, $validation, $messages);
     }
 
-    public function index(): View {
+    public function index(Request $request)
+    {
+        // Get filter from request
+        $filters = [
+            'start_date' => $request->input('start_date'),
+            'end_date'   => $request->input('end_date'),
+            'search'     => $request->input('search'),
+            'order'      => $request->input('order', 'desc'),
+            'orderby'    => $request->input('orderby', 'created_at'),
+        ];
+
+        // Call service to get areas with filters
+        $areasResponse = $this->areaService->getAllAreas($filters);
+
+        if (!$areasResponse['status']) {
+            return redirect('login')->withErrors($areasResponse['message']);
+        }
+
+        // Get data areas
+        $areas = $areasResponse['data'] ?? [];
+
         return view('pages.areas.index', [
-            'areas' => []
+            'areas'   => $areas,
+            'filters' => $filters,
         ]);
     }
 

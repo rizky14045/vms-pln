@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Models\User;
 use Illuminate\View\View;
-use App\Service\UserService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use App\Helper\ResponseHelper;
 use Illuminate\Http\JsonResponse;

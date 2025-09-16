@@ -4,7 +4,8 @@
     'variant' => 'primary', // default warna
     'size' => 'md', // md, sm, lg
     'class' => '',
-    'scripts' => ''
+    'scripts' => '',
+    'link' => null, // tambahan untuk URL
 ])
 
 @php
@@ -21,8 +22,17 @@
         'lg' => 'text-lg px-6 py-4',
         default => 'text-sm btn-sm px-3 py-4', // md
     };
+
+    $allClasses = "$baseClasses $variantClasses $sizeClasses $class";
 @endphp
 
-<button type="{{ $type }}" {{ $attributes->merge(['class' => "$baseClasses $variantClasses $sizeClasses $class"]) }}>
-    {{ $text }}
-</button>
+@if ($link)
+    <a href="{{ $link }}" {{ $attributes->merge(['class' => $allClasses]) }}>
+        {{ $text }}
+    </a>
+@else
+    <button type="{{ $type }}" {{ $attributes->merge(['class' => $allClasses]) }}
+        @if ($scripts) onclick="{{ $scripts }}" @endif>
+        {{ $text }}
+    </button>
+@endif
