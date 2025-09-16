@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('areas', function (Blueprint $table) {
             $table->id();
             $table->string('access_no')->unique();
+            $table->string('name');
             $table->string('description')->nullable();
             $table->timestamps();
         });

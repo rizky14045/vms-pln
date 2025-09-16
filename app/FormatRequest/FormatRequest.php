@@ -4,11 +4,16 @@ namespace App\FormatRequest;
 
 class FormatRequest
 {
-    public static function formatAddArea(string $access_no, array $data)
+    public static function formatAddArea(array $data)
     {
         $entTimeZone = [];
 
+         $entTimeZone[] = [
+                    'DoorName' => "esd-138",
+                    'TimeZone' => '01'
+                ];
         if (!empty($data['device_id']) && is_array($data['device_id'])) {
+           
             foreach ($data['device_id'] as $device) {
                 $entTimeZone[] = [
                     'DoorName' => $device,
@@ -18,7 +23,7 @@ class FormatRequest
         }
 
         return [
-            'AccessNo' => $access_no,
+            'AccessNo' => $data['access_no'],
             'Description' => $data['description'] ?? '',
             'TimeZoneGroup' => [
                 'entTimeZone' => $entTimeZone

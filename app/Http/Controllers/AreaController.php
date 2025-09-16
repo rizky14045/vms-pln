@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\FormatRequest\FormatRequest;
-use App\Http\Validation\AreaValidation;
+use App\Validation\AreaValidation;
 use App\Services\AreaService;
 use App\Services\VaultSiteService;
 use Illuminate\View\View;
@@ -29,6 +29,18 @@ class AreaController extends Controller
     {
         return Validator::make($data, $validation, $messages);
     }
+
+    public function index(): View {
+        return view('pages.areas.index', [
+            'areas' => []
+        ]);
+    }
+
+    public function create(): View {
+        return view('pages.areas.create', [
+            'areas' => []
+        ]);
+    }
     
     public function store(Request $request) {
         // Validate request data
@@ -37,20 +49,18 @@ class AreaController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         };
 
+        $accessNo = $this->areaService->getNextAvailableAccessNo();
+        if ($accessNo === null) {
+            return redirect()->back()->withErrors('Kontroller sudah penuh.')->withInput();
+        }
+        $request->merge(['access_no' => $accessNo]);
+
         $stored_area = $this->areaService->createArea($request->all());
 
         if (!$stored_area["status"]) {
             return redirect()->back()->withErrors($stored_area["message"])->withInput();
         }
 
-        $result = $this->vaultSiteService->addArea($this->formatRequest->formatAddArea($stored_area["data"]->access_no, $request->all()));
-
-        return redirect()->route('area.index')->with('success', 'Area berhasil dibuat.');
-    }
-
-    public function destroy($accessNo) {
-        $result = $this->vaultSiteService->deleteArea($accessNo);
-
-        dd($result);
+        return redirect()->route('areas.index')->with('success', 'Area berhasil dibuat.');
     }
 }

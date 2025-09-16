@@ -20,11 +20,13 @@ Route::get('/', [DashboardController::class, 'index']);
 
 
 Route::controller(AuthenticationController::class)->group(function () {
-    Route::get('/testing','addData')->name('index');
     Route::get('/login','viewLogin')->name('login');
+    Route::post('/login','login')->name('login.post');
     Route::get('/register','viewRegister')->name('register');
 });
 
 Route::controller(AreaController::class)->group(function () {
-    Route::get('/test-area','index')->name('area.index');
+    Route::get('/areas','index')->name('areas.index');
+    Route::get('/areas/create','create')->name('areas.create');
+    Route::post('/areas','store')->name('areas.store');
 });

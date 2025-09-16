@@ -2,20 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Validation\AuthValidation;
+use App\Services\AuthService;
 use Illuminate\View\View;
-use App\Service\UserService;
-use App\Services\VaultSiteService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AuthenticationController extends Controller
-{
-    protected $vaultSiteService;
+{    
+    protected $authService;
+
     public function __construct(
-        VaultSiteService $vaultSiteService
+        AuthService $authService
     ) {
-        $this->vaultSiteService = $vaultSiteService;
+        $this->authService = $authService;
     }
-    
+
+    protected function validator(array $data, $validation, array $messages = [])
+    {
+        return Validator::make($data, $validation, $messages);
+    }
+
     public function viewLogin(): View {
         return view('login');
     }
@@ -23,48 +30,25 @@ class AuthenticationController extends Controller
         return view('register');
     }
 
-    public function addData(){
-         $data = [
-            "CardNo" => "20211114",
-            "Name" => "Test API 211114",
-            "CardPinNo" => "0000",
-            "CardType" => "Normal",
-            "Department" => "RnD",
-            "Company" => "binRusdi",
-            "Gentle" => "Male",
-            "AccessLevel" => "02",
-            "FaceAccessLevel" => "00",
-            "LiftAccessLevel" => "01",
-            "BypassAP" => false,
-            "ActiveStatus" => true,
-            "NonExpired" => true,
-            "ExpiredDate" => "2020/12/31",
-            "VehicleNo" => "B6694UWA",
-            "FloorNo" => "3",
-            "UnitNo" => "25",
-            "ParkingNo" => "4",
-            "StaffNo" => "12514",
-            "Title" => "string",
-            "Position" => "string",
-            "NRIC" => "string",
-            "Passport" => "string",
-            "Race" => "string",
-            "DOB" => "1985/07/10",
-            "JoiningDate" => "2020/01/01",
-            "ResignDate" => "2020/12/31",
-            "Address1" => "string",
-            "Address2" => "string",
-            "PostalCode" => "string",
-            "City" => "string",
-            "State" => "string",
-            "Email" => "string",
-            "MobileNo" => "string",
-            "Photo" => "string",
-            "DownloadCard" => true,
-        ];
+    public function login(Request $request) {
+        // Validate request data
+        $validator = $this->validator($request->all(), AuthValidation::rulesForLogin(), AuthValidation::messages());
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        };
 
-        $response = $this->vaultSiteService->addCard($data);
+        try {
+            $this->authService->login(
+                $request->only('email', 'password'),
+                $request->boolean('remember')
+            );
 
-        return response()->json($response);
+            $request->session()->regenerate();
+
+            return redirect()->intended('/dashboard')
+                ->with('success', 'Login berhasil!');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return back()->withErrors($e->errors())->withInput();
+        }
     }
 }
