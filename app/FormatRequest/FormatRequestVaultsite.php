@@ -2,7 +2,7 @@
 
 namespace App\FormatRequest;
 
-class FormatRequest
+class FormatRequestVaultsite
 {
     public static function formatAddArea(array $data)
     {

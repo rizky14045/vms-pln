@@ -31,4 +31,12 @@ Route::controller(AreaController::class)->group(function () {
     Route::get('/areas','index')->name('areas.index');
     Route::get('/areas/create','create')->name('areas.create');
     Route::post('/areas','store')->name('areas.store');
+    Route::get('/areas/{id}/edit','edit')->name('areas.edit');
+    Route::put('/areas/{id}','update')->name('areas.update');
+});
+
+Route::controller(AreaController::class)->group(function () {
+    Route::get('/areas','index')->name('areas.index');
+    Route::get('/areas/create','create')->name('areas.create');
+    Route::post('/areas','store')->name('areas.store');
 });

@@ -12,14 +12,14 @@ class AreaService
     public function getAllAreas(array $filters = [])
     {
         try {
-            $query = Area::query();
+            $query = Area::with('childrenArea');
 
             // Filter search
             if (!empty($filters['search'])) {
-                $search = $filters['search'];
+                $search = trim($filters['search']);
                 $query->where(function ($q) use ($search) {
                     $q->where('name', 'like', "%{$search}%")
-                      ->orWhere('description', 'like', "%{$search}%");
+                    ->orWhere('description', 'like', "%{$search}%");
                 });
             }
 
@@ -36,41 +36,82 @@ class AreaService
             }
 
             // Order & OrderBy
-            $order   = $filters['order']   ?? 'desc';
-            $orderBy = $filters['orderby'] ?? 'created_at';
+            $allowedOrderBy = ['id', 'name', 'created_at', 'updated_at'];
+            $allowedOrder   = ['asc', 'desc'];
 
-            $areas = $query->orderBy($orderBy, $order)->get();
+            $orderBy = in_array($filters['orderby'] ?? 'created_at', $allowedOrderBy)
+                ? $filters['orderby']
+                : 'created_at';
 
-            return ResponseHelper::successServiceResponse(
-                200,
-                true,
-                'Get all areas success',
-                $areas
-            );
-        } catch (Exception $e) {
-            return ResponseHelper::errorServiceResponse(
-                500,
-                false,
-                'Get all areas failed',
-                $e->getMessage()
-            );
+            $order = in_array(strtolower($filters['order'] ?? 'desc'), $allowedOrder)
+                ? strtolower($filters['order'])
+                : 'desc';
+
+            // Ambil hanya root areas (parent_id = null)
+            $areas = $query->whereNull('parent_id')
+                        ->orderBy($orderBy, $order)
+                        ->get();
+
+            return ResponseHelper::successServiceResponse('Get all areas success', $areas);
+        } catch (\Throwable $e) {
+            return ResponseHelper::errorServiceResponse(500, 'Get all areas failed', $e->getMessage());
         }
     }
+
+    public function getAreaByID(int $id, bool $withChildren = false)
+    {
+        try {
+            if ($withChildren) {
+                $area = Area::with('childrenArea')->find($id);
+            } else {
+                $area = Area::find($id);
+            }
+
+            if (!$area) {
+                return ResponseHelper::errorServiceResponse(404, 'Area not found');
+            }
+
+            return ResponseHelper::successServiceResponse('Get area success', $area);
+        } catch (Exception $e) {
+            return ResponseHelper::errorServiceResponse(500, 'Get area failed', $e->getMessage());
+        }
+    }
+
 
     public function createArea(array $areaData)
     {
         try {
             $area = Area::create([
                 'access_no' => isset($areaData['access_no']) ? $areaData['access_no'] : null,
+                'parent_id' => isset($areaData['parent_id']) ? $areaData['parent_id'] : null,
                 'name' => isset($areaData['name']) ? $areaData['name'] : null,
                 'description' => isset($areaData['description']) ? $areaData['description'] : null,
             ]);
 
-            return ResponseHelper::successServiceResponse(200, true, 'Create area success', $area);
+            return ResponseHelper::successServiceResponse('Create area success', $area);
         } catch (Exception $e) {
-            return ResponseHelper::errorServiceResponse(500, false, 'Create area failed', $e->getMessage());
+            return ResponseHelper::errorServiceResponse(500, 'Create area failed', $e->getMessage());
         }
     }
+
+    public function updateArea(int $id, array $areaData)
+    {
+        try {
+            $area = Area::findOrFail($id);
+
+            // Update hanya field yang diperbolehkan
+            $area->update([
+                'name'        => isset($areaData['name']) ? $areaData['name'] : $area->name,
+                'description' => isset($areaData['description']) ? $areaData['description'] : $area->description,
+            ]);
+
+            return ResponseHelper::successServiceResponse('Update area success', $area);
+        } catch (Exception $e) {
+            return ResponseHelper::errorServiceResponse(500, 'Update area failed', $e->getMessage());
+        }
+    }
+
+
 
     public function getNextAvailableAccessNo(): ?string
     {

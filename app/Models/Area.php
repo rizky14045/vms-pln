@@ -9,4 +9,10 @@ class Area extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function childrenArea()
+    {
+        return $this->hasMany(Area::class, 'parent_id')->with('childrenArea');
+    }
+
 }

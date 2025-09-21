@@ -23,9 +23,8 @@ class AreaValidation
     public static function rulesForUpdate()
     {
         return [
+            'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
-            'device_id' => 'required|array|min:1',
-            'device_id.*' => 'required|string',
         ];
     }
 

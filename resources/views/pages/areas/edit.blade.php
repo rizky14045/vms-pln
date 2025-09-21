@@ -8,11 +8,12 @@
             <div>
                 <a href="{{ route('areas.index') }}" class="text-gray-500 absolute left-0">< kembali</a>
             </div>
-            <h2 class="text-2xl font-bold mb-6 text-center">Tambah Area</h2>
+            <h2 class="text-2xl font-bold mb-6 text-center">Edit Area</h2>
         </div>
 
-        <form action="{{ route('areas.store') }}" method="POST">
+        <form action="{{ route('areas.update', ['id' => $area->id]) }}" method="POST">
             @csrf
+            @method('PUT')
 
             {{-- Hidden parent_id --}}
             <input type="hidden" name="parent_id" value="{{ request('parent') }}">
@@ -27,6 +28,7 @@
                     'required' => true,
                     'autofocus' => true,
                     'label' => 'Nama Area',
+                    'value' => $area->name ?? ''
                 ])
             </div>
 
@@ -40,6 +42,7 @@
                     'required' => true,
                     'autofocus' => true,
                     'label' => 'Deskripsi Area',
+                    'value' => $area->description ?? ''
                 ])
             </div>
 

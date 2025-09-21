@@ -19,9 +19,9 @@ class DeviceAreaService
                 'description' => isset($areaData['description']) ? $areaData['description'] : null,
             ]);
 
-            return ResponseHelper::successServiceResponse(200, true, 'Create area success', $area);
+            return ResponseHelper::successServiceResponse('Create area success', $area);
         } catch (Exception $e) {
-            return ResponseHelper::errorServiceResponse(500, false, 'Create area failed', $e->getMessage());
+            return ResponseHelper::errorServiceResponse(500, 'Create area failed', $e->getMessage());
         }
     }
 }

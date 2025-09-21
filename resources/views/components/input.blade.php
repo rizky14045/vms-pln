@@ -6,6 +6,7 @@
     'name',
     'id' => $name,
     'label' => null,
+    'value' => null,
 ])
 
 <div class="icon-field mb-6 relative">
@@ -29,7 +30,7 @@
             type="{{ $type }}"
             name="{{ $name }}"
             id="{{ $id }}"
-            value="{{ old($name) }}"
+            value="{{ old($name, $value) }}"
             placeholder="{{ $placeholder }}"
             {{ $attributes->merge([
                 'class' => 'form-control h-[56px] ps-11 border-neutral-300 bg-neutral-50 dark:bg-dark-2 rounded-xl w-full'

@@ -18,14 +18,12 @@ class ResponseHelper {
     }
 
     public static function successServiceResponse(
-        int $code_status,
-        bool $status,
         string $message = '',
         $data = null
     ): array {
         return [
-            'code_status' => $code_status,
-            'status' => $status,
+            'code_status' => 200,
+            'status' => true,
             'message' => $message,
             'data' => $data,
         ];
@@ -33,13 +31,12 @@ class ResponseHelper {
 
     public static function errorServiceResponse(
         int $code_status,
-        bool $status,
         string $message = '',
         $errors = null
     ): array {
         return [
             'code_status' => $code_status,
-            'status' => $status,
+            'status' => false,
             'message' => $message,
             'errors' => $errors,
         ];

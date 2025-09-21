@@ -4,6 +4,7 @@
 <div class="min-h-screen flex items-center justify-center px-4 py-8">
     <div style="width:464px" class="mx-auto bg-white dark:bg-neutral-800 rounded-xl shadow-lg px-6 py-6">
         {{-- Title --}}
+        
         <div class="relative w-full">
             <div>
                 <a href="{{ route('areas.index') }}" class="text-gray-500 absolute left-0">< kembali</a>
@@ -13,9 +14,6 @@
 
         <form action="{{ route('areas.store') }}" method="POST">
             @csrf
-
-            {{-- Hidden parent_id --}}
-            <input type="hidden" name="parent_id" value="{{ request('parent') }}">
 
             {{-- Input Name --}}
             <div class="mb-5">
