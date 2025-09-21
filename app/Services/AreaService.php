@@ -5,33 +5,42 @@ namespace App\Services;
 use App\Helper\ResponseHelper;
 use App\Models\Area;
 use Carbon\Carbon;
+use App\FormatRequest\FormatRequestVaultsite;
 use Exception;
 
 class AreaService
 {
+    protected $vaultsiteService;
+
+    public function __construct(VaultSiteService $vaultsiteService)
+    {
+        $this->vaultsiteService = $vaultsiteService;
+    }
+
     public function getAllAreas(array $filters = [])
     {
         try {
             $query = Area::with('childrenArea');
 
             // Filter search
-            if (!empty($filters['search'])) {
+            if (array_key_exists('search', $filters) && !empty($filters['search'])) {
                 $search = trim($filters['search']);
                 $query->where(function ($q) use ($search) {
                     $q->where('name', 'like', "%{$search}%")
-                    ->orWhere('description', 'like', "%{$search}%");
+                        ->orWhere('description', 'like', "%{$search}%");
                 });
             }
 
             // Filter tanggal
-            if (!empty($filters['start_date']) && !empty($filters['end_date'])) {
+            if (array_key_exists('start_date', $filters) && array_key_exists('end_date', $filters) 
+                && !empty($filters['start_date']) && !empty($filters['end_date'])) {
                 $query->whereBetween('created_at', [
                     Carbon::parse($filters['start_date'])->startOfDay(),
                     Carbon::parse($filters['end_date'])->endOfDay()
                 ]);
-            } elseif (!empty($filters['start_date'])) {
+            } elseif (array_key_exists('start_date', $filters) && !empty($filters['start_date'])) {
                 $query->whereDate('created_at', '>=', Carbon::parse($filters['start_date'])->startOfDay());
-            } elseif (!empty($filters['end_date'])) {
+            } elseif (array_key_exists('end_date', $filters) && !empty($filters['end_date'])) {
                 $query->whereDate('created_at', '<=', Carbon::parse($filters['end_date'])->endOfDay());
             }
 
@@ -39,18 +48,18 @@ class AreaService
             $allowedOrderBy = ['id', 'name', 'created_at', 'updated_at'];
             $allowedOrder   = ['asc', 'desc'];
 
-            $orderBy = in_array($filters['orderby'] ?? 'created_at', $allowedOrderBy)
+            $orderBy = (array_key_exists('orderby', $filters) && in_array($filters['orderby'], $allowedOrderBy))
                 ? $filters['orderby']
                 : 'created_at';
 
-            $order = in_array(strtolower($filters['order'] ?? 'desc'), $allowedOrder)
+            $order = (array_key_exists('order', $filters) && in_array(strtolower($filters['order']), $allowedOrder))
                 ? strtolower($filters['order'])
                 : 'desc';
 
             // Ambil hanya root areas (parent_id = null)
             $areas = $query->whereNull('parent_id')
-                        ->orderBy($orderBy, $order)
-                        ->get();
+                ->orderBy($orderBy, $order)
+                ->get();
 
             return ResponseHelper::successServiceResponse('Get all areas success', $areas);
         } catch (\Throwable $e) {
@@ -76,7 +85,6 @@ class AreaService
             return ResponseHelper::errorServiceResponse(500, 'Get area failed', $e->getMessage());
         }
     }
-
 
     public function createArea(array $areaData)
     {
@@ -111,8 +119,6 @@ class AreaService
         }
     }
 
-
-
     public function getNextAvailableAccessNo(): ?string
     {
         // Get all used access numbers
@@ -132,4 +138,25 @@ class AreaService
         return null;
     }
 
+    public function processAreas(array $area_ids)
+    {
+        try {
+            // Get all areas
+            $areas = Area::get();
+
+            foreach ($areas as $area) {
+                $formatted_area = FormatRequestVaultsite::formatAddArea([
+                    'access_no' => $area->access_no,
+                    'description' => $area->name,
+                    'device_id' => $area->devices->pluck('device_name')->toArray()
+                ]);
+
+                $storedToVaultsite = $this->vaultsiteService->addArea($formatted_area);
+            }
+
+            return ResponseHelper::successServiceResponse('Process areas success', $areas);
+        } catch (\Exception $e) {
+            return ResponseHelper::errorServiceResponse(500, 'Process areas failed', $e->getMessage());
+        }
+    }
 }

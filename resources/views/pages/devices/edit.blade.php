@@ -12,11 +12,12 @@
                    &lt; kembali
                 </a>
             </div>
-            <h2 class="text-2xl font-bold mb-6 text-center">Tambah Device</h2>
+            <h2 class="text-2xl font-bold mb-6 text-center">Edit Device</h2>
         </div>
 
-        <form action="{{ route('devices.store') }}" method="POST">
+        <form action="{{ route('devices.update', ['id' => $device->id]) }}" method="POST">
             @csrf
+            @method('PUT')
 
             {{-- Input Nama Device --}}
             <div class="mb-5">
@@ -28,6 +29,7 @@
                     'required' => true,
                     'autofocus' => true,
                     'label' => 'Nama Device',
+                    'value' => old('device_name', $device->device_name),
                 ])
             </div>
 
@@ -40,22 +42,28 @@
                 <div class="space-y-2 border rounded-lg p-4 max-h-72 overflow-y-auto bg-neutral-50 dark:bg-dark-2">
                     {{-- Rekursif tampilkan area sebagai checkbox --}}
                     @php
-                        function renderAreaCheckbox($areas, $prefix = '', $level = 0) {
+                        // Ambil old value atau dari relasi device
+                        $selectedAreas = old('area_ids', isset($device) ? $device->areas->pluck('id')->toArray() : []);
+
+                        function renderAreaCheckbox($areas, $selectedAreas, $prefix = '', $level = 0) {
                             foreach ($areas as $area) {
+                                $isChecked = in_array($area->id, $selectedAreas) ? 'checked' : '';
                                 echo '<div class="flex items-center space-x-2" style="margin-left:'.($level*12).'px">';
-                                echo '<input type="checkbox" id="area_'.$area->id.'" name="area_ids[]" value="'.$area->id.'" data-parent="'.($area->parent_id ?? '').'" class="area-checkbox w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">';
+                                echo '<input type="checkbox" id="area_'.$area->id.'" name="area_ids[]" value="'.$area->id.'" data-parent="'.($area->parent_id ?? '').'" class="area-checkbox w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" '.$isChecked.'>';
                                 echo '<label for="area_'.$area->id.'" class="text-gray-700 dark:text-gray-200 cursor-pointer">'.$prefix.$area->name.'</label>';
                                 echo '</div>';
 
                                 if ($area->childrenArea && $area->childrenArea->count()) {
-                                    renderAreaCheckbox($area->childrenArea, '', $level+1);
+                                    renderAreaCheckbox($area->childrenArea, $selectedAreas, '', $level+1);
                                 }
                             }
                         }
-                        renderAreaCheckbox($areas);
+
+                        renderAreaCheckbox($areas, $selectedAreas);
                     @endphp
                 </div>
             </div>
+
 
             {{-- Button --}}
             <div class="flex justify-end">

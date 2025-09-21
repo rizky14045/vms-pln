@@ -5,15 +5,20 @@ namespace App\Services;
 use App\Helper\ResponseHelper;
 use App\Models\Area;
 use App\Models\Device;
+use App\Models\DeviceArea;
 use Carbon\Carbon;
 use Exception;
 
 class DeviceService
 {
-    public function getAllDevices(array $filters = [])
+    public function getAllDevices(array $filters = [], bool $withRelations)
     {
         try {
-            $query = Device::query();
+            if ($withRelations) {
+                $query = Device::with('areas'); // eager load relasi areas
+            } else {
+                $query = Device::query();
+            }
 
             // Filter search
             if (!empty($filters['search'])) {
@@ -39,46 +44,82 @@ class DeviceService
             $order   = $filters['order']   ?? 'desc';
             $orderBy = $filters['orderby'] ?? 'created_at';
 
-            $areas = $query->orderBy($orderBy, $order)->get();
+            $devices = $query->orderBy($orderBy, $order)->get();
 
-            return ResponseHelper::successServiceResponse('Get all devices success', $areas);
+            return ResponseHelper::successServiceResponse('Get all devices success', $devices);
         } catch (Exception $e) {
             return ResponseHelper::errorServiceResponse(500, 'Get all devices failed', $e->getMessage());
         }
     }
 
-    public function createArea(array $areaData)
+    public function getDeviceById(int $id, bool $withRelations = false)
     {
         try {
-            $area = Area::create([
-                'access_no' => isset($areaData['access_no']) ? $areaData['access_no'] : null,
-                'name' => isset($areaData['name']) ? $areaData['name'] : null,
-                'description' => isset($areaData['description']) ? $areaData['description'] : null,
+            if ($withRelations) {
+                $device = Device::with('areas')->find($id);
+            } else {
+                $device = Device::find($id);
+            }
+
+            if (!$device) {
+                return ResponseHelper::errorServiceResponse(404, 'Device not found');
+            }
+
+            return ResponseHelper::successServiceResponse('Get device success', $device);
+        } catch (Exception $e) {
+            return ResponseHelper::errorServiceResponse(500, 'Get device failed', $e->getMessage());
+        }
+    }
+
+    public function createDevice(array $deviceData)
+    {
+        try {
+            $device = Device::create([
+                'device_type' => "Controller",
+                'device_name' => isset($deviceData['device_name']) ? $deviceData['device_name'] : null,
             ]);
 
-            return ResponseHelper::successServiceResponse('Create area success', $area);
+            return ResponseHelper::successServiceResponse('Create device success', $device);
         } catch (Exception $e) {
-            return ResponseHelper::errorServiceResponse(500, 'Create area failed', $e->getMessage());
+            return ResponseHelper::errorServiceResponse(500, 'Create device failed', $e->getMessage());
         }
     }
 
-    public function getNextAvailableAccessNo(): ?string
+    public function updateDevice(int $deviceId, array $deviceData)
     {
-        // Get all used access numbers
-        $usedAccessNos = Area::pluck('access_no')->toArray();
+        try {
+            $device = Device::findOrFail($deviceId);
 
-        // Loop from 1 to 999 to find the first available number
-        for ($i = 1; $i <= 999; $i++) {
-            // Format number as zero-padded 2-digit string
-            $formatted = str_pad($i, 2, '0', STR_PAD_LEFT);
+            $device->update([
+                'device_type' => "Controller",
+                'device_name' => $deviceData['device_name'] ?? $device->device_name,
+            ]);
 
-            if (!in_array($formatted, $usedAccessNos)) {
-                return $formatted;
-            }
+            return ResponseHelper::successServiceResponse('Update device success', $device);
+        } catch (Exception $e) {
+            return ResponseHelper::errorServiceResponse(500, 'Update device failed', $e->getMessage());
         }
-
-        // If all numbers are used, return null (or handle as needed)
-        return null;
     }
 
+    public function createDeviceArea(int $device_id, array $deviceData)
+    {
+        try {
+            DeviceArea::where('device_id', $device_id)->delete();
+            
+            $device_areas = [];
+            foreach ($deviceData['area_ids'] as $area_id) {
+                $device_areas[] = [
+                    'device_id' => $device_id,
+                    'area_id' => $area_id,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            }
+            $device = DeviceArea::insert($device_areas);
+
+            return ResponseHelper::successServiceResponse('Create device area success', $device);
+        } catch (Exception $e) {
+            return ResponseHelper::errorServiceResponse(500, 'Create device area failed', $e->getMessage());
+        }
+    }
 }

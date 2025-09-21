@@ -8,10 +8,6 @@ class FormatRequestVaultsite
     {
         $entTimeZone = [];
 
-         $entTimeZone[] = [
-                    'DoorName' => "esd-138",
-                    'TimeZone' => '01'
-                ];
         if (!empty($data['device_id']) && is_array($data['device_id'])) {
            
             foreach ($data['device_id'] as $device) {

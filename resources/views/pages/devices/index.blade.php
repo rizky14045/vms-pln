@@ -11,7 +11,7 @@
         'variant' => 'primary',
         'size' => 'md',
         'class' => 'mt-6',
-        'link' => route('areas.create')
+        'link' => route('devices.create')
     ])
 
     <!-- Container Form Tambah Area -->
@@ -41,81 +41,29 @@
 
     <!-- List Area -->
     <div id="areaList" class="space-y-4 mt-4">
-        @foreach ($areas as $area)
+        @foreach ($devices as $device)
         <div class="p-5 border rounded-xl bg-white dark:bg-neutral-800 shadow-sm">
             <div class="flex justify-between items-center">
-                <h3 class="font-semibold text-lg text-gray-900 dark:text-white">
-                    {{ $area->name }}
-                </h3>
-                {{-- @include('components.button', [
-                    'text' => '+',
+                <div>
+                    <h3 class="font-semibold text-lg text-gray-900 dark:text-white">
+                        {{ $device->device_name }}
+                    </h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                        {{ $device->device_type }}
+                    </p>    
+                </div>
+                @include('components.button', [
+                    'text' => 'EDIT',
                     'type' => 'button',
                     'variant' => 'primary',
                     'size' => 'sm',
                     'class' => '',
                     'id' => 'btnAddChild',
-                    'data' => ['parent' => $area->id]
-                ]) --}}
+                    'link' => route('devices.edit', ['id' => $device->id])
+                ])
             </div>
         </div>            
         @endforeach
     </div>
 </div>
-@endsection
-
-@section('scripts')
-<script>
-$(document).ready(function () {
-    // tombol tambah area utama
-    $("#btnAddRoot").click(function () {
-        $("#formContainer").removeClass("hidden");
-        $("#parent_id").val(""); // tanpa parent
-        $("#areaName").val("");
-    });
-
-    // tombol tambah anak area
-    $(document).on("click", ".btnAddChild", function () {
-        let parentId = $(this).data("parent");
-        $("#formContainer").removeClass("hidden");
-        $("#parent_id").val(parentId); // isi dengan parent id
-        $("#areaName").val("");
-    });
-
-    // batal
-    $("#btnCancel").click(function () {
-        $("#formContainer").addClass("hidden");
-        $("#parent_id").val("");
-        $("#areaName").val("");
-    });
-
-    // submit form
-    $("#areaForm").submit(function (e) {
-        e.preventDefault();
-
-        let name = $("#areaName").val();
-        let parentId = $("#parent_id").val();
-
-        // contoh: kirim AJAX
-        $.ajax({
-            url: "#",
-            method: "POST",
-            data: {
-                _token: "{{ csrf_token() }}",
-                name: name,
-                parent_id: parentId
-            },
-            success: function (res) {
-                alert("Area berhasil ditambahkan!");
-                $("#formContainer").addClass("hidden");
-                $("#areaForm")[0].reset();
-
-                // TODO: render ulang daftar area tanpa reload page
-            },
-            error: function (xhr) {
-                alert("Gagal menambahkan area");
-            }
-        });
-    });
-});
-</script>
 @endsection
