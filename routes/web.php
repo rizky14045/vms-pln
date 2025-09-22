@@ -20,6 +20,7 @@ use App\Http\Controllers\DeviceController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/register-visitor', [HomeController::class, 'registerVisitor'])->name('register-visitor');
+Route::post('/register-request', [HomeController::class, 'registerRequest'])->name('register-request');
 
 
 Route::middleware('guest')->group(function () {
