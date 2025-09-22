@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('access_no')->unique();
             $table->string('name');
             $table->string('description')->nullable();
+            $table->foreignId('parent_id')->nullable();
             $table->timestamps();
         });
     }

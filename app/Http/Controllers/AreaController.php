@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\FormatRequest\FormatRequest;
+use App\FormatRequest\FormatRequestVaultsite;
 use App\Validation\AreaValidation;
 use App\Services\AreaService;
 use App\Services\VaultSiteService;
@@ -17,7 +17,7 @@ class AreaController extends Controller
 
     public function __construct(
         VaultSiteService $vaultSiteService,
-        FormatRequest $formatRequest,
+        FormatRequestVaultsite $formatRequest,
         AreaService $areaService
     ) {
         $this->vaultSiteService = $vaultSiteService;
@@ -58,9 +58,7 @@ class AreaController extends Controller
     }
 
     public function create(): View {
-        return view('pages.areas.create', [
-            'areas' => []
-        ]);
+        return view('pages.areas.create');
     }
     
     public function store(Request $request) {
@@ -83,5 +81,31 @@ class AreaController extends Controller
         }
 
         return redirect()->route('areas.index')->with('success', 'Area berhasil dibuat.');
+    }
+
+    public function edit($id) {
+        $area = $this->areaService->getAreaById($id, false);
+        if (!$area["status"]) {
+            return redirect()->back()->withErrors($area["message"]);
+        }
+        return view('pages.areas.edit', [
+            'area' => $area["data"]
+        ]);
+    }
+
+    public function update(Request $request, $id) {
+        // Validate request data
+        $validator = $this->validator($request->all(), AreaValidation::rulesForUpdate(), AreaValidation::messages());
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        };
+
+        $stored_area = $this->areaService->updateArea($id, $request->all());
+
+        if (!$stored_area["status"]) {
+            return redirect()->back()->withErrors($stored_area["message"])->withInput();
+        }
+
+        return redirect()->route('areas.index')->with('success', 'Area berhasil diedit.');
     }
 }
