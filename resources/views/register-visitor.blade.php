@@ -17,7 +17,7 @@
     </div>
 
     <!-- Judul -->
-    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Register Visitor</h2>
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Register Karyawan</h2>
 
     <!-- Form -->
     <form class="space-y-4" method="POST" action="{{ route('register-request') }}" enctype="multipart/form-data">
@@ -51,15 +51,6 @@
               'required' => true,
               'autofocus' => true,
               'label' => 'Nama Lengkap',
-          ])
-      </div>
-      <div>
-          @include('components.areaText', [
-              'name' => 'purpose_of_visit',
-              'id' => 'purpose_of_visit',
-              'required' => true,
-              'autofocus' => true,
-              'label' => 'Tujuan Kunjungan',
           ])
       </div>
 
