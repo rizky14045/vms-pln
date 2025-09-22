@@ -19,6 +19,7 @@ use App\Http\Controllers\AuthenticationController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/register-visitor', [HomeController::class, 'registerVisitor'])->name('register-visitor');
+Route::post('/register-request', [HomeController::class, 'registerRequest'])->name('register-request');
 
 
 Route::controller(AuthenticationController::class)->group(function () {

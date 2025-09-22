@@ -31,7 +31,7 @@ class AuthenticationController extends Controller
     }
 
     public function login(Request $request) {
-        // Validate request data
+        
         $validator = $this->validator($request->all(), AuthValidation::rulesForLogin(), AuthValidation::messages());
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();

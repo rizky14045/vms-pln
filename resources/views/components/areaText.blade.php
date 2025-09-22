@@ -25,24 +25,15 @@
         @endif
 
         {{-- Input --}}
-        <input 
-            type="{{ $type }}"
+        <textarea 
             name="{{ $name }}"
             id="{{ $id }}"
-            value="{{ old($name) }}"
-            placeholder="{{ $placeholder }}"
             {{ $attributes->merge([
-                'class' => 'form-control h-[56px] ps-11 border-neutral-300 bg-neutral-50 dark:bg-dark-2 rounded-xl w-full'
+                'class' => 'form-control ps-11 h-[90px] border-neutral-300 bg-neutral-50 dark:bg-dark-2 rounded-xl w-full'
             ]) }}
         >
-
-        {{-- Toggle password if type=password --}}
-        @if($type === 'password')
-            <span 
-                class="toggle-password ri-eye-line cursor-pointer absolute end-0 top-1/2 -translate-y-1/2 me-4 text-secondary-light"
-                data-toggle="#{{ $id }}">
-            </span>
-        @endif
+                {{ old($name) }}
+        </textarea>
     </div>
 
     {{-- Error message --}}
