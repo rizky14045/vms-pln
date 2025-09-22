@@ -1,8 +1,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laravel Template Admin</title>
-    <link rel="icon" type="image/png" href="{{asset('assets/images/favicon.png')}}" sizes="16x16">
+    <title>VMS - PLN Nusantara Power</title>
+    <link rel="icon" type="image/png" href="{{ asset('assets/logo.ico') }}" sizes="16x16">
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <!-- remix icon font css  -->

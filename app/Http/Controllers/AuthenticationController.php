@@ -45,7 +45,7 @@ class AuthenticationController extends Controller
 
             $request->session()->regenerate();
 
-            return redirect()->intended('/areas')
+            return redirect()->intended('/dasboard')
                 ->with('success', 'Login berhasil!');
         } catch (\Illuminate\Validation\ValidationException $e) {
             return back()->withErrors($e->errors())->withInput();
