@@ -22,24 +22,28 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/register-visitor', [HomeController::class, 'registerVisitor'])->name('register-visitor');
 
 
-Route::controller(AuthenticationController::class)->group(function () {
-    Route::get('/login','viewLogin')->name('login');
-    Route::post('/login','login')->name('login.post');
-    Route::get('/register','viewRegister')->name('register');
+Route::middleware('guest')->group(function () {
+    Route::controller(AuthenticationController::class)->group(function () {
+        Route::get('/login','viewLogin')->name('login');
+        Route::post('/login','login')->name('login.post');
+        Route::get('/register','viewRegister')->name('register');
+    });
 });
 
-Route::controller(AreaController::class)->group(function () {
-    Route::get('/areas','index')->name('areas.index');
-    Route::get('/areas/create','create')->name('areas.create');
-    Route::post('/areas','store')->name('areas.store');
-    Route::get('/areas/{id}/edit','edit')->name('areas.edit');
-    Route::put('/areas/{id}','update')->name('areas.update');
-});
+Route::middleware('auth')->group(function () {
+    Route::controller(AreaController::class)->group(function () {
+        Route::get('/areas','index')->name('areas.index');
+        Route::get('/areas/create','create')->name('areas.create');
+        Route::post('/areas','store')->name('areas.store');
+        Route::get('/areas/{id}/edit','edit')->name('areas.edit');
+        Route::put('/areas/{id}','update')->name('areas.update');
+    });
 
-Route::controller(DeviceController::class)->group(function () {
-    Route::get('/devices','index')->name('devices.index');
-    Route::get('/devices/create','create')->name('devices.create');
-    Route::post('/devices','store')->name('devices.store');
-    Route::get('/devices/{id}/edit','edit')->name('devices.edit');
-    Route::put('/devices/{id}','update')->name('devices.update');
+    Route::controller(DeviceController::class)->group(function () {
+        Route::get('/devices','index')->name('devices.index');
+        Route::get('/devices/create','create')->name('devices.create');
+        Route::post('/devices','store')->name('devices.store');
+        Route::get('/devices/{id}/edit','edit')->name('devices.edit');
+        Route::put('/devices/{id}','update')->name('devices.update');
+    });
 });
