@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('areas', function (Blueprint $table) {
-            $table->id();
-            $table->string('access_no')->unique();
-            $table->string('name');
-            $table->string('description')->nullable();
-            $table->timestamps();
+        Schema::table('areas', function (Blueprint $table) {
+            $table->foreignId('parent_id')->nullable();
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('areas');
+        Schema::table('areas', function (Blueprint $table) {
+            //
+        });
     }
 };
