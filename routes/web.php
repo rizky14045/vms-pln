@@ -33,6 +33,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
     Route::controller(AreaController::class)->group(function () {
         Route::get('/areas','index')->name('areas.index');
         Route::get('/areas/create','create')->name('areas.create');

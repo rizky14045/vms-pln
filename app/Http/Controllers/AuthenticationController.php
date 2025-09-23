@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Validation\AuthValidation;
-use App\Services\AuthService;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use App\Services\AuthService;
+use App\Validation\AuthValidation;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 
 class AuthenticationController extends Controller
@@ -45,10 +46,19 @@ class AuthenticationController extends Controller
 
             $request->session()->regenerate();
 
-            return redirect()->intended('/dasboard')
-                ->with('success', 'Login berhasil!');
+            Alert::success('Login Berhasil', 'Selamat datang');
+            return redirect()->route('dashboard');
+
         } catch (\Illuminate\Validation\ValidationException $e) {
             return back()->withErrors($e->errors())->withInput();
         }
+    }
+
+    public function logout(Request $request) {
+
+        $this->authService->logout();
+
+        Alert::success('Logout Berhasil', 'Anda telah keluar dari sistem');
+        return redirect()->route('login');
     }
 }
