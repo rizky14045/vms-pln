@@ -22,10 +22,20 @@ class RegisterPersonService{
             'phone' =>null,
             'password_fr' => null,
             'password_permission' => null,
-            'person_image' => $request['person_image'],
+            'person_image' => $request['image_name'],
             'is_employee' => true,
             'expired_at' => null,
             'purpose_of_visit' => $request['purpose_of_visit'] ?? null,
+            'status_level' => 1,
+            'status' => 'Waiting for approval',
         ]);
+    }
+
+    public function getAllRegisteredPerson(){
+        return RegisteredPerson::with('user')->latest()->get();
+    }
+
+    public function getRegisteredPersonById($id){
+        return RegisteredPerson::with('user')->where('id', $id)->first();
     }
 }

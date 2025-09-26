@@ -18,7 +18,7 @@
           </a>
         </li>
         <li>
-          <a href="chat-message.html">
+          <a href="{{route('registered.index')}}">
             <iconify-icon icon="solar:users-group-rounded-broken" class="menu-icon"></iconify-icon>
             <span>Register Employee</span>
           </a>

@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\AreaController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AreaController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RegisteredController;
+use App\Http\Controllers\AuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,7 @@ use App\Http\Controllers\DeviceController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/register-employee', [HomeController::class, 'registerVisitor'])->name('register-visitor');
 Route::post('/register-request', [HomeController::class, 'registerRequest'])->name('register-request');
+Route::get('/base64', [HomeController::class, 'testBase']);
 
 
 Route::middleware('guest')->group(function () {
@@ -48,5 +50,15 @@ Route::middleware('auth')->group(function () {
         Route::post('/devices','store')->name('devices.store');
         Route::get('/devices/{id}/edit','edit')->name('devices.edit');
         Route::put('/devices/{id}','update')->name('devices.update');
+    });
+    Route::controller(RegisteredController::class)->group(function () {
+        Route::get('/registered','index')->name('registered.index');
+        Route::get('/registered/{id}','show')->name('registered.show');
+        Route::get('/registered/{id}/approve','approve')->name('registered.approve');
+        Route::patch('/registered/{id}/approve','updateApprove')->name('registered.update-approve');
+        Route::get('/registered/create','create')->name('registered.create');
+        Route::post('/registered','store')->name('registered.store');
+        Route::get('/registered/{id}/edit','edit')->name('registered.edit');
+        Route::put('/registered/{id}','update')->name('registered.update');
     });
 });

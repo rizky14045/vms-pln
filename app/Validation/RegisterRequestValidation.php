@@ -9,8 +9,7 @@ class RegisterRequestValidation
         return [
             'nid' => 'required|string|max:255',
             'name' => 'required|string|max:255',
-            'purpose_of_visit' => 'required|string',
-            'person_image' => 'required|file|mimes:png', 
+            'person_image' => 'required|file|mimes:png,jpeg,jpg', 
         ];
     }
 
@@ -25,10 +24,6 @@ class RegisterRequestValidation
             'name.required' => 'Nama wajib diisi.',
             'name.string' => 'Nama harus berupa teks.',
             'name.max' => 'Nama maksimal 255 karakter.',
-            
-            'purpose_of_visit.required' => 'Tujuan Kunjungan wajib diisi.',
-            'purpose_of_visit.string' => 'Tujuan Kunjungan harus berupa teks.',
-            'purpose_of_visit.max' => 'Tujuan Kunjungan maksimal 255 karakter.',
 
             'person_image.required' => 'Foto wajib diisi.',
             'person_image.file' => 'Foto harus berupa file.',

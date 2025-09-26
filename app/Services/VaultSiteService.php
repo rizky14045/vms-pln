@@ -16,6 +16,7 @@ class VaultSiteService
                 'trace' => 1,
                 'exceptions' => true,
                 'cache_wsdl' => WSDL_CACHE_NONE,
+                'keep_alive' => false,
             ]);
 
         } catch (Exception $e) {

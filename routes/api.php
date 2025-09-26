@@ -2,8 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\AuthenticationController;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\API\FetchController;
+use App\Http\Controllers\API\AuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->middleware(['throttle:api'])->group(function () {
+    Route::get('/get-user-by-nid/{nid}', [FetchController::class, 'getUserByNid'])->name('getUserByNid');      
     Route::controller(AuthenticationController::class)->group(function () {
         Route::post('/register','register')->name('register');
         Route::post('/login','login')->name('login');

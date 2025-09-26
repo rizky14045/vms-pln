@@ -14,4 +14,12 @@ class FileHelper {
         $file->move(public_path($path), $filename);
         return $path . '/' . $filename;
     } 
+
+    public static function base64Encode($filePath) {
+        if (file_exists($filePath)) {
+            $fileData = file_get_contents($filePath);
+            return base64_encode($fileData);
+        }
+        return null;
+    }
 }

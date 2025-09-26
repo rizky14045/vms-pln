@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Services\UserService;
 use Illuminate\Support\Facades\DB;
 use App\Services\RegisterPersonService;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use App\Validation\RegisterRequestValidation;
 
@@ -46,7 +47,7 @@ class HomeController extends Controller
             $request->merge(['image_name' => $getFilename,'user_id' => $user->id]);
             
             $createdRegister = $this->registerPersonService->createRegisteredPerson($request->all());
-
+        
             FileHelper::saveFile($request->person_image, 'uploads/person_images', $getFilename);
             DB::commit();
             return redirect()->route('register-visitor')->with('success', 'Berhasil melakukan registrasi kunjungan, silahkan tunggu persetujuan dari petugas.');
