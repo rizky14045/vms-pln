@@ -3,6 +3,7 @@
 namespace App\FormatRequest;
 
 use App\Helper\FileHelper;
+use Carbon\Carbon;
 
 class FormatRequestVaultsite
 {
@@ -32,12 +33,12 @@ class FormatRequestVaultsite
     public static function formatAddCard($data)
     {
         return [
-            "CardNo" => "20211116", // Dinamis
+            "CardNo" => $data->user->id_card_number, // Dinamis
             "Name" => $data->user->name ?? "", // data user
             "CardPinNo" => "0000", // default
             "CardType" => "Normal", // default
             "Department" => "",
-            "Company" => "PLN Nusantara Power",
+            "Company" => $data->user->company,
             "Gentle" => "",
             "AccessLevel" => "02", // *
             "FaceAccessLevel" => "00", // default
@@ -57,15 +58,15 @@ class FormatRequestVaultsite
             "Passport" => "",
             "Race" => "",
             "DOB" => "",
-            "JoiningDate" => "2020/01/01", //tanggal registrasi
+            "JoiningDate" => Carbon::parse($data->user->join_date)->format('Y/m/d'), //tanggal registrasi
             "ResignDate" => "",
             "Address1" => "",
             "Address2" => "",
             "PostalCode" => "",
             "City" => "",
             "State" => "",
-            "Email" => "string",
-            "MobileNo" => "string",
+            "Email" => $data->user->email ?? "",
+            "MobileNo" => $data->user->phone ?? "",
             "Photo" => FileHelper::base64Encode(public_path('uploads/person_images/'.$data->person_image)),
             "DownloadCard" => true,
         ];

@@ -69,6 +69,28 @@
               'label' => 'Nama Lengkap',
           ])
       </div>
+      <div>
+          @include('components.input', [
+              'type' => 'email',
+              'name' => 'email',
+              'id' => 'email',
+              'placeholder' => 'Email',
+              'required' => true,
+              'autofocus' => true,
+              'label' => 'Email',
+          ])
+      </div>
+      <div>
+          @include('components.input', [
+              'type' => 'text',
+              'name' => 'phone',
+              'id' => 'phone',
+              'placeholder' => '628xxxxxxx',
+              'required' => true,
+              'autofocus' => true,
+              'label' => 'Nomor HP',
+          ])
+      </div>
 
       <!-- Kamera & Hasil Foto -->
       <div class="flex flex-col md:flex-row gap-6">
@@ -119,6 +141,8 @@
   const checkNidBtn = document.querySelector('button[type="button"]') // tombol Check NID
   const nidInput = document.getElementById('nid')
   const nameInput = document.getElementById('name')
+  const emailInput = document.getElementById('email')
+  const phoneInput = document.getElementById('phone')
   const nidMessage = document.getElementById('nid-message')
 
   async function startCamera() {
@@ -153,6 +177,8 @@
   // 🔹 Fungsi check NID
   checkNidBtn.addEventListener('click', async () => {
     nameInput.value = "" // reset
+    emailInput.value = "" // reset
+    phoneInput.value = "" // reset
     const nid = nidInput.value.trim()
     nidMessage.textContent = ""
     nidMessage.className = "text-sm mt-1" // reset
@@ -167,6 +193,8 @@
       const res = await axios.get("{{ url('api/v1/get-user-by-nid') }}/" + nid)
 
       nameInput.value = res.data.data.user.name
+      emailInput.value = res.data.data.user.email
+      phoneInput.value = res.data.data.user.phone
       nidMessage.textContent = res.data.message
       nidMessage.classList.add("text-green-600")
     } catch (err) {

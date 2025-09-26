@@ -38,4 +38,10 @@ class RegisterPersonService{
     public function getRegisteredPersonById($id){
         return RegisteredPerson::with('user')->where('id', $id)->first();
     }
+
+    public function updateStatusRegisteredPerson(RegisteredPerson $registeredPerson, $data){
+        $registeredPerson->status = $data['status'];
+        $registeredPerson->status_level = $data['status_level'];
+        $registeredPerson->save();
+    }
 }

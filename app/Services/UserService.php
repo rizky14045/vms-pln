@@ -19,11 +19,23 @@ class UserService{
     }
 
     public function createUser($request){
+
         return User::create([
             'name' => $request['name'],
-            'email' => $request['nid'].'@email.com',
-            'nid' => $request['nid'],
+            'email' => $request['email'],
+            'nid' => $request['nid'] ?? '',
+            'id_card_number' => $request['id_card_number'] ?? '',
+            'identity_number' => $request['identity_number'] ?? '',
+            'phone' => $request['phone'] ?? '',
+            'company' => $request['company'] ?? '',
+            'is_employee' => $request['is_employee'],
+            'join_date' => now(),
             'password' => bcrypt('password'),
         ]);
+    }
+
+    public function updateStatusRegistered(User $user){
+        $user->is_registered = true;
+        $user->save();
     }
 }

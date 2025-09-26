@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Services\UserService;
 use Illuminate\Support\Facades\DB;
 use App\Services\RegisterPersonService;
+use App\FormatRequest\FormatRequestUser;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use App\Validation\RegisterRequestValidation;
@@ -16,7 +17,8 @@ class HomeController extends Controller
 {
     public function __construct(
         protected UserService $userService,
-        protected RegisterPersonService $registerPersonService
+        protected RegisterPersonService $registerPersonService,
+        protected FormatRequestUser $formatRequestUser
     ) {}
 
     public function index(): View {
@@ -39,10 +41,11 @@ class HomeController extends Controller
             //check if user exist by nid
             $user = $this->userService->getUserByNid($request->nid);
             if(!$user) {
-                //create user
-                $user = $this->userService->createUser($request->all());
+                
+                $formatRequest = $this->formatRequestUser->employeeUser($request->all()); 
+                $user = $this->userService->createUser($formatRequest);
             }
-
+            // misal hari ini belum di approve , maka kasih notice masih menunggu persetujuan , data ga masukin ke transaction
             $getFilename = FileHelper::generatedFileName('Person', $request->person_image->extension());
             $request->merge(['image_name' => $getFilename,'user_id' => $user->id]);
             

@@ -62,6 +62,23 @@ class VaultSiteService
             return ['error' => $e->getMessage()];
         }
     }
+
+    public function updateCardAccessLevel(array $data)
+    {
+        try {
+            $params = [
+                'CardNo'       => $data['CardNo'],
+                'AccessLevel'  => $data['AccessLevel'],
+                'DownloadCard' => $data['DownloadCard'],
+            ];
+
+            return $this->client->__soapCall('UpdateCardAccessLevel', [$params]);
+        } catch (\Exception $e) {
+            return [
+                'error' => $e->getMessage()
+            ];
+        }
+    }
     
 
 }

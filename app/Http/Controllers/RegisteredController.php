@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Services\AreaService;
+use App\Services\UserService;
 use App\Services\VaultSiteService;
 use App\Services\RegisterPersonService;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\FormatRequest\FormatRequestVaultsite;
 
 class RegisteredController extends Controller
@@ -14,7 +16,8 @@ class RegisteredController extends Controller
      public function __construct(
         protected RegisterPersonService $registerPersonService,
         protected AreaService $areaService,
-        protected VaultSiteService $vaultSiteService
+        protected VaultSiteService $vaultSiteService,
+        protected UserService $userService
     ) {}
 
     public function index(): View {
@@ -52,11 +55,32 @@ class RegisteredController extends Controller
 
     public function updateApprove(Request $request,$id) {
 
-        $registeredPerson = $this->registerPersonService->getRegisteredPersonById($id);
-        $formatRequest = FormatRequestVaultsite::formatAddCard($registeredPerson);
-        $response = $this->vaultSiteService->addCard($formatRequest);
+        try {
+            $registeredPerson = $this->registerPersonService->getRegisteredPersonById($id);
+            $formatRequest = FormatRequestVaultsite::formatAddCard($registeredPerson);
+            //check if user already have card
+            $userRegistered = $this->userService->getUserById($registeredPerson->user->id);
+            if($userRegistered->is_registered == false){
+                $this->userService->updateStatusRegistered($userRegistered);
+                $response = $this->vaultSiteService->addCard($formatRequest);
+            }else{
 
-        dd($response);
+                $data = [
+                    'CardNo' => (string) $userRegistered->id_card_number,
+                    'AccessLevel' => "03",
+                    'DownloadCard' => "true"
+                ];
+                $response = $this->vaultSiteService->updateCardAccessLevel($data);
+            }
+            $this->registerPersonService->updateStatusRegisteredPerson($registeredPerson, ['status' => 'Approved','status_level' => 2]);
+
+            Alert::success('Success', 'Berhasil menyetujui registrasi kunjungan');
+            return redirect()->route('registered.index');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+        
+
     }
 
   
