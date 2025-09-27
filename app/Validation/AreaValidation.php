@@ -9,22 +9,18 @@ class AreaValidation
         return [
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
+            'device_ids' => 'required|array|min:1',
+            'device_ids.*' => 'required|string',
         ];
     }
 
-    // public static function rulesForCreate()
-    // {
-    //     return [
-    //         'description' => 'required|string|max:255',
-    //         'device_id' => 'required|array|min:1',
-    //         'device_id.*' => 'required|string',
-    //     ];
-    // }
     public static function rulesForUpdate()
     {
         return [
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
+            'device_ids' => 'required|array|min:1',
+            'device_ids.*' => 'required|string',
         ];
     }
 
@@ -38,6 +34,12 @@ class AreaValidation
             'description.required' => 'Deskripsi area wajib diisi.',
             'description.string' => 'Deskripsi area harus berupa teks.',
             'description.max' => 'Deskripsi area maksimal 255 karakter.',
+
+            'device_ids.required' => 'Pilih minimal satu device.',
+            'device_ids.array' => 'Device tidak valid.',
+            'device_ids.min' => 'Pilih minimal satu device.',
+            'device_ids.*.required' => 'Device tidak valid.',
+            'device_ids.*.string' => 'Device tidak valid.',
         ];
     }
 }

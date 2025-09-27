@@ -9,8 +9,6 @@ class DeviceValidation
         return [
             'device_name' => 'required|string|max:255',
             // 'device_type' => 'required|string|max:255',
-            'area_ids' => 'required|array|min:1',
-            'area_ids.*' => 'required|string',
         ];
     }
 
@@ -19,8 +17,6 @@ class DeviceValidation
         return [
             'device_name' => 'required|string|max:255',
             // 'device_type' => 'required|string|max:255',
-            'area_ids' => 'required|array|min:1',
-            'area_ids.*' => 'required|string',
         ];
     }
 
@@ -34,12 +30,6 @@ class DeviceValidation
             'device_type.required' => 'Tipe device wajib diisi.',
             'device_type.string' => 'Tipe device harus berupa teks.',
             'device_type.max' => 'Tipe device maksimal 255 karakter.',
-
-            'area_ids.required' => 'Area wajib diisi.',
-            'area_ids.array' => 'Area harus berupa array.',
-            'area_ids.min' => 'Area minimal 1 item.',
-            'area_ids.*.required' => 'Setiap item area wajib diisi.',
-            'area_ids.*.string' => 'Setiap item area harus berupa teks.',
         ];
     }
 }

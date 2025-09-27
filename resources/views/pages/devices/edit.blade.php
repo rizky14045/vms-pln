@@ -34,13 +34,12 @@
             </div>
 
             {{-- Pilih Area --}}
-            <div class="mb-5">
+            {{-- <div class="mb-5">
                 <label class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-200">
                     Pilih Area
                 </label>
                 
                 <div class="space-y-2 border rounded-lg p-4 max-h-72 overflow-y-auto bg-neutral-50 dark:bg-dark-2">
-                    {{-- Rekursif tampilkan area sebagai checkbox --}}
                     @php
                         // Ambil old value atau dari relasi device
                         $selectedAreas = old('area_ids', isset($device) ? $device->areas->pluck('id')->toArray() : []);
@@ -62,7 +61,7 @@
                         renderAreaCheckbox($areas, $selectedAreas);
                     @endphp
                 </div>
-            </div>
+            </div> --}}
 
 
             {{-- Button --}}
@@ -78,7 +77,7 @@
     </div>
 </div>
 
-<script>
+{{-- <script>
     document.addEventListener('DOMContentLoaded', function () {
         const checkboxes = document.querySelectorAll('.area-checkbox');
         const form = document.querySelector('form');
@@ -126,7 +125,5 @@
             });
         });
     });
-</script>
-
-
+</script> --}}
 @endsection

@@ -3,26 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\FormatRequest\FormatRequestVaultsite;
+use App\Models\Device;
 use App\Validation\AreaValidation;
 use App\Services\AreaService;
+use App\Services\DeviceService;
 use App\Services\VaultSiteService;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use PhpOffice\PhpSpreadsheet\Calculation\TextData\Format;
 
 class AreaController extends Controller
 {
-    protected $vaultSiteService, $formatRequest, $areaService;
+    protected $vaultSiteService, $formatRequest, $areaService, $deviceService;
 
     public function __construct(
         VaultSiteService $vaultSiteService,
         FormatRequestVaultsite $formatRequest,
-        AreaService $areaService
+        AreaService $areaService,
+        DeviceService $deviceService
     ) {
         $this->vaultSiteService = $vaultSiteService;
         $this->formatRequest = $formatRequest;
         $this->areaService = $areaService;
+        $this->deviceService = $deviceService;
     }
 
     protected function validator(array $data, $validation, array $messages = [])
@@ -57,8 +62,15 @@ class AreaController extends Controller
         ]);
     }
 
-    public function create(): View {
-        return view('pages.areas.create');
+    public function create() {
+        $devices = $this->deviceService->getAllDevices(['status' => 'active'], false);
+        if (!$devices["status"]) {
+            return redirect()->back()->withErrors($devices["message"]);
+        }
+
+        return view('pages.areas.create', [
+            'devices' => $devices["data"]
+        ]);
     }
     
     public function store(Request $request) {
@@ -74,22 +86,43 @@ class AreaController extends Controller
         }
         $request->merge(['access_no' => $accessNo]);
 
+        DB::beginTransaction();
+
         $stored_area = $this->areaService->createArea($request->all());
 
         if (!$stored_area["status"]) {
+            DB::rollBack();
             return redirect()->back()->withErrors($stored_area["message"])->withInput();
         }
+        
+        $stored_device_area = $this->areaService->createDeviceArea($stored_area["data"]->id, $request->all());
+
+        if (!$stored_device_area["status"]) {
+            DB::rollBack();
+            return redirect()->back()->withErrors($stored_device_area["message"])->withInput();
+        }
+
+        $processArea = $this->areaService->processAreas();
+
+        DB::commit();
 
         return redirect()->route('areas.index')->with('success', 'Area berhasil dibuat.');
     }
 
     public function edit($id) {
-        $area = $this->areaService->getAreaById($id, false);
+        $area = $this->areaService->getAreaById($id, false, true);
         if (!$area["status"]) {
             return redirect()->back()->withErrors($area["message"]);
         }
+
+        $devices = $this->deviceService->getAllDevices(['status' => 'active'], false);
+        if (!$devices["status"]) {
+            return redirect()->back()->withErrors($devices["message"]);
+        }
+
         return view('pages.areas.edit', [
-            'area' => $area["data"]
+            'area' => $area["data"],
+            'devices' => $devices["data"]
         ]);
     }
 
@@ -100,11 +133,25 @@ class AreaController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         };
 
+        DB::beginTransaction();
+
         $stored_area = $this->areaService->updateArea($id, $request->all());
 
         if (!$stored_area["status"]) {
+            DB::rollBack();
             return redirect()->back()->withErrors($stored_area["message"])->withInput();
         }
+
+        $stored_device_area = $this->areaService->createDeviceArea($stored_area["data"]->id, $request->all());
+
+        if (!$stored_device_area["status"]) {
+            DB::rollBack();
+            return redirect()->back()->withErrors($stored_device_area["message"])->withInput();
+        }
+
+        $processArea = $this->areaService->processAreas();
+
+        DB::commit();
 
         return redirect()->route('areas.index')->with('success', 'Area berhasil diedit.');
     }

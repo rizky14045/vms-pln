@@ -43,6 +43,39 @@
                 ])
             </div>
 
+            <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                    <label class="block text-sm font-medium text-black-700 dark:text-black-200">
+                        Pilih Device
+                    </label>
+                </div>
+
+                <div 
+                    id="deviceList"
+                    class="overflow-hidden h-0 transition-all duration-300 ease-in-out"
+                >
+                    <div class="space-y-2 mt-2">
+                        @foreach($devices as $device)
+                            <label class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
+                                <input
+                                    type="checkbox"
+                                    name="device_ids[]"
+                                    value="{{ $device->id }}"
+                                    id="device_{{ $device->id }}"
+                                    {{ in_array($device->id, old('device_ids', $selected ?? [])) ? 'checked' : '' }}
+                                    class="device-checkbox w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                >
+                                <div class="flex-1">
+                                    <div class="text-sm font-medium text-gray-800 dark:text-gray-100">
+                                        {{ $device->device_name }}
+                                    </div>
+                                </div>
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
             {{-- Button --}}
             <div class="flex justify-end">
                 @include('components.button', [

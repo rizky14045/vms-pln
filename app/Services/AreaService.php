@@ -6,6 +6,7 @@ use App\Helper\ResponseHelper;
 use App\Models\Area;
 use Carbon\Carbon;
 use App\FormatRequest\FormatRequestVaultsite;
+use App\Models\DeviceArea;
 use Exception;
 
 class AreaService
@@ -20,7 +21,7 @@ class AreaService
     public function getAllAreas(array $filters = [])
     {
         try {
-            $query = Area::with('childrenArea');
+            $query = Area::with('childrenArea', 'devices');
 
             // Filter search
             if (array_key_exists('search', $filters) && !empty($filters['search'])) {
@@ -67,14 +68,20 @@ class AreaService
         }
     }
 
-    public function getAreaByID(int $id, bool $withChildren = false)
+   public function getAreaByID(int $id, bool $withChildren = false, bool $withDevices = false)
     {
         try {
+            $query = Area::query();
+
             if ($withChildren) {
-                $area = Area::with('childrenArea')->find($id);
-            } else {
-                $area = Area::find($id);
+                $query->with('childrenArea');
             }
+
+            if ($withDevices) {
+                $query->with('devices');
+            }
+
+            $area = $query->find($id);
 
             if (!$area) {
                 return ResponseHelper::errorServiceResponse(404, 'Area not found');
@@ -99,6 +106,28 @@ class AreaService
             return ResponseHelper::successServiceResponse('Create area success', $area);
         } catch (Exception $e) {
             return ResponseHelper::errorServiceResponse(500, 'Create area failed', $e->getMessage());
+        }
+    }
+
+    public function createDeviceArea(int $area_id, array $deviceData)
+    {
+        try {
+            DeviceArea::where('area_id', $area_id)->delete();
+            
+            $device_areas = [];
+            foreach ($deviceData['device_ids'] as $device_id) {
+                $device_areas[] = [
+                    'device_id' => $device_id,
+                    'area_id' => $area_id,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            }
+            $device = DeviceArea::insert($device_areas);
+
+            return ResponseHelper::successServiceResponse('Create device area success', $device);
+        } catch (Exception $e) {
+            return ResponseHelper::errorServiceResponse(500, 'Create device area failed', $e->getMessage());
         }
     }
 
@@ -138,7 +167,7 @@ class AreaService
         return null;
     }
 
-    public function processAreas(array $area_ids)
+    public function processAreas()
     {
         try {
             // Get all areas

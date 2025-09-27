@@ -56,16 +56,7 @@ class DeviceController extends Controller
     }
 
     public function create(): View {
-        $get_areas = $this->areaService->getAllAreas(['limit' => 1000]);
-        $areas = [];
-         if ($get_areas['status']) {
-            $areas = $get_areas['data'] ?? [];
-        } else {
-            $areas = [];
-        }
-        return view('pages.devices.create', [
-            'areas' => $areas
-        ]);
+        return view('pages.devices.create');
     }
     
     public function store(Request $request) {
@@ -83,15 +74,6 @@ class DeviceController extends Controller
             return redirect()->back()->withErrors($stored_area["message"])->withInput();
         }
 
-        $stored_device_area = $this->deviceService->createDeviceArea($stored_area["data"]->id, $request->all());
-
-        if (!$stored_device_area["status"]) {
-            DB::rollBack();
-            return redirect()->back()->withErrors($stored_device_area["message"])->withInput();
-        }
-
-        $processArea = $this->areaService->processAreas($request->area_ids);
-
         DB::commit();
 
         return redirect()->route('devices.index')->with('success', 'Device berhasil dibuat.');
@@ -104,16 +86,8 @@ class DeviceController extends Controller
         }
         $device = $getDevice['data'] ?? null;
 
-        $get_areas = $this->areaService->getAllAreas(['limit' => 1000]);
-        $areas = [];
-         if ($get_areas['status']) {
-            $areas = $get_areas['data'] ?? [];
-        } else {
-            $areas = [];
-        }
         return view('pages.devices.edit', [
-            'device' => $device,
-            'areas' => $areas
+            'device' => $device
         ]);
     }
 
@@ -131,15 +105,6 @@ class DeviceController extends Controller
             DB::rollBack();
             return redirect()->back()->withErrors($stored_area["message"])->withInput();
         }
-
-        $stored_device_area = $this->deviceService->createDeviceArea($stored_area["data"]->id, $request->all());
-
-        if (!$stored_device_area["status"]) {
-            DB::rollBack();
-            return redirect()->back()->withErrors($stored_device_area["message"])->withInput();
-        }
-
-        $processArea = $this->areaService->processAreas($request->area_ids);
 
         DB::commit();
 
