@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/devices/{id}','update')->name('devices.update');
     });
     Route::controller(RegisteredController::class)->group(function () {
+        Route::get('/registered/datas','getDataIndex')->name('registered.data');
         Route::get('/registered','index')->name('registered.index');
         Route::get('/registered/{id}','show')->name('registered.show');
         Route::get('/registered/{id}/approve','approve')->name('registered.approve');

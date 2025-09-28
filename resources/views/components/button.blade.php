@@ -5,7 +5,9 @@
     'size' => 'md', // md, sm, lg
     'class' => '',
     'scripts' => '',
-    'link' => null, // tambahan untuk URL
+    'link' => null, // tambahan untuk URL,
+    'value' => null,
+    'name' => null,
 ])
 
 @php
@@ -32,7 +34,7 @@
     </a>
 @else
     <button type="{{ $type }}" {{ $attributes->merge(['class' => $allClasses]) }}
-        @if ($scripts) onclick="{{ $scripts }}" @endif>
+        @if ($scripts) onclick="{{ $scripts }}" @endif @if ($value) value="{{ $value }}" @endif @if ($name) name="{{ $name }}" @endif>
         {{ $text }}
     </button>
 @endif

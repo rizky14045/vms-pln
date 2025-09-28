@@ -25,3 +25,5 @@
 <!-- main js -->
 <script src="{{asset('assets/js/app.js')}}"></script>
 <script src="{{asset('assets/js/homeOneChart.js')}}"></script>
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>

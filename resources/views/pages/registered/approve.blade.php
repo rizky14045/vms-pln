@@ -47,33 +47,42 @@
                 </label>
                 
                 <div class="space-y-2 border rounded-lg p-4 max-h-72 overflow-y-auto bg-neutral-50 dark:bg-dark-2">
-                    {{-- Rekursif tampilkan area sebagai checkbox --}}
-                    @php
-                        function renderAreaCheckbox($areas, $prefix = '', $level = 0) {
-                            foreach ($areas as $area) {
-                                echo '<div class="flex items-center space-x-2" style="margin-left:'.($level*12).'px">';
-                                echo '<input type="checkbox" id="area_'.$area->id.'" name="area_ids[]" value="'.$area->id.'" data-parent="'.($area->parent_id ?? '').'" class="area-checkbox w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">';
-                                echo '<label for="area_'.$area->id.'" class="text-gray-700 dark:text-gray-200 cursor-pointer">'.$prefix.$area->name.'</label>';
-                                echo '</div>';
+                    @foreach ($areas as $area)
+                        <div class="flex items-center mb-4">
+                            <input id="area-{{$area->id}}" type="radio" value="{{$area->id}}" name="area_id" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="area-{{$area->id}}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{$area->name}}</label>
+                        </div>
 
-                                if ($area->childrenArea && $area->childrenArea->count()) {
-                                    renderAreaCheckbox($area->childrenArea, '', $level+1);
-                                }
-                            }
-                        }
-                        renderAreaCheckbox($areas);
-                    @endphp
+                    @endforeach
                 </div>
             </div>
 
             {{-- Button --}}
-            <div class="flex justify-end">
+            <div class="flex justify-end gap-3">
+                @include('components.button', [
+                    'text' => 'Kembali',
+                    'variant' => 'success',
+                    'size' => 'md',
+                    'link' => route('registered.index'),
+                    'class' => 'bg-success-600 hover:bg-success-700',
+                    ])
+                @include('components.button', [
+                    'text' => 'Reject',
+                    'type' => 'submit',
+                    'variant' => 'primary',
+                    'size' => 'md',
+                    'class' => 'bg-danger-600 hover:bg-danger-700',
+                    'value' => 'reject',
+                    'name' => 'action'
+                    ])
                 @include('components.button', [
                     'text' => 'Approve',
                     'type' => 'submit',
                     'variant' => 'primary',
-                    'size' => 'md'
-                ])
+                    'size' => 'md',
+                    'value' => 'approve',
+                    'name' => 'action'
+                    ])
             </div>
         </form>
     </div>

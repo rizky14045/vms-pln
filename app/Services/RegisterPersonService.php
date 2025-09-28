@@ -44,4 +44,15 @@ class RegisterPersonService{
         $registeredPerson->status_level = $data['status_level'];
         $registeredPerson->save();
     }
+    public function updateAreaId(RegisteredPerson $registeredPerson, $area_id){
+        $registeredPerson->area_id = $area_id;
+        $registeredPerson->save();
+    }
+
+    public function getRegisteredPersonToday($nid){
+        $today = now()->format('Y-m-d');
+        return RegisteredPerson::whereHas('user', function($query) use ($nid) {
+            $query->where('nid', $nid);
+        })->whereDate('created_at', $today)->first();
+    }
 }

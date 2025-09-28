@@ -30,7 +30,7 @@ class FormatRequestVaultsite
         ];
     }
 
-    public static function formatAddCard($data)
+    public static function formatAddCard($data, $access_no)
     {
         return [
             "CardNo" => $data->user->id_card_number, // Dinamis
@@ -40,7 +40,7 @@ class FormatRequestVaultsite
             "Department" => "",
             "Company" => $data->user->company,
             "Gentle" => "",
-            "AccessLevel" => "02", // *
+            "AccessLevel" => $access_no, // *
             "FaceAccessLevel" => "00", // default
             "LiftAccessLevel" => "01", // default
             "BypassAP" => false, // default

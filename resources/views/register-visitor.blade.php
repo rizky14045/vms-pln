@@ -31,6 +31,17 @@
           </div>
         </div>
       @endif
+     @if (\Session::has('info'))
+        <div class="w-full flex justify-center">
+          <div class="alert alert-sky bg-sky-100 dark:bg-sky-600/25 text-sky-600 dark:text-sky-400 border-sky-100 
+                      px-6 py-[11px] mb-0 text-lg rounded-lg 
+                      flex items-center gap-2 text-center"
+              role="alert">
+              <iconify-icon icon="akar-icons:double-check" class="icon text-xl"></iconify-icon>
+              {!! \Session::get('info') !!}
+          </div>
+        </div>
+      @endif
 
 
     <!-- Form -->

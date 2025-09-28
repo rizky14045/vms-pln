@@ -188,4 +188,8 @@ class AreaService
             return ResponseHelper::errorServiceResponse(500, 'Process areas failed', $e->getMessage());
         }
     }
+
+    public function getAreaAccessNumber($id){
+        return Area::select('access_no')->where('id',$id)->first();
+    }
 }
