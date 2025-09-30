@@ -13,7 +13,7 @@ use App\FormatRequest\FormatRequestVaultsite;
 
 class RegisteredController extends Controller
 {
-     public function __construct(
+    public function __construct(
         protected RegisterPersonService $registerPersonService,
         protected AreaService $areaService,
         protected VaultSiteService $vaultSiteService,

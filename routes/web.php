@@ -5,6 +5,7 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MyProfileController;
 use App\Http\Controllers\RegisteredController;
 use App\Http\Controllers\AuthenticationController;
 
@@ -35,6 +36,8 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/my-profile', [MyProfileController::class, 'index'])->name('my-profile');
+    Route::put('/change-password', [MyProfileController::class, 'changePassword'])->name('change-password');
     Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
     Route::controller(AreaController::class)->group(function () {
         Route::get('/areas','index')->name('areas.index');
