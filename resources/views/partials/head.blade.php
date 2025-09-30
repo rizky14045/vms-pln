@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/lib/file-upload.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/lib/audioplayer.css')}}">
     <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="{{asset('assets')}}/css/jquery.dataTables.min.css"/>
 
     <!-- main css -->
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
