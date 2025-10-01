@@ -26,4 +26,4 @@
 <script src="{{asset('assets/js/app.js')}}"></script>
 <script src="{{asset('assets/js/homeOneChart.js')}}"></script>
 <!-- DataTables JS -->
-<script src="{{asset('assets')}}/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="{{asset('assets')}}/js/jquery.dataTables.min.js"></script>
