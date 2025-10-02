@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register Visitor</title>
   <script src="{{asset('assets/css/tailwind.css')}}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
   <!-- axios -->
   <script src="{{asset('assets/js/axios.min.js')}}"></script>
+  <!-- face-api.js -->
 </head>
 <body class="min-h-screen w-screen flex items-center justify-center p-2 md:p-4" style="background-color: #14A2BA">
 
@@ -57,7 +59,6 @@
               'autofocus' => true,
               'label' => 'NID',
           ])
-          <!-- Pesan feedback -->
           <p id="nid-message" class="text-sm mt-1"></p>
       </div>
       <div class="flex justify-end">
@@ -105,7 +106,6 @@
 
       <!-- Kamera & Hasil Foto -->
       <div class="flex flex-col md:flex-row gap-6">
-        <!-- Hasil Foto -->
         <div class="flex-1 flex flex-col items-center justify-center">
           <h2 class="text-lg font-semibold mb-4">Hasil Foto</h2>
           <canvas id="snapshot" class="w-full max-w-sm h-auto border rounded-lg shadow mb-4"></canvas>
@@ -115,7 +115,6 @@
           <input type="file" id="fileInput" name="person_image" class="hidden">
         </div>
 
-        <!-- Preview Kamera -->
         <div class="flex-1 flex flex-col items-center justify-center" id="camera-section">
           <h2 class="text-lg font-semibold mb-4">Preview Kamera</h2>
           <video id="preview" autoplay playsinline class="w-full max-w-sm h-auto border rounded-lg shadow bg-black"></video>
@@ -124,8 +123,8 @@
 
       <!-- Tombol Capture -->
       <div class="mt-4 flex justify-center w-full">
-        <button id="capture" class="px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">
-          Ambil Foto
+        <button id="capture" class="px-6 py-2 bg-gray-400 text-white rounded-lg shadow cursor-not-allowed" disabled>
+          Wajah tidak terdeteksi
         </button>
       </div>
 
@@ -149,12 +148,14 @@
   const captureButton = document.getElementById('capture')
   const fileInput = document.getElementById('fileInput')
   const cameraSection = document.getElementById('camera-section')
-  const checkNidBtn = document.querySelector('button[type="button"]') // tombol Check NID
+  const checkNidBtn = document.querySelector('button[type="button"]')
   const nidInput = document.getElementById('nid')
   const nameInput = document.getElementById('name')
   const emailInput = document.getElementById('email')
   const phoneInput = document.getElementById('phone')
   const nidMessage = document.getElementById('nid-message')
+
+  let faceDetected = false
 
   async function startCamera() {
     try {
@@ -166,7 +167,37 @@
     }
   }
 
+  // Load face-api models
+  async function loadModels() {
+    await faceapi.nets.tinyFaceDetector.loadFromUri('/models')
+    console.log("Model FaceAPI Loaded ✅")
+    detectFaceLoop()
+  }
+
+  async function detectFaceLoop() {
+    setInterval(async () => {
+      const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
+      if (detections.length > 0) {
+        faceDetected = true
+        captureButton.disabled = false
+        captureButton.textContent = "Ambil Foto"
+        captureButton.classList.remove("bg-gray-400", "cursor-not-allowed")
+        captureButton.classList.add("bg-blue-600", "hover:bg-blue-700")
+      } else {
+        faceDetected = false
+        captureButton.disabled = true
+        captureButton.textContent = "Wajah tidak terdeteksi"
+        captureButton.classList.remove("bg-blue-600", "hover:bg-blue-700")
+        captureButton.classList.add("bg-gray-400", "cursor-not-allowed")
+      }
+    }, 500)
+  }
+
   function capturePhoto() {
+    if (!faceDetected) {
+      alert("Tidak ada wajah yang terdeteksi. Silakan posisikan wajah Anda di depan kamera.")
+      return
+    }
     const context = canvas.getContext('2d')
     canvas.width = video.videoWidth
     canvas.height = video.videoHeight
@@ -187,12 +218,12 @@
 
   // 🔹 Fungsi check NID
   checkNidBtn.addEventListener('click', async () => {
-    nameInput.value = "" // reset
-    emailInput.value = "" // reset
-    phoneInput.value = "" // reset
+    nameInput.value = "" 
+    emailInput.value = "" 
+    phoneInput.value = "" 
     const nid = nidInput.value.trim()
     nidMessage.textContent = ""
-    nidMessage.className = "text-sm mt-1" // reset
+    nidMessage.className = "text-sm mt-1" 
 
     if (!nid) {
       nidMessage.textContent = "Silakan masukkan NID terlebih dahulu"
@@ -202,7 +233,6 @@
 
     try {
       const res = await axios.get("{{ url('api/v1/get-user-by-nid') }}/" + nid)
-
       nameInput.value = res.data.data.user.name
       emailInput.value = res.data.data.user.email
       phoneInput.value = res.data.data.user.phone
@@ -214,7 +244,10 @@
     }
   })
 
-  window.addEventListener('load', startCamera)
+  window.addEventListener('load', async () => {
+    await startCamera()
+    await loadModels()
+  })
 </script>
 
 </body>
