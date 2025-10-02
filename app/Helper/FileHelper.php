@@ -22,4 +22,21 @@ class FileHelper {
         }
         return null;
     }
+
+    public static function toBase64($file, bool $withPrefix = true): ?string
+    {
+        if (!$file->isValid()) {
+            return null;
+        }
+
+        $fileContent = file_get_contents($file->getRealPath());
+        $base64 = base64_encode($fileContent);
+
+        if ($withPrefix) {
+            $mimeType = $file->getMimeType();
+            return "data:" . $mimeType . ";base64," . $base64;
+        }
+
+        return $base64;
+    }
 }

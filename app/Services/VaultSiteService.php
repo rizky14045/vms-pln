@@ -79,6 +79,48 @@ class VaultSiteService
             ];
         }
     }
-    
 
+    public function checkFacePhoto(string $photoBase64)
+    {
+        try {
+            $params = [
+                'PhotoBase64' => $photoBase64
+            ];
+
+            $response = $this->client->__soapCall('FRCheckFacePhoto', [$params]);
+
+            // Ambil hasil dari property "FRCheckFacePhotoResult"
+            $result = $response->FRCheckFacePhotoResult ?? null;
+
+            if (!$result) {
+                return [
+                    'error' => true,
+                    'message' => 'Invalid response structure'
+                ];
+            }
+
+            $errCode    = (string)($result->ErrCode ?? '');
+            $errMessage = (string)($result->ErrMessage ?? '');
+            $mediaId    = (string)($result->MediaID ?? '');
+
+            if ($errCode === '-1') {
+                return [
+                    'error' => true,
+                    'message' => $errMessage
+                ];
+            }
+
+            return [
+                'error' => false,
+                'message' => 'Success',
+                'media_id' => $mediaId
+            ];
+
+        } catch (\Exception $e) {
+            return [
+                'error' => true,
+                'message' => $e->getMessage()
+            ];
+        }
+    }
 }

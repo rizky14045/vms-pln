@@ -9,6 +9,7 @@ use App\Services\UserService;
 use Illuminate\Support\Facades\DB;
 use App\Services\RegisterPersonService;
 use App\FormatRequest\FormatRequestUser;
+use App\Services\VaultSiteService;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use App\Validation\RegisterRequestValidation;
@@ -18,7 +19,8 @@ class HomeController extends Controller
     public function __construct(
         protected UserService $userService,
         protected RegisterPersonService $registerPersonService,
-        protected FormatRequestUser $formatRequestUser
+        protected FormatRequestUser $formatRequestUser,
+        protected VaultSiteService $vaultSiteService
     ) {}
 
     public function index(): View {
@@ -50,6 +52,21 @@ class HomeController extends Controller
             if($check_today){
                 return redirect()->route('register-visitor')->with('info', 'Anda sudah melakukan registrasi kunjungan hari ini, silahkan tunggu persetujuan dari petugas.');
             }
+            if ($request->hasFile('person_image')) {
+                $base64Only = FileHelper::toBase64($request->file('person_image'), false);
+
+                $result = $this->vaultSiteService->checkFacePhoto($base64Only);
+
+                if ($result['error']) {
+                    return redirect()
+                        ->back()
+                        ->withErrors([
+                            'person_image' => $result['message'] // tampil di input person_image
+                        ])
+                        ->withInput();
+                }
+            }
+
             $getFilename = FileHelper::generatedFileName('Person', $request->person_image->extension());
             $request->merge(['image_name' => $getFilename,'user_id' => $user->id]);
             
