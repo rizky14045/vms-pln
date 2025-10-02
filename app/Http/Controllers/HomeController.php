@@ -48,7 +48,7 @@ class HomeController extends Controller
             // misal hari ini belum di approve , maka kasih notice masih menunggu persetujuan , data ga masukin ke transaction
             $check_today = $this->registerPersonService->getRegisteredPersonToday($request->nid);
             if($check_today){
-                return redirect()->route('register-visitor')->with('info', 'Anda sudah melakukan registrasi kunjungan hari ini, silahkan tunggu persetujuan dari petugas.');
+                return redirect()->route('register-visitor')->with('info', 'Anda sudah melakukan registrasi kunjungan hari ini!');
             }
             $getFilename = FileHelper::generatedFileName('Person', $request->person_image->extension());
             $request->merge(['image_name' => $getFilename,'user_id' => $user->id]);
