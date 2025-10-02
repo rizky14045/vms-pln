@@ -53,6 +53,9 @@ class RegisterPersonService{
         $today = now()->format('Y-m-d');
         return RegisteredPerson::whereHas('user', function($query) use ($nid) {
             $query->where('nid', $nid);
-        })->whereDate('created_at', $today)->first();
+        })
+        ->where('status_level' , 1)
+        ->orWhere('status_level',2)
+        ->whereDate('created_at', $today)->first();
     }
 }
