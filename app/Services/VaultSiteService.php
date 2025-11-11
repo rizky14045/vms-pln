@@ -20,7 +20,7 @@ class VaultSiteService
             ]);
 
         } catch (Exception $e) {
-            throw new Exception("SOAP Client Error: " . $e->getMessage());
+            // throw new Exception("SOAP Client Error: " . $e->getMessage());
         }
     }
 

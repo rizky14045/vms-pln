@@ -41,7 +41,7 @@ class FormatRequestVaultsite
             "Company" => $data->user->company,
             "Gentle" => "",
             "AccessLevel" => $access_no, // *
-            "FaceAccessLevel" => "00", // default
+            "FaceAccessLevel" => "01", // default
             "LiftAccessLevel" => "01", // default
             "BypassAP" => false, // default
             "ActiveStatus" => true, // default

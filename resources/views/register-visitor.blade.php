@@ -104,28 +104,38 @@
           ])
       </div>
 
-      <!-- Kamera & Hasil Foto -->
-      <div class="flex flex-col md:flex-row gap-6">
-        <div class="flex-1 flex flex-col items-center justify-center">
-          <h2 class="text-lg font-semibold mb-4">Hasil Foto</h2>
-          <canvas id="snapshot" class="w-full max-w-sm h-auto border rounded-lg shadow mb-4"></canvas>
-          @if($errors->has('person_image'))
-              <div style="color:red" class="text-red-500 absolute text-sm">{{ $errors->first('person_image') }}</div>
-          @endif
-          <input type="file" id="fileInput" name="person_image" class="hidden">
-        </div>
+      <div class="flex flex-col items-center justify-center gap-4">
+        <h2 class="text-lg font-semibold mb-2">Upload Foto</h2>
 
-        <div class="flex-1 flex flex-col items-center justify-center" id="camera-section">
-          <h2 class="text-lg font-semibold mb-4">Preview Kamera</h2>
-          <video id="preview" autoplay playsinline class="w-full max-w-sm h-auto border rounded-lg shadow bg-black"></video>
-        </div>
-      </div>
+        <!-- Preview Gambar -->
+        <img
+          id="imagePreview"
+          class="w-full max-w-sm h-auto border rounded-lg shadow hidden"
+          alt="Preview Gambar"
+        />
 
-      <!-- Tombol Capture -->
-      <div class="mt-4 flex justify-center w-full">
-        <button id="capture" class="px-6 py-2 bg-gray-400 text-white rounded-lg shadow cursor-not-allowed" disabled>
-          Wajah tidak terdeteksi
+        <!-- Input File -->
+        <input
+          type="file"
+          id="fileInput"
+          name="person_image"
+          accept="image/*"
+          class="hidden"
+        />
+
+        <button
+          type="button"
+          onclick="document.getElementById('fileInput').click()"
+          class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+        >
+          Pilih Gambar
         </button>
+
+        @if($errors->has('person_image'))
+          <div class="text-red-500 text-sm">
+            {{ $errors->first('person_image') }}
+          </div>
+        @endif
       </div>
 
       <!-- Tombol Aksi -->
@@ -143,11 +153,6 @@
   </div>
 
 <script>
-  const video = document.getElementById('preview')
-  const canvas = document.getElementById('snapshot')
-  const captureButton = document.getElementById('capture')
-  const fileInput = document.getElementById('fileInput')
-  const cameraSection = document.getElementById('camera-section')
   const checkNidBtn = document.querySelector('button[type="button"]')
   const nidInput = document.getElementById('nid')
   const nameInput = document.getElementById('name')
@@ -155,66 +160,22 @@
   const phoneInput = document.getElementById('phone')
   const nidMessage = document.getElementById('nid-message')
 
-  let faceDetected = false
+  const fileInput = document.getElementById("fileInput");
+  const imagePreview = document.getElementById("imagePreview");
 
-  async function startCamera() {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true })
-      video.srcObject = stream
-    } catch (error) {
-      console.error('Error accessing camera:', error)
-      cameraSection.innerHTML = '<p class="text-red-500">Tidak dapat mengakses kamera. Periksa izin kamera di browser Anda.</p>'
+  fileInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (file && file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        imagePreview.src = e.target.result;
+        imagePreview.classList.remove("hidden");
+      };
+      reader.readAsDataURL(file);
+    } else {
+      alert("Silakan pilih file gambar yang valid.");
     }
-  }
-
-  // Load face-api models
-  async function loadModels() {
-    await faceapi.nets.tinyFaceDetector.loadFromUri('/models')
-    console.log("Model FaceAPI Loaded ✅")
-    detectFaceLoop()
-  }
-
-  async function detectFaceLoop() {
-    setInterval(async () => {
-      const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
-      if (detections.length > 0) {
-        faceDetected = true
-        captureButton.disabled = false
-        captureButton.textContent = "Ambil Foto"
-        captureButton.classList.remove("bg-gray-400", "cursor-not-allowed")
-        captureButton.classList.add("bg-blue-600", "hover:bg-blue-700")
-      } else {
-        faceDetected = false
-        captureButton.disabled = true
-        captureButton.textContent = "Wajah tidak terdeteksi"
-        captureButton.classList.remove("bg-blue-600", "hover:bg-blue-700")
-        captureButton.classList.add("bg-gray-400", "cursor-not-allowed")
-      }
-    }, 500)
-  }
-
-  function capturePhoto() {
-    if (!faceDetected) {
-      alert("Tidak ada wajah yang terdeteksi. Silakan posisikan wajah Anda di depan kamera.")
-      return
-    }
-    const context = canvas.getContext('2d')
-    canvas.width = video.videoWidth
-    canvas.height = video.videoHeight
-    context.drawImage(video, 0, 0, canvas.width, canvas.height)
-
-    canvas.toBlob((blob) => {
-      const file = new File([blob], 'photo.jpeg', { type: 'image/jpeg' })
-      const dataTransfer = new DataTransfer()
-      dataTransfer.items.add(file)
-      fileInput.files = dataTransfer.files
-    }, 'image/jpeg')
-  }
-
-  captureButton.addEventListener('click', (e) => {
-    e.preventDefault()
-    capturePhoto()
-  })
+  });
 
   // 🔹 Fungsi check NID
   checkNidBtn.addEventListener('click', async () => {
@@ -244,10 +205,6 @@
     }
   })
 
-  window.addEventListener('load', async () => {
-    await startCamera()
-    await loadModels()
-  })
 </script>
 
 </body>
