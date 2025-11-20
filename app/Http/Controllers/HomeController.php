@@ -40,6 +40,7 @@ class HomeController extends Controller
             if($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
             }
+
             //check if user exist by nid
             $user = $this->userService->getUserByNid($request->nid);
             if(!$user) {
@@ -53,7 +54,10 @@ class HomeController extends Controller
                 return redirect()->route('register-visitor')->with('info', 'Anda sudah melakukan registrasi kunjungan hari ini!');
             }
             if ($request->hasFile('person_image')) {
-                $base64Only = FileHelper::toBase64($request->file('person_image'), false);
+                $base64Only = FileHelper::toResizedBase64(
+                    $request->file('person_image'),
+                    false // tanpa prefix
+                );
 
                 $result = $this->vaultSiteService->checkFacePhoto($base64Only);
 
@@ -71,8 +75,19 @@ class HomeController extends Controller
             $request->merge(['image_name' => $getFilename,'user_id' => $user->id]);
             
             $createdRegister = $this->registerPersonService->createRegisteredPerson($request->all());
+            $base64WithPrefix = FileHelper::toResizedBase64(
+                $request->file('person_image'),
+                true // default sebenarnya true
+            );
         
-            FileHelper::saveFile($request->person_image, 'uploads/person_images', $getFilename);
+            $base64 = FileHelper::toResizedBase64($request->file('person_image'), false);
+
+            $dataBinary = base64_decode($base64);
+
+            file_put_contents(
+                public_path('uploads/person_images/' . $getFilename),
+                $dataBinary
+            );
             DB::commit();
             return redirect()->route('register-visitor')->with('success', 'Berhasil melakukan registrasi kunjungan, silahkan tunggu persetujuan dari petugas.');
 

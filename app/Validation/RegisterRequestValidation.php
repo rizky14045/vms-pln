@@ -9,7 +9,7 @@ class RegisterRequestValidation
         return [
             'nid' => 'required|string|max:255',
             'name' => 'required|string|max:255',
-            'person_image' => 'required|file|mimes:png,jpeg,jpg|dimensions:max_width=1920,max_height=1080',
+            'person_image' => 'required|file|mimes:png,jpeg,jpg',
             'email' => 'required|email:rfc,dns',
             'phone' => 'required|regex:/^628\d{7,12}$/',
         ];
