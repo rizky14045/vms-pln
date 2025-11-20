@@ -23,12 +23,37 @@ class FormatRequestUser
         ];
 
     }
-    protected static function generateCardNo() {
+    protected static function generateCardNo()
+    {
+        $date = now()->format('dmy'); // 6 digit, contoh: 251125
 
         $lastUser = User::latest('id')->first();
-        $number = $lastUser ? $lastUser->id + 1 : 1;
+        $id = $lastUser ? $lastUser->id + 1 : 1;
 
-        return sprintf("%08d", $number);
+        $maxTotalDigit = 10;
+        $dateLength = strlen($date);
+
+        $maxIdDigit = $maxTotalDigit - $dateLength;
+
+        // Jika ID lebih panjang dari 4 digit → fallback ke random
+        if (strlen((string)$id) > $maxIdDigit) {
+            return static::generateRandomCardNo();
+        }
+
+        // Gabungkan tanggal + ID sampai total pas 10 digit
+        $cardNo = $date . str_pad($id, $maxIdDigit, "0", STR_PAD_LEFT);
+
+        return $cardNo;
+    }
+
+    // Fallback: random unique 10 digit
+    protected static function generateRandomCardNo()
+    {
+        do {
+            $random = str_pad(random_int(0, 9999999999), 10, '0', STR_PAD_LEFT);
+        } while (User::where('id_card_number', $random)->exists()); // pastikan tidak duplikat
+
+        return $random;
     }
 
 }
