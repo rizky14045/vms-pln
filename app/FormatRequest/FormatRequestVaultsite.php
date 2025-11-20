@@ -73,4 +73,12 @@ class FormatRequestVaultsite
 
     }
 
+    public static function formatAddFace($card_id)
+    {
+        return [
+            'FRDownloadCardUserFace' => [
+                'CardNo' => $card_id
+            ]
+        ];
+    }
 }

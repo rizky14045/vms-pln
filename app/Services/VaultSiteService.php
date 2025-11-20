@@ -37,6 +37,17 @@ class VaultSiteService
         }
     }
 
+    public function addToFR(array $requestBody)
+    {
+        try {
+            return $this->client->__soapCall('FRDownloadCardUserFace', [
+                $requestBody['FRDownloadCardUserFace']
+            ]);
+        } catch (Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
+
     public function addArea(array $alGroup)
     {
         try {

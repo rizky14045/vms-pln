@@ -106,6 +106,8 @@ class RegisteredController extends Controller
         if($userRegistered->is_registered == false){
             $this->userService->updateStatusRegistered($userRegistered);
             $response = $this->vaultSiteService->addCard($formatRequest);
+            $formatRequest = FormatRequestVaultsite::formatAddFace($userRegistered->id_card_number);
+            $response = $this->vaultSiteService->addToFR($formatRequest);
         }else{
             
             $data = [
