@@ -131,6 +131,14 @@
           Pilih Gambar
         </button>
 
+        <div class="text-gray-600 text-sm text-center max-w-xs">
+          Pastikan wajah terlihat jelas dan tidak buram.<br>
+          Format yang didukung: JPG, JPEG, PNG.<br>
+          Resolusi minimal: <span class="font-semibold">600×800 px</span>.<br>
+          Resolusi maksimal: <span class="font-semibold">1920x1080 px</span>.<br>
+          Ukuran maksimal file: <span class="font-semibold">2 MB</span>.
+        </div>
+        
         @if($errors->has('person_image'))
           <div class="text-red-500 text-sm">
             {{ $errors->first('person_image') }}
