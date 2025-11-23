@@ -61,6 +61,10 @@
           ])
           <p id="nid-message" class="text-sm mt-1"></p>
       </div>
+      <p class="text-xs text-gray-600 italic mt-2">
+          Tekan <strong>Check NID</strong> untuk memeriksa apakah nomor NID sudah pernah terdaftar.
+          Jika data sudah ada di sistem, maka form akan otomatis menampilkan data sebelumnya. Jika belum pernah terdaftar, maka Anda dapat melanjutkan pengisian form seperti biasa.
+      </p>
       <div class="flex justify-end">
           @include('components.button', [
               'text' => 'Check NID',
