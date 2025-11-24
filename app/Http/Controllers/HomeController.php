@@ -49,10 +49,10 @@ class HomeController extends Controller
                 $user = $this->userService->createUser($formatRequest);
             }
             // misal hari ini belum di approve , maka kasih notice masih menunggu persetujuan , data ga masukin ke transaction
-            $check_today = $this->registerPersonService->getRegisteredPersonToday($request->nid);
-            if($check_today){
-                return redirect()->route('register-visitor')->with('info', 'Anda sudah melakukan registrasi kunjungan hari ini!');
-            }
+            // $check_today = $this->registerPersonService->getRegisteredPersonToday($request->nid);
+            // if($check_today){
+            //     return redirect()->route('register-visitor')->with('info', 'Anda sudah melakukan registrasi kunjungan hari ini!');
+            // }
             if ($request->hasFile('person_image')) {
                 $base64Only = FileHelper::toResizedBase64(
                     $request->file('person_image'),
@@ -69,6 +69,8 @@ class HomeController extends Controller
                         ])
                         ->withInput();
                 }
+            }else {
+                 return redirect()->route('register-visitor')->with('info', 'Foto tidak ditemukan!');
             }
 
             $getFilename = FileHelper::generatedFileName('Person', $request->person_image->extension());
