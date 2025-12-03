@@ -18,10 +18,14 @@ class AreaService
         $this->vaultsiteService = $vaultsiteService;
     }
 
-    public function getAllAreas(array $filters = [])
+    public function getAllAreas(array $filters = [], $areaType = null)
     {
         try {
             $query = Area::with('childrenArea', 'devices');
+
+            if ($areaType) {
+                $query->where('area_type', $areaType);
+            }
 
             // Filter search
             if (array_key_exists('search', $filters) && !empty($filters['search'])) {

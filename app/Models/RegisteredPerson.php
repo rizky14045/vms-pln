@@ -25,6 +25,8 @@ class RegisteredPerson extends Model
         'password_permission',
         'person_image',
         'is_employee',
+        'pic_name',
+        'pic_phone',
         'expired_at',
         'purpose_of_visit',
         'status_level',

@@ -23,7 +23,7 @@
     </div>
 
     <!-- Judul -->
-    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Register Visitor</h2>
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Register Karyawan</h2>
      @if (\Session::has('success'))
         <div class="w-full flex justify-center">
           <div class="alert alert-emerald bg-emerald-100 dark:bg-emerald-600/25 text-emerald-600 dark:text-emerald-400 border-emerald-100 
@@ -49,14 +49,14 @@
 
 
     <!-- Form -->
-    <form class="space-y-4" method="POST" action="{{ route('register-visitor-request') }}" enctype="multipart/form-data">
+    <form class="space-y-4" method="POST" action="{{ route('register-request') }}" enctype="multipart/form-data">
       @csrf
       <div>
           @include('components.input', [
               'type' => 'text',
               'name' => 'nid',
               'id' => 'nid',
-              'placeholder' => 'Nomor Identitas (NID/Nomor Induk Pegawai)',
+              'placeholder' => 'NID',
               'required' => true,
               'autofocus' => true,
               'label' => 'NID',
@@ -64,12 +64,12 @@
           <p id="nid-message" class="text-sm mt-1"></p>
       </div>
       <p class="text-xs text-gray-600 italic mt-2">
-          Tekan <strong>Check Data</strong> untuk memeriksa apakah nomor Identitas sudah pernah terdaftar.
+          Tekan <strong>Check NID</strong> untuk memeriksa apakah nomor NID sudah pernah terdaftar.
           Jika data sudah ada di sistem, maka form akan otomatis menampilkan data sebelumnya. Jika belum pernah terdaftar, maka Anda dapat melanjutkan pengisian form seperti biasa.
       </p>
       <div class="flex justify-end">
           @include('components.button', [
-              'text' => 'Check Data',
+              'text' => 'Check NID',
               'type' => 'button',
               'variant' => 'primary',
               'size' => 'sm',
@@ -107,52 +107,6 @@
               'required' => true,
               'autofocus' => true,
               'label' => 'Nomor HP',
-          ])
-      </div>
-      <div>
-          @include('components.input', [
-              'type' => 'text',
-              'name' => 'company',
-              'id' => 'company',
-              'placeholder' => 'Nama Perusahaan',
-              'required' => true,
-              'autofocus' => true,
-              'label' => 'Nama Perusahaan',
-          ])
-      </div>
-      <div>
-          @include('components.input', [
-              'type' => 'text',
-              'name' => 'purpose_of_visit',
-              'id' => 'purpose_of_visit',
-              'placeholder' => 'Tujuan',
-              'required' => true,
-              'autofocus' => true,
-              'label' => 'Tujuan',
-          ])
-      </div>
-
-      <div>
-          @include('components.input', [
-              'type' => 'text',
-              'name' => 'pic_name',
-              'id' => 'pic_name',
-              'placeholder' => 'PIC yang dikunjungi',
-              'required' => true,
-              'autofocus' => false,
-              'label' => 'PIC yang dikunjungi',
-          ])
-      </div>
-
-      <div>
-          @include('components.input', [
-              'type' => 'text',
-              'name' => 'pic_phone',
-              'id' => 'pic_phone',
-              'placeholder' => 'Nomor HP PIC yang dikunjungi',
-              'required' => true,
-              'autofocus' => true,
-              'label' => 'Nomor HP PIC yang dikunjungi',
           ])
       </div>
 

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Carbon\Carbon;
 use SoapClient;
 use Exception;
 
@@ -12,12 +13,33 @@ class VaultSiteService
     public function __construct()
     {
         try {
+            // $this->client = new SoapClient(env("VAULTSITE_API_URL") . "?WSDL", [
+            //     'trace' => 1,
+            //     'exceptions' => true,
+            //     'cache_wsdl' => WSDL_CACHE_NONE,
+            //     'keep_alive' => false,
+            // ]);
+
             $this->client = new SoapClient(env("VAULTSITE_API_URL") . "?WSDL", [
                 'trace' => 1,
                 'exceptions' => true,
                 'cache_wsdl' => WSDL_CACHE_NONE,
+                'location' => env("VAULTSITE_API_URL"), // <--- WAJIB
+                'uri' => "WebAPI", // namespace dari WSDL
                 'keep_alive' => false,
+                'stream_context' => stream_context_create([
+                    'ssl' => [
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true,
+                    ],
+                    'http' => [
+                        'protocol_version' => 1.1,
+                        'header' => "Connection: close"
+                    ]
+                ]),
             ]);
+
 
         } catch (Exception $e) {
             // throw new Exception("SOAP Client Error: " . $e->getMessage());
@@ -32,6 +54,21 @@ class VaultSiteService
             ];
 
             return $this->client->__soapCall('AddCard', [$params]);
+        } catch (Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
+
+    public function updateCard(string $cardNo, array $cardProfile)
+    {
+        try {
+            $params = [
+                'CardNo'      => $cardNo,
+                'CardProfile' => $cardProfile
+            ];
+
+            return $this->client->__soapCall('UpdateCard', [$params]);
+
         } catch (Exception $e) {
             return ['error' => $e->getMessage()];
         }
@@ -88,6 +125,22 @@ class VaultSiteService
             return [
                 'error' => $e->getMessage()
             ];
+        }
+    }
+
+    public function updateCardExpiryDate(string $cardNo, string $expiryDate)
+    {
+        try {
+            $params = [
+                'CardNo'       => $cardNo,
+                'ExpiryDate'   => $expiryDate,
+                'DownloadCard' => true,
+            ];
+
+            $result =  $this->client->__soapCall('UpdateCardExpiryDate', [$params]);
+
+        } catch (Exception $e) {
+            return ['error' => $e->getMessage()];
         }
     }
 

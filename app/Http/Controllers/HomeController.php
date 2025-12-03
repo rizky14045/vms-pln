@@ -26,6 +26,10 @@ class HomeController extends Controller
     public function index(): View {
         return view('home');
     }
+    public function registerEmployee(): View {
+        return view('register-employee');
+    }
+
     public function registerVisitor(): View {
         return view('register-visitor');
     }
@@ -33,7 +37,6 @@ class HomeController extends Controller
     public function registerRequest(Request $request) {
 
         try {
-            
             DB::beginTransaction();
 
             $validator = Validator::make($request->all(), RegisterRequestValidation::rulesForCreate(), RegisterRequestValidation::messages());
@@ -44,21 +47,20 @@ class HomeController extends Controller
             //check if user exist by nid
             $user = $this->userService->getUserByNid($request->nid);
             if(!$user) {
-                
+                $request->merge(['company' => 'PLN Nusantara Power', 'is_employee' => true]);
                 $formatRequest = $this->formatRequestUser->employeeUser($request->all()); 
                 $user = $this->userService->createUser($formatRequest);
             }
             // misal hari ini belum di approve , maka kasih notice masih menunggu persetujuan , data ga masukin ke transaction
             // $check_today = $this->registerPersonService->getRegisteredPersonToday($request->nid);
             // if($check_today){
-            //     return redirect()->route('register-visitor')->with('info', 'Anda sudah melakukan registrasi kunjungan hari ini!');
+            //     return redirect()->route('register-employee')->with('info', 'Anda sudah melakukan registrasi kunjungan hari ini!');
             // }
             if ($request->hasFile('person_image')) {
                 $base64Only = FileHelper::toResizedBase64(
                     $request->file('person_image'),
                     false // tanpa prefix
                 );
-
                 $result = $this->vaultSiteService->checkFacePhoto($base64Only);
 
                 if ($result['error']) {
@@ -74,7 +76,7 @@ class HomeController extends Controller
             }
 
             $getFilename = FileHelper::generatedFileName('Person', $request->person_image->extension());
-            $request->merge(['image_name' => $getFilename,'user_id' => $user->id]);
+            $request->merge(['image_name' => $getFilename,'user_id' => $user->id, 'is_employee' => true]);
             
             $createdRegister = $this->registerPersonService->createRegisteredPerson($request->all());
             $base64WithPrefix = FileHelper::toResizedBase64(
@@ -97,7 +99,72 @@ class HomeController extends Controller
             DB::rollBack();
             throw $th;
         }
-       
+    }
 
+    public function registerVisitorRequest(Request $request) {
+
+        try {
+            DB::beginTransaction();
+
+            $validator = Validator::make($request->all(), RegisterRequestValidation::rulesForVisitor(), RegisterRequestValidation::messages());
+            if($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+            //check if user exist by nid
+            $user = $this->userService->getUserByNid($request->nid);
+            if(!$user) {
+                $request->merge(['is_employee' => false]);
+                $formatRequest = $this->formatRequestUser->employeeUser($request->all()); 
+                $user = $this->userService->createUser($formatRequest);
+            }
+            // misal hari ini belum di approve , maka kasih notice masih menunggu persetujuan , data ga masukin ke transaction
+            // $check_today = $this->registerPersonService->getRegisteredPersonToday($request->nid);
+            // if($check_today){
+            //     return redirect()->route('register-employee')->with('info', 'Anda sudah melakukan registrasi kunjungan hari ini!');
+            // }
+            if ($request->hasFile('person_image')) {
+                $base64Only = FileHelper::toResizedBase64(
+                    $request->file('person_image'),
+                    false // tanpa prefix
+                );
+                $result = $this->vaultSiteService->checkFacePhoto($base64Only);
+
+                if ($result['error']) {
+                    return redirect()
+                        ->back()
+                        ->withErrors([
+                            'person_image' => $result['message'] // tampil di input person_image
+                        ])
+                        ->withInput();
+                }
+            }else {
+                 return redirect()->route('register-visitor')->with('info', 'Foto tidak ditemukan!');
+            }
+
+            $getFilename = FileHelper::generatedFileName('Person', $request->person_image->extension());
+            $request->merge(['image_name' => $getFilename,'user_id' => $user->id, 'is_employee' => false]);
+            
+            $createdRegister = $this->registerPersonService->createRegisteredPerson($request->all());
+            $base64WithPrefix = FileHelper::toResizedBase64(
+                $request->file('person_image'),
+                true // default sebenarnya true
+            );
+        
+            $base64 = FileHelper::toResizedBase64($request->file('person_image'), false);
+
+            $dataBinary = base64_decode($base64);
+
+            file_put_contents(
+                public_path('uploads/person_images/' . $getFilename),
+                $dataBinary
+            );
+            DB::commit();
+            return redirect()->route('register-visitor')->with('success', 'Berhasil melakukan registrasi kunjungan, silahkan tunggu persetujuan dari petugas.');
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 }

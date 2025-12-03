@@ -23,16 +23,24 @@ class RegisterPersonService{
             'password_fr' => null,
             'password_permission' => null,
             'person_image' => $request['image_name'],
-            'is_employee' => true,
+            'is_employee' => $request['is_employee'] ?? false,
             'expired_at' => null,
             'purpose_of_visit' => $request['purpose_of_visit'] ?? null,
             'status_level' => 1,
+            'pic_name' => $request['pic_name'] ?? null,
+            'pic_phone' => $request['pic_phone'] ?? null,
             'status' => 'Waiting for approval',
         ]);
     }
 
-    public function getAllRegisteredPerson(){
-        return RegisteredPerson::with('user')->latest()->get();
+    public function getAllRegisteredPerson($isEmployee = 0)
+    {
+        return RegisteredPerson::with('user')
+            ->whereHas('user', function ($q) use ($isEmployee) {
+                $q->where('is_employee', $isEmployee);
+            })
+            ->latest()
+            ->get();
     }
 
     public function getRegisteredPersonById($id){

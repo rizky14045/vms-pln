@@ -3,8 +3,10 @@
 @section('content')
 <section class="bg-white dark:bg-dark-2 flex flex-wrap justify-center min-h-[100vh]">  
     <div class="lg:w-1/2 lg:block hidden">
-        <div class="flex items-center flex-col h-full justify-center">
-            <img src="{{ asset('assets/images/auth/auth-img.png') }}" alt="">
+        <div class="flex items-center flex-col h-full justify-center overflow-hidden">
+            <img src="{{ asset('assets/PLNMKR.jpg') }}" 
+                class="h-full w-auto object-cover" 
+                alt="">
         </div>
     </div>
     <div class="lg:w-1/2 py-8 px-6 flex flex-col justify-center">

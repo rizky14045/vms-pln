@@ -24,6 +24,12 @@
           </a>
         </li>
         <li>
+          <a href="{{route('registered.index.visitor')}}">
+            <iconify-icon icon="solar:users-group-rounded-broken" class="menu-icon"></iconify-icon>
+            <span>Register Visitor</span>
+          </a>
+        </li>
+        <li>
           <a href="{{route('areas.index')}}">
             <iconify-icon icon="solar:buildings-2-bold" class="menu-icon"></iconify-icon>
             <span>Area</span>

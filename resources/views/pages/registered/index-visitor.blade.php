@@ -14,7 +14,7 @@
 @endsection
 @section('content')
 <div class="p-6">
-   <h2 class="text-xl font-semibold mb-4">Daftar Register Employee</h2>
+   <h2 class="text-xl font-semibold mb-4">Daftar Request Visitor</h2>
 
    <div class="bg-white dark:bg-neutral-800 shadow rounded-xl p-4">
       <div class="overflow-x-auto">
@@ -24,6 +24,7 @@
                   <th class="px-4 py-3 text-sm font-semibold text-neutral-700 dark:text-neutral-200">No</th>
                   <th class="px-4 py-3 text-sm font-semibold text-neutral-700 dark:text-neutral-200">NID</th>
                   <th class="px-4 py-3 text-sm font-semibold text-neutral-700 dark:text-neutral-200">Name</th>
+                  <th class="px-4 py-3 text-sm font-semibold text-neutral-700 dark:text-neutral-200">Company</th>
                   <th class="px-4 py-3 text-sm font-semibold text-neutral-700 dark:text-neutral-200">Status</th>
                   <th class="px-4 py-3 text-sm font-semibold text-neutral-700 dark:text-neutral-200">Action</th>
                </tr>
@@ -41,13 +42,14 @@ $(function () {
     let table = $('#selection-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('registered.data') }}?is_employee=1",
+        ajax: "{{ route('registered.data') }}?is_employee=0",
         autoWidth: false,
         responsive: true,
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', searchable: false },
             { data: 'nid', name: 'user.nid' },
             { data: 'name', name: 'user.name' },
+            { data: 'company', name: 'company' },
             { data: 'status', name: 'status', searchable: false },
             { data: 'action', name: 'action', searchable: false }
         ],

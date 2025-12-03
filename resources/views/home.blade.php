@@ -28,7 +28,7 @@
 
       <!-- Buttons -->
       <div class="space-x-4">
-        <a class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded" href="{{route('register-visitor')}}">Mulai</a>
+        <a class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded" href="{{route('register-employee')}}">Mulai</a>
       </div>
     </div>
   </div>

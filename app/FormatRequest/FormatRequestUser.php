@@ -16,8 +16,8 @@ class FormatRequestUser
             'id_card_number' => self::generateCardNo(),
             'identity_number' => null,
             'phone' => $request['phone'],
-            'company' => 'PLN Nusantara Power',
-            'is_employee' => true,
+            'company' => $request['company'],
+            'is_employee' => $request['is_employee'],
             'join_date' => now(),
             'password' => bcrypt('password'),
         ];

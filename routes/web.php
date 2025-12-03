@@ -21,8 +21,10 @@ use App\Http\Controllers\AuthenticationController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/register-employee', [HomeController::class, 'registerVisitor'])->name('register-visitor');
+Route::get('/register-employee', [HomeController::class, 'registerEmployee'])->name('register-employee');
 Route::post('/register-request', [HomeController::class, 'registerRequest'])->name('register-request');
+Route::get('/register-visitors', [HomeController::class, 'registerVisitor'])->name('register-visitor');
+Route::post('/register-visitor-request', [HomeController::class, 'registerVisitorRequest'])->name('register-visitor-request');
 Route::get('/base64', [HomeController::class, 'testBase']);
 
 
@@ -57,9 +59,12 @@ Route::middleware('auth')->group(function () {
     Route::controller(RegisteredController::class)->group(function () {
         Route::get('/registered/datas','getDataIndex')->name('registered.data');
         Route::get('/registered','index')->name('registered.index');
+        Route::get('/registered-visitor','indexVisitor')->name('registered.index.visitor');
         Route::get('/registered/{id}','show')->name('registered.show');
         Route::get('/registered/{id}/approve','approve')->name('registered.approve');
+        Route::get('/registered/{id}/approve-visitor','approveVisitor')->name('registered.approve.visitor');
         Route::patch('/registered/{id}/approve','updateApprove')->name('registered.update-approve');
+        Route::patch('/registered/{id}/approve-visitor','updateApproveVisitor')->name('registered.update-approve-visitor');
         Route::get('/registered/create','create')->name('registered.create');
         Route::post('/registered','store')->name('registered.store');
         Route::get('/registered/{id}/edit','edit')->name('registered.edit');
