@@ -127,6 +127,21 @@ class VaultSiteService
             ];
         }
     }
+    public function deleteCard($cardNumber)
+    {
+        try {
+            $params = [
+                'CardNo'       => $cardNumber,
+                'DeleteFromDevice'  => true,
+            ];
+
+            return $this->client->__soapCall('DeleteCard', [$params]);
+        } catch (\Exception $e) {
+            return [
+                'error' => $e->getMessage()
+            ];
+        }
+    }
 
     public function updateCardExpiryDate(string $cardNo, string $expiryDate)
     {

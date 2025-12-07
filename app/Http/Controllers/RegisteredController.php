@@ -144,6 +144,7 @@ class RegisteredController extends Controller
             Alert::warning('Warning', 'Area tidak boleh kosong');
             return redirect()->back();
         }
+        
         if(!$isEmployee){
             if($request->expired_at == null){
                 Alert::warning('Warning', 'Tanggal kedaluwarsa tidak boleh kosong');
@@ -164,8 +165,9 @@ class RegisteredController extends Controller
         $userRegistered = $this->userService->getUserById($registeredPerson->user->id);
         $areaAccessNumber = $this->areaService->getAreaAccessNumber($request->area_id);
         
-        $formatRequest = FormatRequestVaultsite::formatAddCard($registeredPerson, $areaAccessNumber->access_no);
-
+        $expired_date = Carbon::parse($request->expired_at)->setTime(23, 59, 0);
+        $formatRequest = FormatRequestVaultsite::formatAddCard($registeredPerson, $areaAccessNumber->access_no,$request->all());
+        
         //check if user already have card
         if($userRegistered->is_registered == false){
             $this->userService->updateStatusRegistered($userRegistered);
@@ -196,7 +198,7 @@ class RegisteredController extends Controller
             'status_level' => 2
         ];
         if(!$isEmployee){
-            $updateData['expired_at'] = date('Y-m-d H:i:s', strtotime($request->expired_at));
+            $updateData['expired_at'] = $expired_date;
         }
 
         $this->registerPersonService->updateStatusRegisteredPerson($registeredPerson, $updateData);
