@@ -74,7 +74,9 @@ class DashboardController extends Controller
 
 
         // Latest visitors
-        $latestVisitors = TransactionHistory::orderBy('id','desc')->limit(5)->get();
+        $latestVisitors = TransactionHistory::orderByDesc('tr_date')
+            ->orderByDesc('tr_time')
+            ->limit(5)->get();
 
         // RETURN TO BLADE
         return view('dashboard', compact(
