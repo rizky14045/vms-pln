@@ -21,6 +21,7 @@ use App\Http\Controllers\AuthenticationController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/get-data', [DashboardController::class, 'testGetData']);
 Route::get('/register-employee', [HomeController::class, 'registerEmployee'])->name('register-employee');
 Route::post('/register-request', [HomeController::class, 'registerRequest'])->name('register-request');
 Route::get('/register-visitors', [HomeController::class, 'registerVisitor'])->name('register-visitor');

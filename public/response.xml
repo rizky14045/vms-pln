@@ -1,0 +1,3278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <soap:Body>
+        <GetTransactionResponse xmlns="WebAPI">
+            <GetTransactionResult>
+                <xs:schema id="NewDataSet" targetNamespace="InOut" xmlns:mstns="InOut" xmlns="InOut" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+                    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="InOut_x003A_InOut" msdata:UseCurrentLocale="true">
+                        <xs:complexType>
+                            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                                <xs:element name="InOut">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="TrDate" type="xs:string" minOccurs="0" />
+                                            <xs:element name="TrTime" type="xs:string" minOccurs="0" />
+                                            <xs:element name="CardNo" type="xs:string" minOccurs="0" />
+                                            <xs:element name="Transaction" type="xs:string" minOccurs="0" />
+                                            <xs:element name="TrCode" type="xs:string" minOccurs="0" />
+                                            <xs:element name="DoorName" type="xs:string" minOccurs="0" />
+                                            <xs:element name="CardName" type="xs:string" minOccurs="0" />
+                                            <xs:element name="Department" type="xs:string" minOccurs="0" />
+                                            <xs:element name="StaffNo" type="xs:string" minOccurs="0" />
+                                            <xs:element name="Nric" type="xs:string" minOccurs="0" />
+                                            <xs:element name="Temperature" type="xs:string" minOccurs="0" />
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:choice>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:schema>
+                <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+                    <DocumentElement xmlns="InOut">
+                        <InOut diffgr:id="InOut1" msdata:rowOrder="0">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>10:35:00</TrTime>
+                            <CardNo>0012345678</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>RULY FIRMANSYAH</CardName>
+                            <Department>Department</Department>
+                            <StaffNo>PNP1</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut2" msdata:rowOrder="1">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>12:31:27</TrTime>
+                            <CardNo>0012345678</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>RULY FIRMANSYAH</CardName>
+                            <Department>Department</Department>
+                            <StaffNo>PNP1</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut3" msdata:rowOrder="2">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:52:29</TrTime>
+                            <CardNo>0012345678</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>RULY FIRMANSYAH</CardName>
+                            <Department>Department</Department>
+                            <StaffNo>PNP1</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut4" msdata:rowOrder="3">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>20:05:23</TrTime>
+                            <CardNo>2411250276</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ctr Karyawan Ruang Foto Lt 9</DoorName>
+                            <CardName>Dendi Mahawarman</CardName>
+                            <Department />
+                            <StaffNo>9417834ZY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut5" msdata:rowOrder="4">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>20:05:51</TrTime>
+                            <CardNo>2411250276</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ctr Karyawan Ruang Foto Lt 9</DoorName>
+                            <CardName>Dendi Mahawarman</CardName>
+                            <Department />
+                            <StaffNo>9417834ZY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut6" msdata:rowOrder="5">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>20:06:24</TrTime>
+                            <CardNo>2411250276</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ctr Karyawan Ruang Foto Lt 9</DoorName>
+                            <CardName>Dendi Mahawarman</CardName>
+                            <Department />
+                            <StaffNo>9417834ZY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut7" msdata:rowOrder="6">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>20:07:10</TrTime>
+                            <CardNo>2411250276</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ctr Karyawan Ruang Foto Lt 9</DoorName>
+                            <CardName>Dendi Mahawarman</CardName>
+                            <Department />
+                            <StaffNo>9417834ZY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut8" msdata:rowOrder="7">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>20:22:21</TrTime>
+                            <CardNo>2411250276</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ctr Karyawan Ruang Foto Lt 9</DoorName>
+                            <CardName>Dendi Mahawarman</CardName>
+                            <Department />
+                            <StaffNo>9417834ZY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut9" msdata:rowOrder="8">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>20:22:42</TrTime>
+                            <CardNo>2411250276</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kiri Lift Lantai 9</DoorName>
+                            <CardName>Dendi Mahawarman</CardName>
+                            <Department />
+                            <StaffNo>9417834ZY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut10" msdata:rowOrder="9">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>15:29:09</TrTime>
+                            <CardNo>2411250272</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kiri Lift Lantai 9</DoorName>
+                            <CardName>Roja Rahmatallah</CardName>
+                            <Department />
+                            <StaffNo>9724094ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut11" msdata:rowOrder="10">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:54:23</TrTime>
+                            <CardNo>2411250259</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Nafiulia Arsylisa</CardName>
+                            <Department />
+                            <StaffNo>9218021ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut12" msdata:rowOrder="11">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>10:51:42</TrTime>
+                            <CardNo>2411250259</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Nafiulia Arsylisa</CardName>
+                            <Department />
+                            <StaffNo>9218021ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut13" msdata:rowOrder="12">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>14:27:51</TrTime>
+                            <CardNo>2411250259</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Nafiulia Arsylisa</CardName>
+                            <Department />
+                            <StaffNo>9218021ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut14" msdata:rowOrder="13">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>06:47:20</TrTime>
+                            <CardNo>2411250248</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Admin Lantai 2</DoorName>
+                            <CardName>Calenia Letitia Rismauli Hutabarat</CardName>
+                            <Department />
+                            <StaffNo>9217185ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut15" msdata:rowOrder="14">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:27:58</TrTime>
+                            <CardNo>2411250234</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Hikma Pratama</CardName>
+                            <Department />
+                            <StaffNo>8108012JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut16" msdata:rowOrder="15">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:28:01</TrTime>
+                            <CardNo>2411250234</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Hikma Pratama</CardName>
+                            <Department />
+                            <StaffNo>8108012JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut17" msdata:rowOrder="16">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:28:02</TrTime>
+                            <CardNo>2411250234</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Hikma Pratama</CardName>
+                            <Department />
+                            <StaffNo>8108012JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut18" msdata:rowOrder="17">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:49:55</TrTime>
+                            <CardNo>2411250197</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>R Kholilul Rahman</CardName>
+                            <Department />
+                            <StaffNo>8306038JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut19" msdata:rowOrder="18">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>12:39:49</TrTime>
+                            <CardNo>2411250194</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 3 Lantai 8</DoorName>
+                            <CardName>Mohammad Hariyadi</CardName>
+                            <Department />
+                            <StaffNo>7292106JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut20" msdata:rowOrder="19">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>09:21:00</TrTime>
+                            <CardNo>2511250322</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 1 Lantai 8</DoorName>
+                            <CardName>Abie Rezanto</CardName>
+                            <Department />
+                            <StaffNo>8915063ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut21" msdata:rowOrder="20">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:26:38</TrTime>
+                            <CardNo>2511250322</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 1 Lantai 8</DoorName>
+                            <CardName>Abie Rezanto</CardName>
+                            <Department />
+                            <StaffNo>8915063ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut22" msdata:rowOrder="21">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>14:23:59</TrTime>
+                            <CardNo>2511250323</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Bayu Ian Kusuma</CardName>
+                            <Department />
+                            <StaffNo>8208032JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut23" msdata:rowOrder="22">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>15:31:43</TrTime>
+                            <CardNo>2511250323</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Bayu Ian Kusuma</CardName>
+                            <Department />
+                            <StaffNo>8208032JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut24" msdata:rowOrder="23">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>17:20:42</TrTime>
+                            <CardNo>2511250323</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Bayu Ian Kusuma</CardName>
+                            <Department />
+                            <StaffNo>8208032JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut25" msdata:rowOrder="24">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:59:39</TrTime>
+                            <CardNo>2511250311</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 1 Lantai 8</DoorName>
+                            <CardName>Hardian Arief Winanto</CardName>
+                            <Department />
+                            <StaffNo>8208098JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut26" msdata:rowOrder="25">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>15:31:22</TrTime>
+                            <CardNo>2411250193</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 3 Lantai 8</DoorName>
+                            <CardName>Tsaqif Nur Rahman</CardName>
+                            <Department />
+                            <StaffNo>0024002ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut27" msdata:rowOrder="26">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:40:44</TrTime>
+                            <CardNo>2411250082</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Sylvia Mega Astuti</CardName>
+                            <Department />
+                            <StaffNo>9319112ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut28" msdata:rowOrder="27">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:25:10</TrTime>
+                            <CardNo>2411250077</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Tofan Nugroho</CardName>
+                            <Department />
+                            <StaffNo>8010275ID</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut29" msdata:rowOrder="28">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:25:16</TrTime>
+                            <CardNo>2411250077</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Tofan Nugroho</CardName>
+                            <Department />
+                            <StaffNo>8010275ID</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut30" msdata:rowOrder="29">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:25:23</TrTime>
+                            <CardNo>2411250077</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Tofan Nugroho</CardName>
+                            <Department />
+                            <StaffNo>8010275ID</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut31" msdata:rowOrder="30">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:25:25</TrTime>
+                            <CardNo>2411250077</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Tofan Nugroho</CardName>
+                            <Department />
+                            <StaffNo>8010275ID</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut32" msdata:rowOrder="31">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:25:28</TrTime>
+                            <CardNo>2411250077</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Tofan Nugroho</CardName>
+                            <Department />
+                            <StaffNo>8010275ID</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut33" msdata:rowOrder="32">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:26:59</TrTime>
+                            <CardNo>2411250077</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kanan Lift Lantai 9</DoorName>
+                            <CardName>Tofan Nugroho</CardName>
+                            <Department />
+                            <StaffNo>8010275ID</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut34" msdata:rowOrder="33">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:27:04</TrTime>
+                            <CardNo>2411250077</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kanan Lift Lantai 9</DoorName>
+                            <CardName>Tofan Nugroho</CardName>
+                            <Department />
+                            <StaffNo>8010275ID</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut35" msdata:rowOrder="34">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:04:15</TrTime>
+                            <CardNo>2411250077</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Tofan Nugroho</CardName>
+                            <Department />
+                            <StaffNo>8010275ID</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut36" msdata:rowOrder="35">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>05:19:25</TrTime>
+                            <CardNo>2411250070</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kiri Lift Lantai 9</DoorName>
+                            <CardName>Wijianto</CardName>
+                            <Department />
+                            <StaffNo>8210301KP</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut37" msdata:rowOrder="36">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>05:22:01</TrTime>
+                            <CardNo>2411250070</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ctr Karyawan Ruang Foto Lt 9</DoorName>
+                            <CardName>Wijianto</CardName>
+                            <Department />
+                            <StaffNo>8210301KP</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut38" msdata:rowOrder="37">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:54:45</TrTime>
+                            <CardNo>2411250070</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Wijianto</CardName>
+                            <Department />
+                            <StaffNo>8210301KP</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut39" msdata:rowOrder="38">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:28:39</TrTime>
+                            <CardNo>2111250056</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>IDA BAGUS OKAYAMA PARAMAARTHA</CardName>
+                            <Department />
+                            <StaffNo>9619107ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut40" msdata:rowOrder="39">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:44:43</TrTime>
+                            <CardNo>2111250045</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kanan Lift Lantai 9</DoorName>
+                            <CardName>Dipta Satwiko</CardName>
+                            <Department />
+                            <StaffNo>9115285ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut41" msdata:rowOrder="40">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:44:55</TrTime>
+                            <CardNo>2111250045</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kanan Lift Lantai 9</DoorName>
+                            <CardName>Dipta Satwiko</CardName>
+                            <Department />
+                            <StaffNo>9115285ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut42" msdata:rowOrder="41">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>16:07:32</TrTime>
+                            <CardNo>2111250044</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Deni Septian</CardName>
+                            <Department />
+                            <StaffNo>9116239ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut43" msdata:rowOrder="42">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:39:19</TrTime>
+                            <CardNo>2511250326</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 1 Lantai 8</DoorName>
+                            <CardName>Alya Sania Supriyadi</CardName>
+                            <Department />
+                            <StaffNo>0024067ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut44" msdata:rowOrder="43">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:40:49</TrTime>
+                            <CardNo>2511250334</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Leni Khairani</CardName>
+                            <Department />
+                            <StaffNo>9519056ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut45" msdata:rowOrder="44">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>16:04:00</TrTime>
+                            <CardNo>2511250332</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Fernando Valintino</CardName>
+                            <Department />
+                            <StaffNo>9215163ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut46" msdata:rowOrder="45">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:35:52</TrTime>
+                            <CardNo>2111250034</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Admin Lantai 2</DoorName>
+                            <CardName>BAGUS SEKAWAN RAMAYANTO</CardName>
+                            <Department />
+                            <StaffNo>8913021ID</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut47" msdata:rowOrder="46">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:03:59</TrTime>
+                            <CardNo>2111250034</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Admin Lantai 2</DoorName>
+                            <CardName>BAGUS SEKAWAN RAMAYANTO</CardName>
+                            <Department />
+                            <StaffNo>8913021ID</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut48" msdata:rowOrder="47">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>18:25:30</TrTime>
+                            <CardNo>2111250034</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Admin Lantai 2</DoorName>
+                            <CardName>BAGUS SEKAWAN RAMAYANTO</CardName>
+                            <Department />
+                            <StaffNo>8913021ID</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut49" msdata:rowOrder="48">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>05:35:27</TrTime>
+                            <CardNo>2511250312</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 3 Lantai 8</DoorName>
+                            <CardName>Dedi Firmansyah</CardName>
+                            <Department />
+                            <StaffNo>CK24.075</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut50" msdata:rowOrder="49">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>05:37:00</TrTime>
+                            <CardNo>2511250312</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 1 Lantai 8</DoorName>
+                            <CardName>Dedi Firmansyah</CardName>
+                            <Department />
+                            <StaffNo>CK24.075</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut51" msdata:rowOrder="50">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>06:02:20</TrTime>
+                            <CardNo>2511250312</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Admin Lantai 2</DoorName>
+                            <CardName>Dedi Firmansyah</CardName>
+                            <Department />
+                            <StaffNo>CK24.075</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut52" msdata:rowOrder="51">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>20:23:06</TrTime>
+                            <CardNo>2511250312</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 1 Lantai 8</DoorName>
+                            <CardName>Dedi Firmansyah</CardName>
+                            <Department />
+                            <StaffNo>CK24.075</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut53" msdata:rowOrder="52">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>21:41:17</TrTime>
+                            <CardNo>2511250312</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kiri Lift Lantai 9</DoorName>
+                            <CardName>Dedi Firmansyah</CardName>
+                            <Department />
+                            <StaffNo>CK24.075</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut54" msdata:rowOrder="53">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>21:43:59</TrTime>
+                            <CardNo>2511250312</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ctr Karyawan Ruang Foto Lt 9</DoorName>
+                            <CardName>Dedi Firmansyah</CardName>
+                            <Department />
+                            <StaffNo>CK24.075</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut55" msdata:rowOrder="54">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>21:50:06</TrTime>
+                            <CardNo>2511250312</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 3 Lantai 8</DoorName>
+                            <CardName>Dedi Firmansyah</CardName>
+                            <Department />
+                            <StaffNo>CK24.075</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut56" msdata:rowOrder="55">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>21:50:46</TrTime>
+                            <CardNo>2511250312</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 3 Lantai 8</DoorName>
+                            <CardName>Dedi Firmansyah</CardName>
+                            <Department />
+                            <StaffNo>CK24.075</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut57" msdata:rowOrder="56">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>21:54:53</TrTime>
+                            <CardNo>2511250312</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 1 Lantai 8</DoorName>
+                            <CardName>Dedi Firmansyah</CardName>
+                            <Department />
+                            <StaffNo>CK24.075</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut58" msdata:rowOrder="57">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>05:44:49</TrTime>
+                            <CardNo>2411250265</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kanan Lift Lantai 9</DoorName>
+                            <CardName>Muhammad Ibnu Sina</CardName>
+                            <Department />
+                            <StaffNo>CK24.077</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut59" msdata:rowOrder="58">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>05:45:19</TrTime>
+                            <CardNo>2411250265</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kiri Lift Lantai 9</DoorName>
+                            <CardName>Muhammad Ibnu Sina</CardName>
+                            <Department />
+                            <StaffNo>CK24.077</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut60" msdata:rowOrder="59">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>06:09:01</TrTime>
+                            <CardNo>2411250265</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Muhammad Ibnu Sina</CardName>
+                            <Department />
+                            <StaffNo>CK24.077</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut61" msdata:rowOrder="60">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:55:53</TrTime>
+                            <CardNo>2411250265</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kanan Lift Lantai 9</DoorName>
+                            <CardName>Muhammad Ibnu Sina</CardName>
+                            <Department />
+                            <StaffNo>CK24.077</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut62" msdata:rowOrder="61">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:52:05</TrTime>
+                            <CardNo>2411250265</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ctr Karyawan Ruang Foto Lt 9</DoorName>
+                            <CardName>Muhammad Ibnu Sina</CardName>
+                            <Department />
+                            <StaffNo>CK24.077</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut63" msdata:rowOrder="62">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:52:09</TrTime>
+                            <CardNo>2411250265</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ctr Karyawan Ruang Foto Lt 9</DoorName>
+                            <CardName>Muhammad Ibnu Sina</CardName>
+                            <Department />
+                            <StaffNo>CK24.077</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut64" msdata:rowOrder="63">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>21:50:45</TrTime>
+                            <CardNo>2411250265</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 3 Lantai 8</DoorName>
+                            <CardName>Muhammad Ibnu Sina</CardName>
+                            <Department />
+                            <StaffNo>CK24.077</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut65" msdata:rowOrder="64">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>19:52:56</TrTime>
+                            <CardNo>2411250265</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ctr Karyawan Ruang Foto Lt 9</DoorName>
+                            <CardName>Muhammad Ibnu Sina</CardName>
+                            <Department />
+                            <StaffNo>CK24.077</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut66" msdata:rowOrder="65">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>20:25:23</TrTime>
+                            <CardNo>2411250265</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ctr Karyawan Ruang Foto Lt 9</DoorName>
+                            <CardName>Muhammad Ibnu Sina</CardName>
+                            <Department />
+                            <StaffNo>CK24.077</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut67" msdata:rowOrder="66">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>20:26:19</TrTime>
+                            <CardNo>2411250265</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ctr Karyawan Ruang Foto Lt 9</DoorName>
+                            <CardName>Muhammad Ibnu Sina</CardName>
+                            <Department />
+                            <StaffNo>CK24.077</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut68" msdata:rowOrder="67">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>20:33:08</TrTime>
+                            <CardNo>2411250265</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kiri Lift Lantai 9</DoorName>
+                            <CardName>Muhammad Ibnu Sina</CardName>
+                            <Department />
+                            <StaffNo>CK24.077</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut69" msdata:rowOrder="68">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>20:33:33</TrTime>
+                            <CardNo>2411250265</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kanan Lift Lantai 9</DoorName>
+                            <CardName>Muhammad Ibnu Sina</CardName>
+                            <Department />
+                            <StaffNo>CK24.077</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut70" msdata:rowOrder="69">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>20:48:55</TrTime>
+                            <CardNo>2411250265</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kanan Lift Lantai 9</DoorName>
+                            <CardName>Muhammad Ibnu Sina</CardName>
+                            <Department />
+                            <StaffNo>CK24.077</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut71" msdata:rowOrder="70">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:01:30</TrTime>
+                            <CardNo>2511250344</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Endang Susilawati</CardName>
+                            <Department />
+                            <StaffNo>8914151ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut72" msdata:rowOrder="71">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:57:12</TrTime>
+                            <CardNo>2511250344</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Endang Susilawati</CardName>
+                            <Department />
+                            <StaffNo>8914151ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut73" msdata:rowOrder="72">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:54:01</TrTime>
+                            <CardNo>2511250344</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Endang Susilawati</CardName>
+                            <Department />
+                            <StaffNo>8914151ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut74" msdata:rowOrder="73">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:31:15</TrTime>
+                            <CardNo>2511250393</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>TEGUH WIDHI</CardName>
+                            <Department />
+                            <StaffNo>PNP6</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut75" msdata:rowOrder="74">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:57:49</TrTime>
+                            <CardNo>2511250393</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>TEGUH WIDHI</CardName>
+                            <Department />
+                            <StaffNo>PNP6</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut76" msdata:rowOrder="75">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:31:18</TrTime>
+                            <CardNo>2511250392</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>DWI HARTONO</CardName>
+                            <Department />
+                            <StaffNo>PNP5</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut77" msdata:rowOrder="76">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:15:33</TrTime>
+                            <CardNo>2511250392</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>DWI HARTONO</CardName>
+                            <Department />
+                            <StaffNo>PNP5</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut78" msdata:rowOrder="77">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>12:31:36</TrTime>
+                            <CardNo>2511250392</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>DWI HARTONO</CardName>
+                            <Department />
+                            <StaffNo>PNP5</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut79" msdata:rowOrder="78">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:23:10</TrTime>
+                            <CardNo>2511250392</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>DWI HARTONO</CardName>
+                            <Department />
+                            <StaffNo>PNP5</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut80" msdata:rowOrder="79">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:11:20</TrTime>
+                            <CardNo>2511250391</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>ARI WIBAWA MUKTI</CardName>
+                            <Department />
+                            <StaffNo>PNP4</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut81" msdata:rowOrder="80">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:44:26</TrTime>
+                            <CardNo>2511250391</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>ARI WIBAWA MUKTI</CardName>
+                            <Department />
+                            <StaffNo>PNP4</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut82" msdata:rowOrder="81">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:55:38</TrTime>
+                            <CardNo>2511250388</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Komang Parmita</CardName>
+                            <Department />
+                            <StaffNo>PNP3</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut83" msdata:rowOrder="82">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>10:53:48</TrTime>
+                            <CardNo>2511250388</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Komang Parmita</CardName>
+                            <Department />
+                            <StaffNo>PNP3</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut84" msdata:rowOrder="83">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:58:49</TrTime>
+                            <CardNo>2511250387</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>M. IRWANSYAH PUTRA</CardName>
+                            <Department />
+                            <StaffNo>PNP2</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut85" msdata:rowOrder="84">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:24:48</TrTime>
+                            <CardNo>2511250387</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>M. IRWANSYAH PUTRA</CardName>
+                            <Department />
+                            <StaffNo>PNP2</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut86" msdata:rowOrder="85">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:43:13</TrTime>
+                            <CardNo>2511250387</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>M. IRWANSYAH PUTRA</CardName>
+                            <Department />
+                            <StaffNo>PNP2</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut87" msdata:rowOrder="86">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>14:46:21</TrTime>
+                            <CardNo>2511250387</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>M. IRWANSYAH PUTRA</CardName>
+                            <Department />
+                            <StaffNo>PNP2</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut88" msdata:rowOrder="87">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>12:29:45</TrTime>
+                            <CardNo>2511250385</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 3 Lantai 8</DoorName>
+                            <CardName>Luqman Muhardian</CardName>
+                            <Department />
+                            <StaffNo>9416209ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut89" msdata:rowOrder="88">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:47:03</TrTime>
+                            <CardNo>2511250384</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Putri Nur R</CardName>
+                            <Department />
+                            <StaffNo>9418032ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut90" msdata:rowOrder="89">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>15:57:10</TrTime>
+                            <CardNo>2511250384</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Putri Nur R</CardName>
+                            <Department />
+                            <StaffNo>9418032ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut91" msdata:rowOrder="90">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:32:40</TrTime>
+                            <CardNo>2511250383</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Angga Lenggana</CardName>
+                            <Department />
+                            <StaffNo>9115125ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut92" msdata:rowOrder="91">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>15:42:21</TrTime>
+                            <CardNo>2511250383</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Angga Lenggana</CardName>
+                            <Department />
+                            <StaffNo>9115125ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut93" msdata:rowOrder="92">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>10:40:15</TrTime>
+                            <CardNo>2511250382</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Siti Maesaroh</CardName>
+                            <Department />
+                            <StaffNo>7303034JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut94" msdata:rowOrder="93">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>14:16:30</TrTime>
+                            <CardNo>2511250382</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Siti Maesaroh</CardName>
+                            <Department />
+                            <StaffNo>7303034JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut95" msdata:rowOrder="94">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>15:29:05</TrTime>
+                            <CardNo>2511250382</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Siti Maesaroh</CardName>
+                            <Department />
+                            <StaffNo>7303034JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut96" msdata:rowOrder="95">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>12:33:24</TrTime>
+                            <CardNo>2511250370</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Yuyun Ari Nugraha</CardName>
+                            <Department />
+                            <StaffNo>8409047JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut97" msdata:rowOrder="96">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>18:20:52</TrTime>
+                            <CardNo>2511250370</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Yuyun Ari Nugraha</CardName>
+                            <Department />
+                            <StaffNo>8409047JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut98" msdata:rowOrder="97">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:33:09</TrTime>
+                            <CardNo>2511250397</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Hamidy Hamid</CardName>
+                            <Department />
+                            <StaffNo>PNP7</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut99" msdata:rowOrder="98">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:34:55</TrTime>
+                            <CardNo>2511250397</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Hamidy Hamid</CardName>
+                            <Department />
+                            <StaffNo>PNP7</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut100" msdata:rowOrder="99">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>14:29:56</TrTime>
+                            <CardNo>2511250397</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Hamidy Hamid</CardName>
+                            <Department />
+                            <StaffNo>PNP7</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut101" msdata:rowOrder="100">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>15:32:40</TrTime>
+                            <CardNo>2511250397</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Hamidy Hamid</CardName>
+                            <Department />
+                            <StaffNo>PNP7</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut102" msdata:rowOrder="101">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>12:34:32</TrTime>
+                            <CardNo>2511250398</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Ryan Ahmed Maulana</CardName>
+                            <Department />
+                            <StaffNo>9116462ZY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut103" msdata:rowOrder="102">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:36:07</TrTime>
+                            <CardNo>2511250364</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Alam Hardik Dewantara</CardName>
+                            <Department />
+                            <StaffNo>9215129ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut104" msdata:rowOrder="103">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>06:54:11</TrTime>
+                            <CardNo>2611250410</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Alda Erfian</CardName>
+                            <Department />
+                            <StaffNo>9315265ZY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut105" msdata:rowOrder="104">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:21:02</TrTime>
+                            <CardNo>2611250413</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 1 Lantai 8</DoorName>
+                            <CardName>sugito prihatin</CardName>
+                            <Department />
+                            <StaffNo>8911155JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut106" msdata:rowOrder="105">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>09:14:42</TrTime>
+                            <CardNo>2611250416</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Gaby Febriani</CardName>
+                            <Department />
+                            <StaffNo>0124082zjy</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut107" msdata:rowOrder="106">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>09:13:39</TrTime>
+                            <CardNo>2511250400</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Rosi Budi Aji</CardName>
+                            <Department />
+                            <StaffNo>ck23.143</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut108" msdata:rowOrder="107">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:49:43</TrTime>
+                            <CardNo>2511250400</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kiri Lift Lantai 9</DoorName>
+                            <CardName>Rosi Budi Aji</CardName>
+                            <Department />
+                            <StaffNo>ck23.143</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut109" msdata:rowOrder="108">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:43:06</TrTime>
+                            <CardNo>2511250381</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ctr Dekom Dkt Lift Lantai 8</DoorName>
+                            <CardName>Yahya Edi Darmawan</CardName>
+                            <Department />
+                            <StaffNo>CK24.164</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut110" msdata:rowOrder="109">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:43:22</TrTime>
+                            <CardNo>2511250381</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ctr Dekom Dkt Lift Lantai 8</DoorName>
+                            <CardName>Yahya Edi Darmawan</CardName>
+                            <Department />
+                            <StaffNo>CK24.164</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut111" msdata:rowOrder="110">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:43:58</TrTime>
+                            <CardNo>2511250381</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ctr Dekom Dkt Lift Lantai 8</DoorName>
+                            <CardName>Yahya Edi Darmawan</CardName>
+                            <Department />
+                            <StaffNo>CK24.164</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut112" msdata:rowOrder="111">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:56:18</TrTime>
+                            <CardNo>2511250338</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Muhammad Aqil Dian Nugraha</CardName>
+                            <Department />
+                            <StaffNo>ck25.011</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut113" msdata:rowOrder="112">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:18:01</TrTime>
+                            <CardNo>2511250338</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Muhammad Aqil Dian Nugraha</CardName>
+                            <Department />
+                            <StaffNo>ck25.011</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut114" msdata:rowOrder="113">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>12:32:21</TrTime>
+                            <CardNo>2511250338</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Muhammad Aqil Dian Nugraha</CardName>
+                            <Department />
+                            <StaffNo>ck25.011</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut115" msdata:rowOrder="114">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:42:14</TrTime>
+                            <CardNo>2511250338</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Muhammad Aqil Dian Nugraha</CardName>
+                            <Department />
+                            <StaffNo>ck25.011</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut116" msdata:rowOrder="115">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:50:30</TrTime>
+                            <CardNo>2511250338</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Muhammad Aqil Dian Nugraha</CardName>
+                            <Department />
+                            <StaffNo>ck25.011</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut117" msdata:rowOrder="116">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>14:09:49</TrTime>
+                            <CardNo>2511250338</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Muhammad Aqil Dian Nugraha</CardName>
+                            <Department />
+                            <StaffNo>ck25.011</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut118" msdata:rowOrder="117">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>14:10:47</TrTime>
+                            <CardNo>2511250338</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Muhammad Aqil Dian Nugraha</CardName>
+                            <Department />
+                            <StaffNo>ck25.011</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut119" msdata:rowOrder="118">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:13:35</TrTime>
+                            <CardNo>2611250421</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Muhammad Luthfi Aziz</CardName>
+                            <Department />
+                            <StaffNo>9316246ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut120" msdata:rowOrder="119">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>16:10:18</TrTime>
+                            <CardNo>2611250421</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Muhammad Luthfi Aziz</CardName>
+                            <Department />
+                            <StaffNo>9316246ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut121" msdata:rowOrder="120">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>15:41:57</TrTime>
+                            <CardNo>2611250420</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>WISNU PRASETYO</CardName>
+                            <Department />
+                            <StaffNo>9216249ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut122" msdata:rowOrder="121">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:02:23</TrTime>
+                            <CardNo>2411250293</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Admin Lantai 2</DoorName>
+                            <CardName>Arfan Syahroni</CardName>
+                            <Department />
+                            <StaffNo>CK24.152</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut123" msdata:rowOrder="122">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:19:33</TrTime>
+                            <CardNo>2411250293</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Arfan Syahroni</CardName>
+                            <Department />
+                            <StaffNo>CK24.152</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut124" msdata:rowOrder="123">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>05:39:00</TrTime>
+                            <CardNo>2411250281</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kiri Lift Lantai 9</DoorName>
+                            <CardName>Ramdan wahyudin</CardName>
+                            <Department />
+                            <StaffNo>CK24.112</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut125" msdata:rowOrder="124">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>19:38:03</TrTime>
+                            <CardNo>2411250277</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Nur Hasanah</CardName>
+                            <Department />
+                            <StaffNo>Ckl24-109</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut126" msdata:rowOrder="125">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>12:41:13</TrTime>
+                            <CardNo>2611250422</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Joko Purnomo</CardName>
+                            <Department />
+                            <StaffNo>8509379Z</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut127" msdata:rowOrder="126">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>12:41:22</TrTime>
+                            <CardNo>2611250422</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Joko Purnomo</CardName>
+                            <Department />
+                            <StaffNo>8509379Z</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut128" msdata:rowOrder="127">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>12:55:17</TrTime>
+                            <CardNo>2611250422</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan Lantai 5</DoorName>
+                            <CardName>Joko Purnomo</CardName>
+                            <Department />
+                            <StaffNo>8509379Z</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut129" msdata:rowOrder="128">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:52:46</TrTime>
+                            <CardNo>2411250273</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kanan Lift Lantai 9</DoorName>
+                            <CardName>Rahma Wati</CardName>
+                            <Department />
+                            <StaffNo>CK24.110</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut130" msdata:rowOrder="129">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:52:57</TrTime>
+                            <CardNo>2411250273</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kanan Lift Lantai 9</DoorName>
+                            <CardName>Rahma Wati</CardName>
+                            <Department />
+                            <StaffNo>CK24.110</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut131" msdata:rowOrder="130">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>05:26:12</TrTime>
+                            <CardNo>2111250058</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Arif Dwi Laksono</CardName>
+                            <Department />
+                            <StaffNo>CK25. 006</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut132" msdata:rowOrder="131">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>05:30:23</TrTime>
+                            <CardNo>2111250058</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Admin Lantai 2</DoorName>
+                            <CardName>Arif Dwi Laksono</CardName>
+                            <Department />
+                            <StaffNo>CK25. 006</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut133" msdata:rowOrder="132">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>05:35:06</TrTime>
+                            <CardNo>2111250058</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan Lantai 5</DoorName>
+                            <CardName>Arif Dwi Laksono</CardName>
+                            <Department />
+                            <StaffNo>CK25. 006</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut134" msdata:rowOrder="133">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:48:33</TrTime>
+                            <CardNo>2111250058</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Arif Dwi Laksono</CardName>
+                            <Department />
+                            <StaffNo>CK25. 006</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut135" msdata:rowOrder="134">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>09:19:52</TrTime>
+                            <CardNo>2111250058</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Arif Dwi Laksono</CardName>
+                            <Department />
+                            <StaffNo>CK25. 006</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut136" msdata:rowOrder="135">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>10:05:56</TrTime>
+                            <CardNo>2111250058</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Arif Dwi Laksono</CardName>
+                            <Department />
+                            <StaffNo>CK25. 006</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut137" msdata:rowOrder="136">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>20:15:00</TrTime>
+                            <CardNo>2111250058</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan Lantai 2</DoorName>
+                            <CardName>Arif Dwi Laksono</CardName>
+                            <Department />
+                            <StaffNo>CK25. 006</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut138" msdata:rowOrder="137">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>21:53:27</TrTime>
+                            <CardNo>2111250058</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan Lantai 2</DoorName>
+                            <CardName>Arif Dwi Laksono</CardName>
+                            <Department />
+                            <StaffNo>CK25. 006</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut139" msdata:rowOrder="138">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>21:59:20</TrTime>
+                            <CardNo>2111250058</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Arif Dwi Laksono</CardName>
+                            <Department />
+                            <StaffNo>CK25. 006</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut140" msdata:rowOrder="139">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>14:12:40</TrTime>
+                            <CardNo>2111250058</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Arif Dwi Laksono</CardName>
+                            <Department />
+                            <StaffNo>CK25. 006</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut141" msdata:rowOrder="140">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>14:16:17</TrTime>
+                            <CardNo>2111250058</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Arif Dwi Laksono</CardName>
+                            <Department />
+                            <StaffNo>CK25. 006</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut142" msdata:rowOrder="141">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>17:28:05</TrTime>
+                            <CardNo>2111250058</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Arif Dwi Laksono</CardName>
+                            <Department />
+                            <StaffNo>CK25. 006</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut143" msdata:rowOrder="142">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>19:51:29</TrTime>
+                            <CardNo>2111250058</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Arif Dwi Laksono</CardName>
+                            <Department />
+                            <StaffNo>CK25. 006</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut144" msdata:rowOrder="143">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>19:51:37</TrTime>
+                            <CardNo>2111250058</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Arif Dwi Laksono</CardName>
+                            <Department />
+                            <StaffNo>CK25. 006</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut145" msdata:rowOrder="144">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>20:14:41</TrTime>
+                            <CardNo>2111250058</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan Lantai 2</DoorName>
+                            <CardName>Arif Dwi Laksono</CardName>
+                            <Department />
+                            <StaffNo>CK25. 006</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut146" msdata:rowOrder="145">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:09:32</TrTime>
+                            <CardNo>2411250230</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Brigitta Violena Mahardika</CardName>
+                            <Department />
+                            <StaffNo>CK23.155</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut147" msdata:rowOrder="146">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>10:16:42</TrTime>
+                            <CardNo>2411250230</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Brigitta Violena Mahardika</CardName>
+                            <Department />
+                            <StaffNo>CK23.155</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut148" msdata:rowOrder="147">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>10:53:11</TrTime>
+                            <CardNo>2411250230</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Brigitta Violena Mahardika</CardName>
+                            <Department />
+                            <StaffNo>CK23.155</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut149" msdata:rowOrder="148">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:10:22</TrTime>
+                            <CardNo>2411250250</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Radya Arum Aji</CardName>
+                            <Department />
+                            <StaffNo>CK25.013</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut150" msdata:rowOrder="149">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:45:47</TrTime>
+                            <CardNo>2411250250</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Radya Arum Aji</CardName>
+                            <Department />
+                            <StaffNo>CK25.013</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut151" msdata:rowOrder="150">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:28:17</TrTime>
+                            <CardNo>2411250250</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Radya Arum Aji</CardName>
+                            <Department />
+                            <StaffNo>CK25.013</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut152" msdata:rowOrder="151">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:01:17</TrTime>
+                            <CardNo>2411250223</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Muhammad Alfath Fiqhya Amrinagara</CardName>
+                            <Department />
+                            <StaffNo>CK25.012</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut153" msdata:rowOrder="152">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:11:30</TrTime>
+                            <CardNo>2411250223</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Muhammad Alfath Fiqhya Amrinagara</CardName>
+                            <Department />
+                            <StaffNo>CK25.012</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut154" msdata:rowOrder="153">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>15:44:04</TrTime>
+                            <CardNo>2411250223</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Muhammad Alfath Fiqhya Amrinagara</CardName>
+                            <Department />
+                            <StaffNo>CK25.012</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut155" msdata:rowOrder="154">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>16:09:01</TrTime>
+                            <CardNo>2411250208</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Inggit Arini</CardName>
+                            <Department />
+                            <StaffNo>CK24.155</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut156" msdata:rowOrder="155">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>17:27:19</TrTime>
+                            <CardNo>2411250208</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Inggit Arini</CardName>
+                            <Department />
+                            <StaffNo>CK24.155</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut157" msdata:rowOrder="156">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>10:56:37</TrTime>
+                            <CardNo>2211250064</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Haykal Faris Dzaki</CardName>
+                            <Department />
+                            <StaffNo>CK24.154</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut158" msdata:rowOrder="157">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:22:06</TrTime>
+                            <CardNo>2211250064</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Haykal Faris Dzaki</CardName>
+                            <Department />
+                            <StaffNo>CK24.154</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut159" msdata:rowOrder="158">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:46:09</TrTime>
+                            <CardNo>2211250064</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 3 Lantai 8</DoorName>
+                            <CardName>Haykal Faris Dzaki</CardName>
+                            <Department />
+                            <StaffNo>CK24.154</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut160" msdata:rowOrder="159">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>15:44:44</TrTime>
+                            <CardNo>2211250064</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 3 Lantai 8</DoorName>
+                            <CardName>Haykal Faris Dzaki</CardName>
+                            <Department />
+                            <StaffNo>CK24.154</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut161" msdata:rowOrder="160">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>14:52:51</TrTime>
+                            <CardNo>2111250047</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Yuliana nurazizah</CardName>
+                            <Department />
+                            <StaffNo>CK24.166</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut162" msdata:rowOrder="161">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:36:54</TrTime>
+                            <CardNo>2111250036</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Hikma Amalia Kasah</CardName>
+                            <Department />
+                            <StaffNo>CK24.167</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut163" msdata:rowOrder="162">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>10:18:32</TrTime>
+                            <CardNo>2111250036</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Hikma Amalia Kasah</CardName>
+                            <Department />
+                            <StaffNo>CK24.167</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut164" msdata:rowOrder="163">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:11:19</TrTime>
+                            <CardNo>2111250036</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Hikma Amalia Kasah</CardName>
+                            <Department />
+                            <StaffNo>CK24.167</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut165" msdata:rowOrder="164">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:09:27</TrTime>
+                            <CardNo>2111250036</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Hikma Amalia Kasah</CardName>
+                            <Department />
+                            <StaffNo>CK24.167</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut166" msdata:rowOrder="165">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>14:14:38</TrTime>
+                            <CardNo>2111250036</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Hikma Amalia Kasah</CardName>
+                            <Department />
+                            <StaffNo>CK24.167</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut167" msdata:rowOrder="166">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>15:31:16</TrTime>
+                            <CardNo>2111250036</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Hikma Amalia Kasah</CardName>
+                            <Department />
+                            <StaffNo>CK24.167</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut168" msdata:rowOrder="167">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>16:04:00</TrTime>
+                            <CardNo>2111250025</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kiri Lift Lantai 9</DoorName>
+                            <CardName>Nugroho Yudo Atmojo</CardName>
+                            <Department />
+                            <StaffNo>CK23.148</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut169" msdata:rowOrder="168">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:33:59</TrTime>
+                            <CardNo>2111250024</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 1 Lantai 8</DoorName>
+                            <CardName>Elsa Febri Indrianti</CardName>
+                            <Department />
+                            <StaffNo>Ck.24.153</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut170" msdata:rowOrder="169">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:41:01</TrTime>
+                            <CardNo>2111250024</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Elsa Febri Indrianti</CardName>
+                            <Department />
+                            <StaffNo>Ck.24.153</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut171" msdata:rowOrder="170">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:40:53</TrTime>
+                            <CardNo>2111250023</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>ARIYANTO</CardName>
+                            <Department />
+                            <StaffNo>CK25.008</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut172" msdata:rowOrder="171">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:02:00</TrTime>
+                            <CardNo>2111250023</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>ARIYANTO</CardName>
+                            <Department />
+                            <StaffNo>CK25.008</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut173" msdata:rowOrder="172">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>17:28:06</TrTime>
+                            <CardNo>2111250023</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>ARIYANTO</CardName>
+                            <Department />
+                            <StaffNo>CK25.008</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut174" msdata:rowOrder="173">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:10:22</TrTime>
+                            <CardNo>2111250018</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Admin Lantai 2</DoorName>
+                            <CardName>Raka prayuda</CardName>
+                            <Department />
+                            <StaffNo>CK24.111</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut175" msdata:rowOrder="174">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:37:44</TrTime>
+                            <CardNo>2111250018</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan Lantai 2</DoorName>
+                            <CardName>Raka prayuda</CardName>
+                            <Department />
+                            <StaffNo>CK24.111</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut176" msdata:rowOrder="175">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:48:15</TrTime>
+                            <CardNo>2611250423</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>LAVENIA WIDYA AYU ARABELLA</CardName>
+                            <Department />
+                            <StaffNo>CK25.105</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut177" msdata:rowOrder="176">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:48:19</TrTime>
+                            <CardNo>2611250423</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>LAVENIA WIDYA AYU ARABELLA</CardName>
+                            <Department />
+                            <StaffNo>CK25.105</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut178" msdata:rowOrder="177">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:48:20</TrTime>
+                            <CardNo>2611250423</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>LAVENIA WIDYA AYU ARABELLA</CardName>
+                            <Department />
+                            <StaffNo>CK25.105</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut179" msdata:rowOrder="178">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:48:42</TrTime>
+                            <CardNo>2611250423</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>LAVENIA WIDYA AYU ARABELLA</CardName>
+                            <Department />
+                            <StaffNo>CK25.105</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut180" msdata:rowOrder="179">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:48:44</TrTime>
+                            <CardNo>2611250423</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>LAVENIA WIDYA AYU ARABELLA</CardName>
+                            <Department />
+                            <StaffNo>CK25.105</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut181" msdata:rowOrder="180">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:50:28</TrTime>
+                            <CardNo>2611250423</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 3 Lantai 8</DoorName>
+                            <CardName>LAVENIA WIDYA AYU ARABELLA</CardName>
+                            <Department />
+                            <StaffNo>CK25.105</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut182" msdata:rowOrder="181">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:33:08</TrTime>
+                            <CardNo>2611250423</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>LAVENIA WIDYA AYU ARABELLA</CardName>
+                            <Department />
+                            <StaffNo>CK25.105</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut183" msdata:rowOrder="182">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:33:12</TrTime>
+                            <CardNo>2611250423</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>LAVENIA WIDYA AYU ARABELLA</CardName>
+                            <Department />
+                            <StaffNo>CK25.105</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut184" msdata:rowOrder="183">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:33:14</TrTime>
+                            <CardNo>2611250423</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>LAVENIA WIDYA AYU ARABELLA</CardName>
+                            <Department />
+                            <StaffNo>CK25.105</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut185" msdata:rowOrder="184">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:16:32</TrTime>
+                            <CardNo>2611250423</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>LAVENIA WIDYA AYU ARABELLA</CardName>
+                            <Department />
+                            <StaffNo>CK25.105</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut186" msdata:rowOrder="185">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:33:01</TrTime>
+                            <CardNo>2611250423</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>LAVENIA WIDYA AYU ARABELLA</CardName>
+                            <Department />
+                            <StaffNo>CK25.105</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut187" msdata:rowOrder="186">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:33:06</TrTime>
+                            <CardNo>2611250423</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>LAVENIA WIDYA AYU ARABELLA</CardName>
+                            <Department />
+                            <StaffNo>CK25.105</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut188" msdata:rowOrder="187">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:33:07</TrTime>
+                            <CardNo>2611250423</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>LAVENIA WIDYA AYU ARABELLA</CardName>
+                            <Department />
+                            <StaffNo>CK25.105</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut189" msdata:rowOrder="188">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:33:07</TrTime>
+                            <CardNo>2611250423</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>LAVENIA WIDYA AYU ARABELLA</CardName>
+                            <Department />
+                            <StaffNo>CK25.105</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut190" msdata:rowOrder="189">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:33:08</TrTime>
+                            <CardNo>2611250423</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>LAVENIA WIDYA AYU ARABELLA</CardName>
+                            <Department />
+                            <StaffNo>CK25.105</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut191" msdata:rowOrder="190">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>05:51:57</TrTime>
+                            <CardNo>2611250439</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang Direksi Tengah Lantai 8</DoorName>
+                            <CardName>SAHROPI</CardName>
+                            <Department />
+                            <StaffNo>CK24.114</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut192" msdata:rowOrder="191">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>18:49:02</TrTime>
+                            <CardNo>2611250439</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>SAHROPI</CardName>
+                            <Department />
+                            <StaffNo>CK24.114</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut193" msdata:rowOrder="192">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:18:15</TrTime>
+                            <CardNo>2611250446</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang Direksi Tengah Lantai 8</DoorName>
+                            <CardName>Luvi nurlaela ramadayanti</CardName>
+                            <Department />
+                            <StaffNo>CK24.129</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut194" msdata:rowOrder="193">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:23:38</TrTime>
+                            <CardNo>2611250460</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Muhammad Fuji Cahyo Kurniawan</CardName>
+                            <Department />
+                            <StaffNo>CK25.010</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut195" msdata:rowOrder="194">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:11:30</TrTime>
+                            <CardNo>2611250460</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Muhammad Fuji Cahyo Kurniawan</CardName>
+                            <Department />
+                            <StaffNo>CK25.010</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut196" msdata:rowOrder="195">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>10:45:39</TrTime>
+                            <CardNo>2611250460</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Muhammad Fuji Cahyo Kurniawan</CardName>
+                            <Department />
+                            <StaffNo>CK25.010</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut197" msdata:rowOrder="196">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>12:28:03</TrTime>
+                            <CardNo>2611250460</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Muhammad Fuji Cahyo Kurniawan</CardName>
+                            <Department />
+                            <StaffNo>CK25.010</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut198" msdata:rowOrder="197">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:50:28</TrTime>
+                            <CardNo>2611250460</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Muhammad Fuji Cahyo Kurniawan</CardName>
+                            <Department />
+                            <StaffNo>CK25.010</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut199" msdata:rowOrder="198">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>14:10:53</TrTime>
+                            <CardNo>2611250460</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Muhammad Fuji Cahyo Kurniawan</CardName>
+                            <Department />
+                            <StaffNo>CK25.010</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut200" msdata:rowOrder="199">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>15:46:21</TrTime>
+                            <CardNo>2611250460</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Muhammad Fuji Cahyo Kurniawan</CardName>
+                            <Department />
+                            <StaffNo>CK25.010</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut201" msdata:rowOrder="200">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:01:10</TrTime>
+                            <CardNo>2611250464</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>ACHMAD ISMAIL</CardName>
+                            <Department />
+                            <StaffNo>SPRO.003</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut202" msdata:rowOrder="201">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>16:07:24</TrTime>
+                            <CardNo>2611250498</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kiri Lift Lantai 9</DoorName>
+                            <CardName>Andrie Agaliksi</CardName>
+                            <Department />
+                            <StaffNo>9116237ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut203" msdata:rowOrder="202">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>16:07:27</TrTime>
+                            <CardNo>2611250498</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kiri Lift Lantai 9</DoorName>
+                            <CardName>Andrie Agaliksi</CardName>
+                            <Department />
+                            <StaffNo>9116237ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut204" msdata:rowOrder="203">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>10:09:49</TrTime>
+                            <CardNo>2611250495</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ctr Dekom Dkt Lift Lantai 8</DoorName>
+                            <CardName>Irham Bani Mahatma</CardName>
+                            <Department />
+                            <StaffNo>CK25.002</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut205" msdata:rowOrder="204">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>12:25:29</TrTime>
+                            <CardNo>2611250495</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ctr Dekom Dkt Lift Lantai 8</DoorName>
+                            <CardName>Irham Bani Mahatma</CardName>
+                            <Department />
+                            <StaffNo>CK25.002</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut206" msdata:rowOrder="205">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>10:09:49</TrTime>
+                            <CardNo>2611250493</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ctr Dekom Dkt Lift Lantai 8</DoorName>
+                            <CardName>Husni Thamrin</CardName>
+                            <Department />
+                            <StaffNo>8913080ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut207" msdata:rowOrder="206">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:26:08</TrTime>
+                            <CardNo>2611250490</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan Lantai 5</DoorName>
+                            <CardName>Frans Ericson</CardName>
+                            <Department />
+                            <StaffNo>8108024JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut208" msdata:rowOrder="207">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>05:56:56</TrTime>
+                            <CardNo>2611250489</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang Direksi Tengah Lantai 8</DoorName>
+                            <CardName>Mohamad Ridwan</CardName>
+                            <Department />
+                            <StaffNo>CK24.108</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut209" msdata:rowOrder="208">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>09:31:37</TrTime>
+                            <CardNo>2611250491</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>anggie febriani novita</CardName>
+                            <Department />
+                            <StaffNo>CK25.003</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut210" msdata:rowOrder="209">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>10:39:50</TrTime>
+                            <CardNo>2611250491</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>anggie febriani novita</CardName>
+                            <Department />
+                            <StaffNo>CK25.003</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut211" msdata:rowOrder="210">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>10:45:40</TrTime>
+                            <CardNo>2611250502</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Catur Budi Prasetyono</CardName>
+                            <Department />
+                            <StaffNo>8008027JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut212" msdata:rowOrder="211">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>15:46:22</TrTime>
+                            <CardNo>2611250502</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>Catur Budi Prasetyono</CardName>
+                            <Department />
+                            <StaffNo>8008027JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut213" msdata:rowOrder="212">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:21:29</TrTime>
+                            <CardNo>2611250511</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Churiyatul Falasifah</CardName>
+                            <Department />
+                            <StaffNo>8410107KP</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut214" msdata:rowOrder="213">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>14:15:37</TrTime>
+                            <CardNo>2611250511</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>Churiyatul Falasifah</CardName>
+                            <Department />
+                            <StaffNo>8410107KP</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut215" msdata:rowOrder="214">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>09:02:20</TrTime>
+                            <CardNo>2611250518</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>HERI DWI SULISTIYONO</CardName>
+                            <Department />
+                            <StaffNo>8911123JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut216" msdata:rowOrder="215">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>09:40:20</TrTime>
+                            <CardNo>2611250518</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>HERI DWI SULISTIYONO</CardName>
+                            <Department />
+                            <StaffNo>8911123JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut217" msdata:rowOrder="216">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>15:15:18</TrTime>
+                            <CardNo>2611250518</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>HERI DWI SULISTIYONO</CardName>
+                            <Department />
+                            <StaffNo>8911123JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut218" msdata:rowOrder="217">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>09:26:00</TrTime>
+                            <CardNo>2611250519</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang Direksi Tengah Lantai 8</DoorName>
+                            <CardName>Monica Ayu Wulandari</CardName>
+                            <Department />
+                            <StaffNo>9316068TB</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut219" msdata:rowOrder="218">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>10:57:22</TrTime>
+                            <CardNo>2611250519</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang Direksi Tengah Lantai 8</DoorName>
+                            <CardName>Monica Ayu Wulandari</CardName>
+                            <Department />
+                            <StaffNo>9316068TB</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut220" msdata:rowOrder="219">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:26:02</TrTime>
+                            <CardNo>2611250519</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang Direksi Tengah Lantai 8</DoorName>
+                            <CardName>Monica Ayu Wulandari</CardName>
+                            <Department />
+                            <StaffNo>9316068TB</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut221" msdata:rowOrder="220">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:54:49</TrTime>
+                            <CardNo>2711250528</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Pradifta Hertansyah Pohan</CardName>
+                            <Department />
+                            <StaffNo>9015021AS</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut222" msdata:rowOrder="221">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:23:52</TrTime>
+                            <CardNo>2711250531</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan Lantai 5</DoorName>
+                            <CardName>RIDWAN</CardName>
+                            <Department />
+                            <StaffNo>7394046ja</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut223" msdata:rowOrder="222">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>09:55:25</TrTime>
+                            <CardNo>2711250531</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan Lantai 5</DoorName>
+                            <CardName>RIDWAN</CardName>
+                            <Department />
+                            <StaffNo>7394046ja</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut224" msdata:rowOrder="223">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:02:40</TrTime>
+                            <CardNo>2711250531</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan Lantai 5</DoorName>
+                            <CardName>RIDWAN</CardName>
+                            <Department />
+                            <StaffNo>7394046ja</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut225" msdata:rowOrder="224">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:42:28</TrTime>
+                            <CardNo>2711250531</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan Lantai 5</DoorName>
+                            <CardName>RIDWAN</CardName>
+                            <Department />
+                            <StaffNo>7394046ja</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut226" msdata:rowOrder="225">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:14:05</TrTime>
+                            <CardNo>2711250537</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Dekom 1 Lantai 8</DoorName>
+                            <CardName>PUTRA ARIEF HIDAYAT</CardName>
+                            <Department />
+                            <StaffNo>8715082AM</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut227" msdata:rowOrder="226">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>09:44:10</TrTime>
+                            <CardNo>2711250537</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 1 Lantai 8</DoorName>
+                            <CardName>PUTRA ARIEF HIDAYAT</CardName>
+                            <Department />
+                            <StaffNo>8715082AM</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut228" msdata:rowOrder="227">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>12:01:46</TrTime>
+                            <CardNo>2711250539</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>R.D.W. MANURUNG</CardName>
+                            <Department />
+                            <StaffNo>7195111P</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut229" msdata:rowOrder="228">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>12:01:49</TrTime>
+                            <CardNo>2711250539</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>R.D.W. MANURUNG</CardName>
+                            <Department />
+                            <StaffNo>7195111P</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut230" msdata:rowOrder="229">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>09:01:43</TrTime>
+                            <CardNo>0112250636</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 1 Lantai 8</DoorName>
+                            <CardName>MUHAMMAD AFIF</CardName>
+                            <Department />
+                            <StaffNo>7806032JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut231" msdata:rowOrder="230">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:06:30</TrTime>
+                            <CardNo>0112250620</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan Lantai 5</DoorName>
+                            <CardName>SARITA</CardName>
+                            <Department />
+                            <StaffNo>7392100K3</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut232" msdata:rowOrder="231">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:07:48</TrTime>
+                            <CardNo>0112250620</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>SARITA</CardName>
+                            <Department />
+                            <StaffNo>7392100K3</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut233" msdata:rowOrder="232">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:09:17</TrTime>
+                            <CardNo>0112250620</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan Lantai 5</DoorName>
+                            <CardName>SARITA</CardName>
+                            <Department />
+                            <StaffNo>7392100K3</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut234" msdata:rowOrder="233">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>14:12:15</TrTime>
+                            <CardNo>0112250606</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Audrey Eka Paramitha</CardName>
+                            <Department />
+                            <StaffNo>0124085ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut235" msdata:rowOrder="234">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:43:40</TrTime>
+                            <CardNo>0112250604</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Farida Amanda Chibakhitah</CardName>
+                            <Department />
+                            <StaffNo>9520203ZY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut236" msdata:rowOrder="235">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:26:14</TrTime>
+                            <CardNo>0112250603</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 1 Lantai 8</DoorName>
+                            <CardName>PRADILLA ABELTY</CardName>
+                            <Department />
+                            <StaffNo>CK24.169</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut237" msdata:rowOrder="236">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>14:12:12</TrTime>
+                            <CardNo>0112250600</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Vania Atika Ghassani</CardName>
+                            <Department />
+                            <StaffNo>0124083ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut238" msdata:rowOrder="237">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:38:11</TrTime>
+                            <CardNo>0112250586</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Muhammad Faris Zaini Fuad</CardName>
+                            <Department />
+                            <StaffNo>9215192ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut239" msdata:rowOrder="238">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:00:59</TrTime>
+                            <CardNo>2811250583</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Admin Lantai 2</DoorName>
+                            <CardName>Intan Reza Nur Oktavia</CardName>
+                            <Department />
+                            <StaffNo>9419062ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut240" msdata:rowOrder="239">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>16:28:26</TrTime>
+                            <CardNo>2811250583</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Admin Lantai 2</DoorName>
+                            <CardName>Intan Reza Nur Oktavia</CardName>
+                            <Department />
+                            <StaffNo>9419062ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut241" msdata:rowOrder="240">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:12:14</TrTime>
+                            <CardNo>2811250582</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Admin Lantai 2</DoorName>
+                            <CardName>Alfian Sulthoni</CardName>
+                            <Department />
+                            <StaffNo>9015031ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut242" msdata:rowOrder="241">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>10:00:42</TrTime>
+                            <CardNo>2811250582</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Alfian Sulthoni</CardName>
+                            <Department />
+                            <StaffNo>9015031ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut243" msdata:rowOrder="242">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:20:24</TrTime>
+                            <CardNo>2811250582</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Alfian Sulthoni</CardName>
+                            <Department />
+                            <StaffNo>9015031ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut244" msdata:rowOrder="243">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>15:46:06</TrTime>
+                            <CardNo>2811250582</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 3 Lantai 8</DoorName>
+                            <CardName>Alfian Sulthoni</CardName>
+                            <Department />
+                            <StaffNo>9015031ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut245" msdata:rowOrder="244">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:03:45</TrTime>
+                            <CardNo>2811250563</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Admin Lantai 2</DoorName>
+                            <CardName>Ganang Eko Nurdiansah</CardName>
+                            <Department />
+                            <StaffNo>9317130ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut246" msdata:rowOrder="245">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:05:05</TrTime>
+                            <CardNo>2711250543</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 3 Lantai 8</DoorName>
+                            <CardName>Mahendra Ristanto Kurniawan</CardName>
+                            <Department />
+                            <StaffNo>8409025JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut247" msdata:rowOrder="246">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>15:50:03</TrTime>
+                            <CardNo>0212250671</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan Lantai 5</DoorName>
+                            <CardName>Andy Danang Rumanjaya</CardName>
+                            <Department />
+                            <StaffNo>8512010ZY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut248" msdata:rowOrder="247">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:28:23</TrTime>
+                            <CardNo>0212250669</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Admin Lantai 2</DoorName>
+                            <CardName>Ni Made Nastiti Saraswati</CardName>
+                            <Department />
+                            <StaffNo>9819061ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut249" msdata:rowOrder="248">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>10:59:24</TrTime>
+                            <CardNo>0212250659</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Admin Lantai 2</DoorName>
+                            <CardName>Reza Renatasari</CardName>
+                            <Department />
+                            <StaffNo>9418012ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut250" msdata:rowOrder="249">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:24:38</TrTime>
+                            <CardNo>0212250658</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 3 Lantai 8</DoorName>
+                            <CardName>I Putu Yoga Wahyu Diputra</CardName>
+                            <Department />
+                            <StaffNo>8008101JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut251" msdata:rowOrder="250">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:20:42</TrTime>
+                            <CardNo>0212250656</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 3 Lantai 8</DoorName>
+                            <CardName>Dzikril hakim</CardName>
+                            <Department />
+                            <StaffNo>9215329ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut252" msdata:rowOrder="251">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:51:32</TrTime>
+                            <CardNo>0212250653</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kanan Lift Lantai 9</DoorName>
+                            <CardName>Yohanes franky lindarmawan</CardName>
+                            <Department />
+                            <StaffNo>9015001ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut253" msdata:rowOrder="252">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>16:10:23</TrTime>
+                            <CardNo>0212250653</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Yohanes franky lindarmawan</CardName>
+                            <Department />
+                            <StaffNo>9015001ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut254" msdata:rowOrder="253">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:00:16</TrTime>
+                            <CardNo>0212250652</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kanan Lift Lantai 9</DoorName>
+                            <CardName>Bryan syahwana</CardName>
+                            <Department />
+                            <StaffNo>CK23.160</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut255" msdata:rowOrder="254">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>16:20:50</TrTime>
+                            <CardNo>0212250652</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Kanan Lift Lantai 9</DoorName>
+                            <CardName>Bryan syahwana</CardName>
+                            <Department />
+                            <StaffNo>CK23.160</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut256" msdata:rowOrder="255">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>08:10:39</TrTime>
+                            <CardNo>0312250677</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Ruang HSE Lantai 2</DoorName>
+                            <CardName>HARRY PURNOMO</CardName>
+                            <Department />
+                            <StaffNo>8006011JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut257" msdata:rowOrder="256">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>07:29:25</TrTime>
+                            <CardNo>0312250679</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan 1 Lantai 8</DoorName>
+                            <CardName>Piterson Marulitua Sihaloho</CardName>
+                            <Department />
+                            <StaffNo>9320469ZY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut258" msdata:rowOrder="257">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>12:09:20</TrTime>
+                            <CardNo>0312250679</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Piterson Marulitua Sihaloho</CardName>
+                            <Department />
+                            <StaffNo>9320469ZY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut259" msdata:rowOrder="258">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>12:26:42</TrTime>
+                            <CardNo>0312250678</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Hayat Pujiatmoko</CardName>
+                            <Department />
+                            <StaffNo>8109043JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut260" msdata:rowOrder="259">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>10:59:21</TrTime>
+                            <CardNo>0412250691</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Admin Lantai 2</DoorName>
+                            <CardName>DINDHA YANNE ARYANDINIE</CardName>
+                            <Department />
+                            <StaffNo>9118018ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut261" msdata:rowOrder="260">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>10:59:24</TrTime>
+                            <CardNo>0412250691</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Admin Lantai 2</DoorName>
+                            <CardName>DINDHA YANNE ARYANDINIE</CardName>
+                            <Department />
+                            <StaffNo>9118018ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut262" msdata:rowOrder="261">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>10:59:31</TrTime>
+                            <CardNo>0412250691</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Admin Lantai 2</DoorName>
+                            <CardName>DINDHA YANNE ARYANDINIE</CardName>
+                            <Department />
+                            <StaffNo>9118018ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut263" msdata:rowOrder="262">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>11:19:18</TrTime>
+                            <CardNo>0412250691</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Admin Lantai 2</DoorName>
+                            <CardName>DINDHA YANNE ARYANDINIE</CardName>
+                            <Department />
+                            <StaffNo>9118018ZJY</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut264" msdata:rowOrder="263">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>12:26:46</TrTime>
+                            <CardNo>0412250694</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod IN</DoorName>
+                            <CardName>Asep Syarip hidayat</CardName>
+                            <Department />
+                            <StaffNo>8911182JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut265" msdata:rowOrder="264">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>14:30:12</TrTime>
+                            <CardNo>0412250693</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Eko Widi</CardName>
+                            <Department />
+                            <StaffNo>8208264Z</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut266" msdata:rowOrder="265">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>16:21:12</TrTime>
+                            <CardNo>0412250693</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Tripod OUT</DoorName>
+                            <CardName>Eko Widi</CardName>
+                            <Department />
+                            <StaffNo>8208264Z</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut267" msdata:rowOrder="266">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>09:01:58</TrTime>
+                            <CardNo>0412250698</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan Lantai 2</DoorName>
+                            <CardName>Elvira yosefa</CardName>
+                            <Department />
+                            <StaffNo>9009148A2</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut268" msdata:rowOrder="267">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>16:32:52</TrTime>
+                            <CardNo>0412250698</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan Lantai 2</DoorName>
+                            <CardName>Elvira yosefa</CardName>
+                            <Department />
+                            <StaffNo>9009148A2</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut269" msdata:rowOrder="268">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>13:16:20</TrTime>
+                            <CardNo>0412250699</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Akses Karyawan Lantai 2</DoorName>
+                            <CardName>Gina Agnina</CardName>
+                            <Department />
+                            <StaffNo>8108006JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                        <InOut diffgr:id="InOut270" msdata:rowOrder="269">
+                            <TrDate>2025/12/05</TrDate>
+                            <TrTime>17:06:11</TrTime>
+                            <CardNo>0412250699</CardNo>
+                            <Transaction>Valid Entry Access</Transaction>
+                            <TrCode>C0</TrCode>
+                            <DoorName>Lobby Admin Lantai 2</DoorName>
+                            <CardName>Gina Agnina</CardName>
+                            <Department />
+                            <StaffNo>8108006JA</StaffNo>
+                            <Nric />
+                        </InOut>
+                    </DocumentElement>
+                </diffgr:diffgram>
+            </GetTransactionResult>
+        </GetTransactionResponse>
+    </soap:Body>
+</soap:Envelope>
