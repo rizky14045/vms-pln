@@ -48,6 +48,7 @@ class RegisterPersonService{
     }
 
     public function updateStatusRegisteredPerson(RegisteredPerson $registeredPerson, $data){
+        $registeredPerson->expired_at = $data['expired_at'] ?? null;
         $registeredPerson->status = $data['status'];
         $registeredPerson->status_level = $data['status_level'];
         $registeredPerson->save();

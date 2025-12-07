@@ -31,7 +31,8 @@ class RegisteredPerson extends Model
         'purpose_of_visit',
         'status_level',
         'status',
-        'area_id'
+        'area_id',
+        'is_deleted_card'
     ];
 
     protected $table = 'registered_persons';

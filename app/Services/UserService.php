@@ -34,7 +34,7 @@ class UserService{
         ]);
     }
 
-    public function updateStatusRegistered(User $user){
+    public function updateStatusRegistered(User $user,$request){
         $user->is_registered = true;
         $user->save();
     }

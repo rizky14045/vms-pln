@@ -37,6 +37,7 @@ class AreaController extends Controller
 
     public function index(Request $request)
     {
+        //test push
         // Get filter from request
         $filters = [
             'start_date' => $request->input('start_date'),
