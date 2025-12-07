@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use DOMDocument;
+use DOMXPath;
 use SoapClient;
 use Exception;
 
@@ -200,5 +202,71 @@ class VaultSiteService
                 'message' => $e->getMessage()
             ];
         }
+    }
+
+    public function getTransaction($dateFrom = null, $dateTo = null)
+    {
+        try {
+            $params = [
+                'DateFrom' => $dateFrom,
+                'DateTo'   => $dateTo,
+                'CardNo'   => '',
+                'StaffNo'  => '',
+                'Nric'     => '',
+                'DoorName' => ''
+            ];
+
+            // Panggil SOAP GetTransaction
+            $response = $this->client->__soapCall("GetTransaction", [$params]);
+
+            return $this->parseAccessLog($response->GetTransactionResult);
+
+        } catch (\Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
+
+    public function parseAccessLog($xmlAny)
+    {
+        if (is_object($xmlAny) && isset($xmlAny->any)) {
+            $xmlString = $xmlAny->any;
+        } else {
+            $xmlString = $xmlAny;
+        }
+
+        $xmlString = preg_replace('/<xs:schema.*?<\/xs:schema>/s', '', $xmlString);
+
+        $xmlString = str_replace([
+            'xmlns="InOut"',
+            'xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"',
+            'xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1"',
+        ], '', $xmlString);
+
+        $dom = new DOMDocument();
+        @$dom->loadXML($xmlString);
+
+        $xpath = new DOMXPath($dom);
+
+        $nodes = $xpath->query('//*[local-name()="InOut"]');
+
+        if ($nodes->length === 0) {
+            return ['error' => 'Tidak ada node InOut ditemukan'];
+        }
+
+        $result = [];
+
+        foreach ($nodes as $node) {
+            $record = [];
+
+            foreach ($node->childNodes as $child) {
+                if ($child->nodeType === XML_ELEMENT_NODE) {
+                    $record[$child->nodeName] = $child->textContent;
+                }
+            }
+
+            $result[] = $record;
+        }
+
+        return $result;
     }
 }
