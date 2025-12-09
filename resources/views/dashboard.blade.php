@@ -15,7 +15,7 @@
             <div
                 class="card shadow-none border border-gray-200 rounded-lg h-full bg-gradient-to-r from-cyan-600/10 to-white">
                 <div class="card-body p-5">
-                    <p class="font-medium mb-1">Total Visitor</p>
+                    <p class="font-medium mb-1">Total Register</p>
                     <h6 class="text-2xl font-bold">{{ $totalVisitor }}</h6>
                 </div>
             </div>
