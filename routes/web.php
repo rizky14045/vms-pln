@@ -64,8 +64,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/registered/{id}','show')->name('registered.show');
         Route::get('/registered/{id}/approve','approve')->name('registered.approve');
         Route::get('/registered/{id}/approve-visitor','approveVisitor')->name('registered.approve.visitor');
+        Route::get('/registered/{id}/edit','edit')->name('registered.edit');
         Route::patch('/registered/{id}/approve','updateApprove')->name('registered.update-approve');
         Route::patch('/registered/{id}/approve-visitor','updateApproveVisitor')->name('registered.update-approve-visitor');
+        Route::patch('/registered/{id}/edit-card','updateCard')->name('registered.update-card');
         Route::get('/registered/create','create')->name('registered.create');
         Route::post('/registered','store')->name('registered.store');
         Route::get('/registered/{id}/edit','edit')->name('registered.edit');

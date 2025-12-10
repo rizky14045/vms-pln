@@ -2,34 +2,41 @@
 
 @section('content')
 <div class="min-h-screen flex items-center justify-center px-4 py-8">
-    <div style="width:520px" class="mx-auto bg-white dark:bg-neutral-800 rounded-xl shadow-lg px-6 py-6">
+    <div class="w-1/2 mx-auto bg-white dark:bg-neutral-800 rounded-xl shadow-lg px-6 py-6">
 
         {{-- Title --}}
         <div class="relative w-full">
-            <div>
-                <a href="{{ route('devices.index') }}" 
-                   class="text-gray-500 absolute left-0 hover:text-gray-700 dark:hover:text-gray-300 transition">
-                   &lt; kembali
-                </a>
-            </div>
-            <h2 class="text-2xl font-bold mb-6 text-center">Edit Device</h2>
+
+            <h2 class="text-2xl font-bold mb-6 text-center">Edit Karyawan</h2>
         </div>
 
-        <form action="{{ route('devices.update', ['id' => $device->id]) }}" method="POST">
+        <form action="{{ route('registered.update-card',['id'=>$registeredPerson->id]) }}" method="POST">
             @csrf
-            @method('PUT')
+            @method('PATCH')
 
             {{-- Input Nama Device --}}
             <div class="mb-5">
                 @include('components.input', [
                     'type' => 'text',
-                    'name' => 'device_name',
-                    'id' => 'device_name',
-                    'placeholder' => 'Nama Device',
+                    'name' => 'name',
+                    'id' => 'name',
+                    'placeholder' => 'Nama Karyawan',
                     'required' => true,
                     'autofocus' => true,
-                    'label' => 'Nama Device',
-                    'value' => old('device_name', $device->device_name),
+                    'label' => 'Nama Karyawan',
+                    'value' => $registeredPerson->user->name ?? ''
+                ])
+            </div>
+            <div class="mb-5">
+                @include('components.input', [
+                    'type' => 'text',
+                    'name' => 'nid',
+                    'id' => 'nid',
+                    'placeholder' => 'NID Karyawan',
+                    'required' => true,
+                    'autofocus' => true,
+                    'label' => 'NID Karyawan',
+                    'value' => $registeredPerson->user->nid ?? ''
                 ])
             </div>
 
@@ -40,39 +47,33 @@
                 </label>
                 
                 <div class="space-y-2 border rounded-lg p-4 max-h-72 overflow-y-auto bg-neutral-50 dark:bg-dark-2">
-                    {{-- Rekursif tampilkan area sebagai checkbox --}}
-                    @php
-                        // Ambil old value atau dari relasi device
-                        $selectedAreas = old('area_ids', isset($device) ? $device->areas->pluck('id')->toArray() : []);
+                    @foreach ($areas as $area)
+                        <div class="flex items-center mb-4">
+                            <input id="area-{{$area->id}}" type="radio" value="{{$area->id}}" name="area_id" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="area-{{$area->id}}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{$area->name}}</label>
+                        </div>
 
-                        function renderAreaCheckbox($areas, $selectedAreas, $prefix = '', $level = 0) {
-                            foreach ($areas as $area) {
-                                $isChecked = in_array($area->id, $selectedAreas) ? 'checked' : '';
-                                echo '<div class="flex items-center space-x-2" style="margin-left:'.($level*12).'px">';
-                                echo '<input type="checkbox" id="area_'.$area->id.'" name="area_ids[]" value="'.$area->id.'" data-parent="'.($area->parent_id ?? '').'" class="area-checkbox w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" '.$isChecked.'>';
-                                echo '<label for="area_'.$area->id.'" class="text-gray-700 dark:text-gray-200 cursor-pointer">'.$prefix.$area->name.'</label>';
-                                echo '</div>';
-
-                                if ($area->childrenArea && $area->childrenArea->count()) {
-                                    renderAreaCheckbox($area->childrenArea, $selectedAreas, '', $level+1);
-                                }
-                            }
-                        }
-
-                        renderAreaCheckbox($areas, $selectedAreas);
-                    @endphp
+                    @endforeach
                 </div>
             </div>
 
-
             {{-- Button --}}
-            <div class="flex justify-end">
+            <div class="flex justify-end gap-3">
                 @include('components.button', [
-                    'text' => 'Simpan',
+                    'text' => 'Kembali',
+                    'variant' => 'success',
+                    'size' => 'md',
+                    'link' => route('registered.index'),
+                    'class' => 'bg-success-600 hover:bg-success-700',
+                    ])
+                @include('components.button', [
+                    'text' => 'Save',
                     'type' => 'submit',
                     'variant' => 'primary',
-                    'size' => 'md'
-                ])
+                    'size' => 'md',
+                    'value' => 'approve',
+                    'name' => 'action'
+                    ])
             </div>
         </form>
     </div>

@@ -57,6 +57,25 @@ class RegisteredController extends Controller
         return view('pages.registered.approve-visitor', $data);
     }
 
+    public function edit($id) {
+        $data['registeredPerson'] = $this->registerPersonService->getRegisteredPersonById($id);
+        if(!$data['registeredPerson']->is_employee || $data['registeredPerson']->status_level != 2) {
+            return abort(404);
+        } 
+        $data['areas'] = $this->areaService->getAllAreas(['limit' => 1000], "employee")['data'] ;
+
+        return view('pages.registered.edit', $data);
+    }
+
+    public function updateCard(Request $request,$id) {
+
+        try {
+           return $this->approveRegistered($request, $id);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
     public function updateApprove(Request $request,$id) {
 
         try {
@@ -130,6 +149,13 @@ class RegisteredController extends Controller
                     return '<a href="'.$approveUrl.'" class="w-8 h-8 bg-success-100 dark:bg-success-600/25 text-success-600 dark:text-success-400 rounded-full inline-flex items-center justify-center">
                                 <iconify-icon icon="solar:check-circle-outline"></iconify-icon>
                             </a>';
+                }else if($row->status_level == 2){
+                    if($isEmployee){
+                        $approveUrl = route('registered.edit', $row->id);
+                        return '<a href="'.$approveUrl.'" class="w-8 h-8 bg-warning-100 dark:bg-warning-600/25 text-warning-600 dark:text-warning-400 rounded-full inline-flex items-center justify-center">
+                                        <iconify-icon icon="solar:pen-2-outline"></iconify-icon>
+                                    </a>';
+                    }
                 }
                 return '';
             })
