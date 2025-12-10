@@ -28,6 +28,8 @@ class AreaController extends Controller
         $this->formatRequest = $formatRequest;
         $this->areaService = $areaService;
         $this->deviceService = $deviceService;
+
+        $this->middleware('permission:manage area')->only(['index', 'create', 'store', 'edit', 'update']);
     }
 
     protected function validator(array $data, $validation, array $messages = [])

@@ -8,7 +8,7 @@ class DeviceValidation
     {
         return [
             'device_name' => 'required|string|max:255',
-            // 'device_type' => 'required|string|max:255',
+            'device_type' => 'required|string|in:FR,Controller',
         ];
     }
 
@@ -16,7 +16,7 @@ class DeviceValidation
     {
         return [
             'device_name' => 'required|string|max:255',
-            // 'device_type' => 'required|string|max:255',
+            'device_type' => 'required|string|in:FR,Controller',
         ];
     }
 
@@ -30,6 +30,7 @@ class DeviceValidation
             'device_type.required' => 'Tipe device wajib diisi.',
             'device_type.string' => 'Tipe device harus berupa teks.',
             'device_type.max' => 'Tipe device maksimal 255 karakter.',
+            'device_type.in' => 'Tipe device harus berupa FR atau Controller.',
         ];
     }
 }

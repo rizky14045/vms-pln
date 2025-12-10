@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.8",
         "maatwebsite/excel": "^3.1",
         "realrashid/sweet-alert": "^7.3",
+        "spatie/laravel-permission": "^6.23",
         "tymon/jwt-auth": "^2.2",
         "yajra/laravel-datatables-oracle": "^10.11"
     },

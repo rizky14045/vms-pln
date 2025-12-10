@@ -21,6 +21,8 @@ class DeviceController extends Controller
     ) {
         $this->deviceService = $deviceService;
         $this->areaService = $areaService;
+
+        $this->middleware('permission:manage device')->only(['index', 'create', 'store', 'edit', 'update']);
     }
 
     protected function validator(array $data, $validation, array $messages = [])

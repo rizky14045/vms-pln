@@ -75,7 +75,7 @@ class DeviceService
     {
         try {
             $device = Device::create([
-                'device_type' => "Controller",
+                'device_type' => isset($deviceData['device_type']) ? $deviceData['device_type'] : null,
                 'device_name' => isset($deviceData['device_name']) ? $deviceData['device_name'] : null,
             ]);
 
@@ -91,7 +91,7 @@ class DeviceService
             $device = Device::findOrFail($deviceId);
 
             $device->update([
-                'device_type' => "Controller",
+                'device_type' => isset($deviceData['device_type']) ? $deviceData['device_type'] : $device->device_type,
                 'device_name' => $deviceData['device_name'] ?? $device->device_name,
             ]);
 
