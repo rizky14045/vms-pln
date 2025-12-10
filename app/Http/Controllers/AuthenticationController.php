@@ -46,6 +46,19 @@ class AuthenticationController extends Controller
 
             $request->session()->regenerate();
 
+            $user = auth()->user();
+
+            if ($user->roles->isEmpty()) {
+                // Jika tidak ada role → logout paksa
+                auth()->logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+
+                return back()->withErrors([
+                    'email' => 'Email atau password salah.'
+                ])->withInput();
+            }
+
             Alert::success('Login Berhasil', 'Selamat datang');
             return redirect()->route('dashboard');
 
