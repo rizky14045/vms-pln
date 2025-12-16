@@ -50,7 +50,7 @@
             </div>
 
             <!-- Internal Visitor -->
-            <div class="card shadow-none border border-gray-200 rounded-lg bg-gradient-to-r from-purple-600/10 to-white">
+            {{-- <div class="card shadow-none border border-gray-200 rounded-lg bg-gradient-to-r from-purple-600/10 to-white">
                 <div class="card-body p-5">
                     <p class="font-medium mb-1">Visitor Internal</p>
                     <h6 class="text-2xl font-bold text-purple-600">{{ $totalVisitorInternal }}</h6>
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
         <!-- CHARTS -->
