@@ -32,7 +32,7 @@ class FormatRequestVaultsite
 
     public static function formatAddCard($data, $access_no)
     {
-        $withExpired = $data->is_employee ? false : true;
+        $withExpired = $data->is_employee ? true : false;
         return [
             "CardNo" => $data->user->id_card_number, // Dinamis
             "Name" => $data->user->name ?? "", // data user
@@ -46,7 +46,7 @@ class FormatRequestVaultsite
             "LiftAccessLevel" => "00", // default
             "BypassAP" => false, // default
             "ActiveStatus" => true, // default
-            "NonExpired" => true, // default
+            "NonExpired" => $withExpired, // default
             "ExpiredDate" => Carbon::parse($data->expired_at)->format('Y/m/d'), // 5 tahun kedepan
             "VehicleNo" => "",
             "FloorNo" => "",
