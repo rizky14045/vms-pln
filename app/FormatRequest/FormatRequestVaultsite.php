@@ -46,7 +46,7 @@ class FormatRequestVaultsite
             "LiftAccessLevel" => "00", // default
             "BypassAP" => false, // default
             "ActiveStatus" => true, // default
-            "NonExpired" => $withExpired, // default
+            "NonExpired" => true, // default
             "ExpiredDate" => Carbon::parse($data->expired_at)->format('Y/m/d'), // 5 tahun kedepan
             "VehicleNo" => "",
             "FloorNo" => "",
