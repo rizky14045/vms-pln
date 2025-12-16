@@ -24,7 +24,7 @@
             <div
                 class="card shadow-none border border-gray-200 rounded-lg h-full bg-gradient-to-r from-indigo-600/10 to-white">
                 <div class="card-body p-5">
-                    <p class="font-medium mb-1">Total Karyawan</p>
+                    <p class="font-medium mb-1">Total Karyawan Aktif</p>
                     <h6 class="text-2xl font-bold">{{ $totalKaryawan }}</h6>
                 </div>
             </div>
@@ -42,12 +42,8 @@
                             <p class="font-semibold text-yellow-600">{{ $pendingExternal }}</p>
                         </div>
                         <div>
-                            <p class="text-gray-500">Approved</p>
+                            <p class="text-gray-500">Active Visitor</p>
                             <p class="font-semibold text-green-600">{{ $approvedExternal }}</p>
-                        </div>
-                        <div>
-                            <p class="text-gray-500">Rejected</p>
-                            <p class="font-semibold text-red-600">{{ $rejectedExternal }}</p>
                         </div>
                     </div>
                 </div>
@@ -68,10 +64,6 @@
                         <div>
                             <p class="text-gray-500">Approved</p>
                             <p class="font-semibold text-green-600">{{ $approvedInternal }}</p>
-                        </div>
-                        <div>
-                            <p class="text-gray-500">Rejected</p>
-                            <p class="font-semibold text-red-600">{{ $rejectedInternal }}</p>
                         </div>
                     </div>
                 </div>

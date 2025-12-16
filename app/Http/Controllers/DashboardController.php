@@ -23,20 +23,31 @@ class DashboardController extends Controller
         // =============================
 
         // Visitor summary
-        $totalVisitor = RegisteredPerson::count();;
-        $totalKaryawan = User::where('is_employee',1)->count();
+        $totalVisitor = RegisteredPerson::select('user_id')->distinct()->count();
+        $totalKaryawan = User::where(['is_employee' => 1, 'status' => "active"])->count();
 
         // External visitor
-        $totalVisitorExternal = RegisteredPerson::whereDate('created_at',today())->where('is_employee',false)->count();
-        $pendingExternal  = RegisteredPerson::where('status_level',1)->whereDate('created_at',today())->where('is_employee',false)->count();
-        $approvedExternal = RegisteredPerson::where('status_level',2)->whereDate('created_at',today())->where('is_employee',false)->count();
-        $rejectedExternal = RegisteredPerson::where('status_level',0)->whereDate('created_at',today())->where('is_employee',false)->count();
+        $totalVisitorExternal = RegisteredPerson::where('is_employee', false)
+                            ->select('user_id')
+                            ->distinct()
+                            ->count();
+        $pendingExternal  = RegisteredPerson::where('status_level',1)->where('is_employee',false)->count();
+        $approvedExternal = RegisteredPerson::where('status_level', 2)
+                            ->where('is_employee', false)
+                            ->whereDate('expired_at', '>', today())
+                            ->distinct('user_id')
+                            ->count('user_id');
 
         // Internal visitor
-        $totalVisitorInternal = RegisteredPerson::whereDate('created_at',today())->where('is_employee',1)->count();
-        $pendingInternal  = RegisteredPerson::where('status_level',1)->whereDate('created_at',today())->where('is_employee',1)->count();
-        $approvedInternal = RegisteredPerson::where('status_level',2)->whereDate('created_at',today())->where('is_employee',1)->count();
-        $rejectedInternal = RegisteredPerson::where('status_level',0)->whereDate('created_at',today())->where('is_employee',1)->count();
+        $totalVisitorInternal = RegisteredPerson::where('is_employee', true)
+                            ->select('user_id')
+                            ->distinct()
+                            ->count();
+        $pendingInternal  = RegisteredPerson::where('status_level',1)->where('is_employee',true)->count();
+        $approvedInternal = RegisteredPerson::where('status_level', 2)
+                            ->where('is_employee', true)
+                            ->distinct('user_id')
+                            ->count('user_id');
 
         // Chart monthly visitor
         $months = [
@@ -87,11 +98,9 @@ class DashboardController extends Controller
 
             'pendingExternal',
             'approvedExternal',
-            'rejectedExternal',
 
             'pendingInternal',
             'approvedInternal',
-            'rejectedInternal',
 
             'months',
             'visitorPerMonth',
