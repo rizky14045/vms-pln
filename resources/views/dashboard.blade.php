@@ -112,7 +112,7 @@
                                     <tr>
                                         <td>{{ $v->card_name }}</td>
                                         <td>{{ $v->door_name }}</td>
-                                        <td>{{ $v->tr_date }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($v->tr_date)->format('d-m-Y') }}</td>
                                         <td>{{ $v->tr_time }}</td>
                                         
                                 @endforeach
