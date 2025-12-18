@@ -89,17 +89,6 @@
       </div>
       <div>
           @include('components.input', [
-              'type' => 'email',
-              'name' => 'email',
-              'id' => 'email',
-              'placeholder' => 'Email',
-              'required' => true,
-              'autofocus' => true,
-              'label' => 'Email',
-          ])
-      </div>
-      <div>
-          @include('components.input', [
               'type' => 'text',
               'name' => 'phone',
               'id' => 'phone',

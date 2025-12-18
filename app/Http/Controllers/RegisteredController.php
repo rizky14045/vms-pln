@@ -152,7 +152,9 @@ class RegisteredController extends Controller
                 }else if($row->status_level == 2){
                     if($isEmployee){
                         $approveUrl = route('registered.edit', $row->id);
-                        return '<a href="'.$approveUrl.'" class="w-8 h-8 bg-warning-100 dark:bg-warning-600/25 text-warning-600 dark:text-warning-400 rounded-full inline-flex items-center justify-center">
+                        // $deleteUrl = route('registered.delete', $row->id);
+                        return '
+                                    <a href="'.$approveUrl.'" class="w-8 h-8 bg-warning-100 dark:bg-warning-600/25 text-warning-600 dark:text-warning-400 rounded-full inline-flex items-center justify-center">
                                         <iconify-icon icon="solar:pen-2-outline"></iconify-icon>
                                     </a>';
                     }

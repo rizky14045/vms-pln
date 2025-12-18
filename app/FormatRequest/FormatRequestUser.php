@@ -11,7 +11,7 @@ class FormatRequestUser
     {
         return [
             'name' => $request['name'],
-            'email' => $request['email'],
+            'email' => $request['email'] ?? null,
             'nid' => $request['nid'],
             'id_card_number' => self::generateCardNo(),
             'identity_number' => null,

@@ -27,8 +27,13 @@
       <div id="clock" class="text-lg font-mono mb-6"></div>
 
       <!-- Buttons -->
-      <div class="space-x-4">
-        <a class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded" href="{{route('register-employee')}}">Mulai</a>
+      <div class="flex gap-4 items-cemter">
+        <div class="space-x-4">
+          <a class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded" href="{{route('register-employee')}}">Karyawan</a>
+        </div>
+        <div class="space-x-4">
+          <a class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded" href="{{route('register-visitor')}}">Visitor</a>
+        </div>
       </div>
     </div>
   </div>

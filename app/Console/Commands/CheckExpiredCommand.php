@@ -46,6 +46,7 @@ class CheckExpiredCommand extends Command
 
             // 👉 Aksi ketika expired
             // Contoh: tandai kartu telah dihapus
+            $this->vaultSiteService->deleteFaceCard($record->user->id_card_number);
             $this->vaultSiteService->deleteCard($record->user->id_card_number);
             $record->update([
                 'is_deleted_card' => 1,

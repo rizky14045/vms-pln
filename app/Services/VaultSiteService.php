@@ -144,6 +144,22 @@ class VaultSiteService
         }
     }
 
+    public function deleteFaceCard($cardNumber)
+    {
+        try {
+            $params = [
+                'CardNo'   => $cardNumber,
+                'Download'=> true,
+            ];
+
+            return $this->client->__soapCall('FRDeleteCardUserFace', [$params]);
+        } catch (\Exception $e) {
+            return [
+                'error' => $e->getMessage()
+            ];
+        }
+    }
+
     public function updateCardExpiryDate(string $cardNo, string $expiryDate)
     {
         try {

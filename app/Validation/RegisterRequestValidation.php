@@ -21,7 +21,6 @@ class RegisterRequestValidation
             'nid' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'person_image' => 'required|file|mimes:png,jpeg,jpg',
-            'email' => 'required|email:rfc,dns',
             'phone' => 'required|regex:/^628\d{7,12}$/',
             'company' => 'required|string|max:255',
             'purpose_of_visit' => 'required|string|max:500',
