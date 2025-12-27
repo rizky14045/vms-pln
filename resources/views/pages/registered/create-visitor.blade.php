@@ -6,14 +6,11 @@
 
         {{-- Title --}}
         <div class="relative w-full">
-
-            <h2 class="text-2xl font-bold mb-6 text-center">Approve Registrasi Visitor</h2>
+            <h2 class="text-2xl font-bold mb-6 text-center">Tambah Visitor</h2>
         </div>
 
-        <form action="{{ route('registered.update-approve-visitor',['id'=>$registeredPerson->id, 'is_employee' => 0]) }}" method="POST">
+        <form action="{{ route('registered.store-visitor') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('PATCH')
-
             {{-- Input Nama Device --}}
             <div class="mb-5">
                 @include('components.input', [
@@ -39,7 +36,17 @@
                     'value' => $registeredPerson->user->nid ?? ''
                 ])
             </div>
-
+            <div>
+                @include('components.input', [
+                    'type' => 'text',
+                    'name' => 'phone',
+                    'id' => 'phone',
+                    'placeholder' => '628xxxxxxx',
+                    'required' => true,
+                    'autofocus' => true,
+                    'label' => 'Nomor HP',
+                ])
+            </div>
             <div class="mb-5">
                 @include('components.input', [
                     'type' => 'text',
@@ -81,14 +88,13 @@
 
             <div class="mb-5">
                 @include('components.input', [
-                    'type' => 'text',
-                    'name' => 'pic_phone',
-                    'id' => 'pic_phone',
-                    'placeholder' => 'Nomor HP PIC',
+                    'type' => 'date',
+                    'name' => 'expired_at',
+                    'id' => 'expired_at',
+                    'placeholder' => 'Tanggal Expired',
                     'required' => true,
                     'autofocus' => true,
-                    'label' => 'Nomor HP PIC',
-                    'value' => $registeredPerson->pic_phone ?? ''
+                    'label' => 'Tanggal Expired'
                 ])
             </div>
 
@@ -101,7 +107,7 @@
                 <div class="space-y-2 border rounded-lg p-4 max-h-72 overflow-y-auto bg-neutral-50 dark:bg-dark-2">
                     @foreach ($areas as $area)
                         <div class="flex items-center mb-4">
-                            <input id="area-{{$area->id}}" type="radio" value="{{$area->id}}" name="area_id" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <input id="area-{{$area->id}}" type="radio" value="{{$area->id}}" name="area_id" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" {{ old('area_id') == $area->id ? 'checked' : '' }}>
                             <label for="area-{{$area->id}}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{$area->name}}</label>
                         </div>
 
@@ -109,16 +115,52 @@
                 </div>
             </div>
 
-            <div class="mb-5">
-                @include('components.input', [
-                    'type' => 'date',
-                    'name' => 'expired_at',
-                    'id' => 'expired_at',
-                    'placeholder' => 'Tanggal Expired',
-                    'required' => true,
-                    'autofocus' => true,
-                    'label' => 'Tanggal Expired'
-                ])
+            <div>
+                @error('area_id')
+                    <span style="color:red" class="text-red-500 absolute text-sm mb-4">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="flex flex-col items-center justify-center gap-4">
+                <h2 class="text-lg font-semibold mb-2">Upload Foto</h2>
+
+                <!-- Preview Gambar -->
+                <img
+                id="imagePreview"
+                class="w-full max-w-[150px] h-auto border rounded-lg shadow hidden"
+                alt="Preview Gambar"
+                />
+
+                <!-- Input File -->
+                <input
+                type="file"
+                id="fileInput"
+                name="person_image"
+                accept="image/*"
+                class="hidden"
+                />
+
+                <button
+                type="button"
+                onclick="document.getElementById('fileInput').click()"
+                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+                >
+                Pilih Gambar
+                </button>
+
+                <div class="text-gray-600 text-sm text-center max-w-xs">
+                Pastikan wajah terlihat jelas dan tidak buram.<br>
+                Format yang didukung: JPG, JPEG, PNG.<br>
+                Resolusi minimal: <span class="font-semibold">600×800 px</span>.<br>
+                Resolusi maksimal: <span class="font-semibold">1920x1080 px</span>.<br>
+                Ukuran maksimal file: <span class="font-semibold">2 MB</span>.
+                </div>
+                
+                @if($errors->has('person_image'))
+                <div class="text-red-500 text-sm">
+                    {{ $errors->first('person_image') }}
+                </div>
+                @endif
             </div>
 
             {{-- Button --}}
@@ -131,16 +173,7 @@
                     'class' => 'bg-success-600 hover:bg-success-700',
                     ])
                 @include('components.button', [
-                    'text' => 'Reject',
-                    'type' => 'submit',
-                    'variant' => 'primary',
-                    'size' => 'md',
-                    'class' => 'bg-danger-600 hover:bg-danger-700',
-                    'value' => 'reject',
-                    'name' => 'action'
-                    ])
-                @include('components.button', [
-                    'text' => 'Approve',
+                    'text' => 'Submit',
                     'type' => 'submit',
                     'variant' => 'primary',
                     'size' => 'md',
@@ -153,54 +186,21 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const checkboxes = document.querySelectorAll('.area-checkbox');
-        const form = document.querySelector('form');
+    const fileInput = document.getElementById("fileInput");
+    const imagePreview = document.getElementById("imagePreview");
 
-        checkboxes.forEach(cb => {
-            cb.addEventListener('change', function () {
-                const isChecked = cb.checked;
-                let parentId = cb.getAttribute('data-parent') || null;
-
-                if (isChecked) {
-                    // ✅ Jika dicentang -> semua ancestor harus dicentang
-                    while (parentId) {
-                        const parentEl = document.querySelector(`#area_${parentId}`);
-                        if (!parentEl) break;
-                        if (!parentEl.checked) parentEl.checked = true;
-                        parentId = parentEl.getAttribute('data-parent') || null;
-                    }
-                } else {
-                    // ❌ Jika di-uncheck -> semua descendant ikut di-uncheck
-                    uncheckChildren(cb.value);
-                }
-            });
-        });
-
-        function uncheckChildren(parentId) {
-            const children = document.querySelectorAll(
-                `.area-checkbox[data-parent="${parentId}"]`
-            );
-
-            children.forEach(child => {
-                if (child.checked) {
-                    child.checked = false;
-                    // rekursif ke bawah
-                    uncheckChildren(child.value);
-                }
-            });
+    fileInput.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        if (file && file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            imagePreview.src = e.target.result;
+            imagePreview.classList.remove("hidden");
+        };
+        reader.readAsDataURL(file);
+        } else {
+        alert("Silakan pilih file gambar yang valid.");
         }
-
-        // 🔥 Pastikan semua checkbox checked terkirim saat submit
-        form.addEventListener('submit', function () {
-            checkboxes.forEach(cb => {
-                if (cb.checked) {
-                    cb.disabled = false; // pastikan tidak disabled
-                }
-            });
-        });
     });
 </script>
-
-
 @endsection

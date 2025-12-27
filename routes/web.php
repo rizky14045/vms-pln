@@ -61,6 +61,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/registered/datas','getDataIndex')->name('registered.data');
         Route::get('/registered','index')->name('registered.index');
         Route::get('/registered-visitor','indexVisitor')->name('registered.index.visitor');
+        Route::get('/registered-visitor/create-visitor','createVisitor')->name('registered.create-visitor');
+        Route::post('/registered-visitor','storeVisitor')->name('registered.store-visitor');
         Route::get('/registered/{id}','show')->name('registered.show');
         Route::get('/registered/{id}/approve','approve')->name('registered.approve');
         Route::get('/registered/{id}/approve-visitor','approveVisitor')->name('registered.approve.visitor');
@@ -68,8 +70,6 @@ Route::middleware('auth')->group(function () {
         Route::patch('/registered/{id}/approve','updateApprove')->name('registered.update-approve');
         Route::patch('/registered/{id}/approve-visitor','updateApproveVisitor')->name('registered.update-approve-visitor');
         Route::patch('/registered/{id}/edit-card','updateCard')->name('registered.update-card');
-        Route::get('/registered/create','create')->name('registered.create');
-        Route::post('/registered','store')->name('registered.store');
         Route::get('/registered/{id}/edit','edit')->name('registered.edit');
         Route::put('/registered/{id}','update')->name('registered.update');
     });

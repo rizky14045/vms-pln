@@ -29,6 +29,20 @@ class RegisterRequestValidation
         ];
     }
 
+    public static function rulesForCreateVisitor()
+    {
+        return [
+            'nid' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'person_image' => 'required|file|mimes:png,jpeg,jpg',
+            'phone' => 'required|regex:/^628\d{7,12}$/',
+            'company' => 'required|string|max:255',
+            'purpose_of_visit' => 'required|string|max:500',
+            'pic_name' => 'required|string|max:255',
+            'area_id' => 'required|exists:areas,id',
+        ];
+    }
+
     public static function messages()
     {
         return [
@@ -62,6 +76,9 @@ class RegisterRequestValidation
             'pic_name.max' => 'Nama PIC maksimal 255 karakter.',
             'pic_phone.required' => 'Nomor telepon PIC wajib diisi.',
             'pic_phone.regex' => 'Format nomor telepon PIC tidak sesuai. Contoh:628XXXXXXXX.',
+
+            'area_id.required' => 'Area wajib dipilih.',
+            'area_id.exists' => 'Area yang dipilih tidak valid.',
         ];
     }
 

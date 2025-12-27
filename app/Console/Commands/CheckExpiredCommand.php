@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use App\Models\RegisteredPerson;
+use App\Models\User;
 use App\Services\VaultSiteService;
 
 class CheckExpiredCommand extends Command
@@ -39,9 +40,10 @@ class CheckExpiredCommand extends Command
 
         $records = RegisteredPerson::where('is_employee', 0)
             ->where('is_deleted_card', 0)
-            ->where('expired_at', '<=', $today)
+            ->where('expired_at', '<', $today)
             ->get();
 
+        $user_ids = $records->pluck('user_id')->toArray();
         foreach ($records as $record) {
 
             // 👉 Aksi ketika expired
@@ -55,6 +57,11 @@ class CheckExpiredCommand extends Command
             // Kamu bisa juga menambahkan log, notifikasi, dsb.
             // Log::info("Card expired for ID: {$record->id}");
         }
+
+        User::whereIn('id', $user_ids)->update([
+            'is_registered' => 0,
+            'status' => 'inactive',
+        ]);
 
         $this->info("Expired RegisterPerson checked: " . $records->count());
 

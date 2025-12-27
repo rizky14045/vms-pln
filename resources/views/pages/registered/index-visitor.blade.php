@@ -14,7 +14,12 @@
 @endsection
 @section('content')
 <div class="p-6">
-   <h2 class="text-xl font-semibold mb-4">Daftar Request Visitor</h2>
+   <div class="w-full flex items-center justify-between mb-4">
+    <h2 class="text-xl font-semibold mb-4">Daftar Request Visitor</h2>
+    <div>
+        <a style="background-color: #007BFF;" class="px-4 py-2 rounded-md text-white text-bold" href="{{ route('registered.create-visitor') }}">Tambah Visitor</a>
+    </div>
+   </div>
 
    <div class="bg-white dark:bg-neutral-800 shadow rounded-xl p-4">
       <div class="overflow-x-auto">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\FormatRequest\FormatRequestUser;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Services\AreaService;
@@ -10,7 +11,14 @@ use App\Services\VaultSiteService;
 use App\Services\RegisterPersonService;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\FormatRequest\FormatRequestVaultsite;
+use App\Helper\FileHelper;
+use App\Models\RegisteredPerson;
+use App\Validation\RegisterRequestValidation;
 use Carbon\Carbon;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Colors\Rgb\Channels\Red;
 
 class RegisteredController extends Controller
 {
@@ -18,7 +26,8 @@ class RegisteredController extends Controller
         protected RegisterPersonService $registerPersonService,
         protected AreaService $areaService,
         protected VaultSiteService $vaultSiteService,
-        protected UserService $userService
+        protected UserService $userService,
+        protected FormatRequestUser $formatRequestUser,
     ) {}
 
     public function index(): View {
@@ -27,6 +36,88 @@ class RegisteredController extends Controller
 
     public function indexVisitor(): View {
         return view('pages.registered.index-visitor');
+    }
+
+    public function createVisitor(): View {
+        $data['areas'] = $this->areaService->getAllAreas(['limit' => 1000], "visitor")['data'] ;
+        return view('pages.registered.create-visitor', $data);
+    }
+
+    public function storeVisitor(Request $request) {
+        try {
+            DB::beginTransaction();
+
+            $validator = Validator::make($request->all(), RegisterRequestValidation::rulesForCreateVisitor(), RegisterRequestValidation::messages());
+            if($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+            //check if user exist by nid
+            $user = $this->userService->getUserByNid($request->nid);
+            if(!$user) {
+                $request->merge(['is_employee' => false]);
+                $formatRequest = $this->formatRequestUser->employeeUser($request->all()); 
+                $user = $this->userService->createUser($formatRequest);
+            }
+            
+            // get get latest registered person
+            $latestRegisteredPerson = RegisteredPerson::where('user_id', $user->id)
+                ->orderBy('created_at', 'desc')
+                ->first();
+
+            if ($latestRegisteredPerson->expired_at && $latestRegisteredPerson->expired_at > now()) {
+                return redirect()->route('registered.create-visitor')->with('info', 'Visitor masih berlaku hingga ' . $latestRegisteredPerson->expired_at->format('d-m-Y') . '.');
+            }
+            
+            if ($request->hasFile('person_image')) {
+                $base64Only = FileHelper::toResizedBase64(
+                    $request->file('person_image'),
+                    false // tanpa prefix
+                );
+                $result = $this->vaultSiteService->checkFacePhoto($base64Only);
+
+                if ($result['error']) {
+                    return redirect()
+                        ->back()
+                        ->withErrors([
+                            'person_image' => $result['message'] // tampil di input person_image
+                        ])
+                        ->withInput();
+                }
+            }else {
+                 return redirect()->route('registered.create-visitor')->with('info', 'Foto tidak ditemukan!');
+            }
+
+            $getFilename = FileHelper::generatedFileName('Person', $request->person_image->extension());
+            $request->merge(['image_name' => $getFilename,'user_id' => $user->id, 'is_employee' => false]);
+            
+            $createdRegister = $this->registerPersonService->createRegisteredPerson($request->all());
+            $base64WithPrefix = FileHelper::toResizedBase64(
+                $request->file('person_image'),
+                true // default sebenarnya true
+            );
+        
+            $base64 = FileHelper::toResizedBase64($request->file('person_image'), false);
+
+            $dataBinary = base64_decode($base64);
+
+            file_put_contents(
+                public_path('uploads/person_images/' . $getFilename),
+                $dataBinary
+            );
+            DB::commit();
+
+            $this->approveRegistered($request, $createdRegister->id);
+            RegisteredPerson::where("user_id",$user->id)->where("status_level", 1)->update([
+                "status_level" => 0,
+                "status" => "Rejected"
+            ]);
+            return redirect()->route('registered.create-visitor')->with('success', 'Berhasil melakukan registrasi kunjungan.');
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
     public function show($id): View {
