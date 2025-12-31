@@ -34,8 +34,9 @@ class RegisteredController extends Controller
         return view('pages.registered.index');
     }
 
-    public function indexVisitor(): View {
-        return view('pages.registered.index-visitor');
+    public function indexVisitor() {
+        $data['visitors'] = $this->registerPersonService->getAllRegisteredPerson(0);
+        return view('pages.registered.index-visitor', $data);
     }
 
     public function createVisitor(): View {
