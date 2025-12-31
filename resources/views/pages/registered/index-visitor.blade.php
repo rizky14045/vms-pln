@@ -54,6 +54,9 @@
 
                         {{-- Company --}}
                         <td class="px-4 py-3 text-sm">
+                            @php
+                                $isEmployee = $visitor->user->is_employee ?? 0;
+                            @endphp
                             @if ($isEmployee == 0)
                                 {{ $visitor->user->company ?? '-' }}
                             @else
