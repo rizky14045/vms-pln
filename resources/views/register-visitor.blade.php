@@ -56,7 +56,7 @@
               'type' => 'text',
               'name' => 'nid',
               'id' => 'nid',
-              'placeholder' => 'Nomor Identitas (NID/Nomor Induk Pegawai)',
+              'placeholder' => 'Nomor Identitas/Identity Number (NID/Nomor Induk Pegawai)',
               'required' => true,
               'autofocus' => true,
               'label' => 'NID',
@@ -84,7 +84,7 @@
               'placeholder' => 'Nama Lengkap',
               'required' => true,
               'autofocus' => true,
-              'label' => 'Nama Lengkap',
+              'label' => 'Nama/Name',
           ])
       </div>
       <div>
@@ -95,7 +95,7 @@
               'placeholder' => '628xxxxxxx',
               'required' => true,
               'autofocus' => true,
-              'label' => 'Nomor HP',
+              'label' => 'Nomor HP/Phone Number',
           ])
       </div>
       <div>
@@ -106,7 +106,7 @@
               'placeholder' => 'Nama Perusahaan',
               'required' => true,
               'autofocus' => true,
-              'label' => 'Nama Perusahaan',
+              'label' => 'Nama Perusahaan/Company Name',
           ])
       </div>
       <div>
@@ -117,7 +117,7 @@
               'placeholder' => 'Tujuan',
               'required' => true,
               'autofocus' => true,
-              'label' => 'Tujuan',
+              'label' => 'Tujuan/Purpose',
           ])
       </div>
 
@@ -129,7 +129,7 @@
               'placeholder' => 'PIC yang dikunjungi',
               'required' => true,
               'autofocus' => false,
-              'label' => 'PIC yang dikunjungi',
+              'label' => 'PIC yang dikunjungi/Person In Charge to Visit',
           ])
       </div>
 
@@ -141,12 +141,12 @@
               'placeholder' => 'Nomor HP PIC yang dikunjungi',
               'required' => true,
               'autofocus' => true,
-              'label' => 'Nomor HP PIC yang dikunjungi',
+              'label' => 'Nomor HP PIC yang dikunjungi/Phone Number of Person In Charge to Visit',
           ])
       </div>
 
       <div class="flex flex-col items-center justify-center gap-4">
-        <h2 class="text-lg font-semibold mb-2">Upload Foto</h2>
+        <h2 class="text-lg font-semibold mb-2">Upload Image</h2>
 
         <!-- Preview Gambar -->
         <img
@@ -169,7 +169,7 @@
           onclick="document.getElementById('fileInput').click()"
           class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
         >
-          Pilih Gambar
+          Select Image
         </button>
 
         <div class="text-gray-600 text-sm text-center max-w-xs">

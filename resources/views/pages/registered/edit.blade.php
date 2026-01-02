@@ -57,6 +57,48 @@
                 </div>
             </div>
 
+            <div class="flex flex-col items-center justify-center gap-4">
+                <h2 class="text-lg font-semibold mb-2">Upload Foto (Opsional)</h2>
+
+                <!-- Preview Gambar -->
+                <img
+                id="imagePreview"
+                class="w-full max-w-[150px] h-auto border rounded-lg shadow hidden"
+                alt="Preview Gambar"
+                />
+
+                <!-- Input File -->
+                <input
+                type="file"
+                id="fileInput"
+                name="person_image"
+                accept="image/*"
+                class="hidden"
+                />
+
+                <button
+                type="button"
+                onclick="document.getElementById('fileInput').click()"
+                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+                >
+                Pilih Gambar 
+                </button>
+
+                <div class="text-gray-600 text-sm text-center max-w-xs">
+                Pastikan wajah terlihat jelas dan tidak buram.<br>
+                Format yang didukung: JPG, JPEG, PNG.<br>
+                Resolusi minimal: <span class="font-semibold">600×800 px</span>.<br>
+                Resolusi maksimal: <span class="font-semibold">1920x1080 px</span>.<br>
+                Ukuran maksimal file: <span class="font-semibold">2 MB</span>.
+                </div>
+                
+                @if($errors->has('person_image'))
+                <div class="text-red-500 text-sm">
+                    {{ $errors->first('person_image') }}
+                </div>
+                @endif
+            </div>
+
             {{-- Button --}}
             <div class="flex justify-end gap-3">
                 @include('components.button', [
@@ -126,6 +168,25 @@
                 }
             });
         });
+    });
+</script>
+
+<script>
+    const fileInput = document.getElementById("fileInput");
+    const imagePreview = document.getElementById("imagePreview");
+
+    fileInput.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        if (file && file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            imagePreview.src = e.target.result;
+            imagePreview.classList.remove("hidden");
+        };
+        reader.readAsDataURL(file);
+        } else {
+        alert("Silakan pilih file gambar yang valid.");
+        }
     });
 </script>
 

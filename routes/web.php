@@ -70,7 +70,7 @@ Route::middleware('auth')->group(function () {
         Route::patch('/registered/{id}/approve','updateApprove')->name('registered.update-approve');
         Route::patch('/registered/{id}/approve-visitor','updateApproveVisitor')->name('registered.update-approve-visitor');
         Route::patch('/registered/{id}/edit-card','updateCard')->name('registered.update-card');
-        Route::get('/registered/{id}/edit','edit')->name('registered.edit');
+        Route::patch('/registered/{id}/delete','delete')->name('registered.delete');
         Route::put('/registered/{id}','update')->name('registered.update');
     });
 });

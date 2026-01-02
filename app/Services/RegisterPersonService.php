@@ -33,15 +33,36 @@ class RegisterPersonService{
         ]);
     }
 
-    public function getAllRegisteredPerson($isEmployee = 0)
+    public function getAllRegisteredPerson(array $filters = [])
     {
-        return RegisteredPerson::with('user')
-            ->whereHas('user', function ($q) use ($isEmployee) {
+        $isEmployee = $filters['is_employee'] ?? 0;
+        $search     = $filters['search'] ?? null;
+        $orderBy    = $filters['order_by'] ?? 'created_at';
+        $orderDir   = $filters['order_dir'] ?? 'desc';
+
+        $query = RegisteredPerson::query()
+            ->selectRaw("
+                registered_persons.*,
+                ROW_NUMBER() OVER (
+                    PARTITION BY registered_persons.user_id
+                    ORDER BY registered_persons.created_at DESC
+                ) as rn
+            ")
+            ->whereHas('user', function ($q) use ($isEmployee, $search) {
                 $q->where('is_employee', $isEmployee);
-            })
-            ->latest()
+
+                if (!empty($search)) {
+                    $q->where('name', 'like', "%{$search}%");
+                }
+            });
+
+        return RegisteredPerson::fromSub($query, 'rp')
+            ->with('user')
+            ->where('rp.rn', 1)
+            ->orderBy($orderBy, $orderDir)
             ->get();
     }
+
 
     public function getRegisteredPersonById($id){
         return RegisteredPerson::with('user')->where('id', $id)->first();
@@ -53,6 +74,33 @@ class RegisterPersonService{
         $registeredPerson->status_level = $data['status_level'];
         $registeredPerson->save();
     }
+    public function updateStatusRegisteredPersonById(int $id, array $data): ?RegisteredPerson
+    {
+        $registeredPerson = RegisteredPerson::find($id);
+
+        if (!$registeredPerson) {
+            return null;
+        }
+
+        $fillable = [
+            'status',
+            'status_level',
+            'image_name',
+            'area_id',
+            'name',
+        ];
+
+        $updateData = array_intersect_key(
+            $data,
+            array_flip($fillable)
+        );
+
+        $registeredPerson->fill($updateData);
+        $registeredPerson->save();
+
+        return $registeredPerson;
+    }
+
     public function updateAreaId(RegisteredPerson $registeredPerson, $area_id){
         $registeredPerson->area_id = $area_id;
         $registeredPerson->save();

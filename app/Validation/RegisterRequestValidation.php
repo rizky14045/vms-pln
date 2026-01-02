@@ -43,6 +43,17 @@ class RegisterRequestValidation
         ];
     }
 
+    public static function rulesForEditEmployee(int $userId)
+    {
+        return [
+            'nid' => 'required|string|max:255|unique:users,nid,' . $userId,
+            'name' => 'required|string|max:255',
+            'person_image' => 'nullable|image|mimes:png,jpeg,jpg',
+        ];
+    }
+
+
+
     public static function messages()
     {
         return [

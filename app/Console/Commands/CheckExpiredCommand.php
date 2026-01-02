@@ -52,6 +52,8 @@ class CheckExpiredCommand extends Command
             $this->vaultSiteService->deleteCard($record->user->id_card_number);
             $record->update([
                 'is_deleted_card' => 1,
+                'status' => 'Expired',
+                'status_level' => 3,
             ]);
 
             // Kamu bisa juga menambahkan log, notifikasi, dsb.

@@ -23,136 +23,121 @@
 
    <div class="bg-white dark:bg-neutral-800 shadow rounded-xl p-4">
       <div class="overflow-x-auto">
-         <table id="selection-table" class="w-full border-collapse">
-            <thead>
-               <tr class="bg-neutral-100 dark:bg-neutral-700 text-left">
-                  <th class="px-4 py-3 text-sm font-semibold text-neutral-700 dark:text-neutral-200">No</th>
-                  <th class="px-4 py-3 text-sm font-semibold text-neutral-700 dark:text-neutral-200">NID</th>
-                  <th class="px-4 py-3 text-sm font-semibold text-neutral-700 dark:text-neutral-200">Name</th>
-                  <th class="px-4 py-3 text-sm font-semibold text-neutral-700 dark:text-neutral-200">Company</th>
-                  <th class="px-4 py-3 text-sm font-semibold text-neutral-700 dark:text-neutral-200">Status</th>
-                  <th class="px-4 py-3 text-sm font-semibold text-neutral-700 dark:text-neutral-200">Action</th>
-               </tr>
-            </thead>
-            <tbody class="divide-y divide-neutral-200 dark:divide-neutral-700">
-                @foreach ($visitors as $index => $visitor)
-                    <tr>
-                        {{-- No --}}
-                        <td class="px-4 py-3 text-sm">
-                            {{ $index + 1 }}
-                        </td>
+         <div class="overflow-x-auto rounded-lg border">
+            <form method="GET" action="{{ route('registered.index.visitor') }}"
+                class="mb-4 flex items-center justify-between p-4">
 
-                        {{-- NID --}}
-                        <td class="px-4 py-3 text-sm">
-                            {{ $visitor->user->nid ?? '' }}
-                        </td>
+                <div class="flex flex-wrap items-end gap-4">
+                    {{-- Search --}}
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Search Name</label>
+                        <input type="text"
+                            name="search"
+                            value="{{ request('search') }}"
+                            placeholder="Cari nama visitor..."
+                            class="px-3 py-2 border rounded w-56">
+                    </div>
 
-                        {{-- Name --}}
-                        <td class="px-4 py-3 text-sm">
-                            {{ $visitor->user->name ?? '' }}
-                        </td>
+                    {{-- Order By --}}
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Order By</label>
+                        <select name="order_by"
+                                onchange="this.form.submit()"
+                                class="px-3 py-2 border rounded w-40">
+                            <option value="created_at" @selected(request('order_by') == 'created_at')>
+                                Created At
+                            </option>
+                            <option value="name" @selected(request('order_by') == 'name')>
+                                Name
+                            </option>
+                            <option value="status_level" @selected(request('order_by') == 'status_level')>
+                                Status
+                            </option>
+                        </select>
+                    </div>
 
-                        {{-- Company --}}
-                        <td class="px-4 py-3 text-sm">
-                            @php
-                                $isEmployee = $visitor->user->is_employee ?? 0;
-                            @endphp
-                            @if ($isEmployee == 0)
-                                {{ $visitor->user->company ?? '-' }}
-                            @else
-                                -
-                            @endif
-                        </td>
+                    {{-- Order Direction --}}
+                    <div>
+                        <select name="order_dir"
+                                onchange="this.form.submit()"
+                                class="px-3 py-2 border rounded w-32">
+                            <option value="desc" @selected(request('order_dir', 'desc') == 'desc')>
+                                Z-A
+                            </option>
+                            <option value="asc" @selected(request('order_dir') == 'asc')>
+                                A-Z
+                            </option>
+                        </select>
+                    </div>
+                </div>
 
-                        {{-- Status --}}
-                        <td class="px-4 py-3 text-sm">
-                            @if ($visitor->status_level == 1)
-                                <span class="bg-warning-100 dark:bg-warning-600/25 text-warning-600 dark:text-warning-400 px-6 py-1.5 rounded-full font-medium text-sm">
-                                    {{ $visitor->status }}
-                                </span>
-                            @elseif ($visitor->status_level == 0)
-                                <span class="bg-danger-100 dark:bg-danger-600/25 text-danger-600 dark:text-danger-400 px-6 py-1.5 rounded-full font-medium text-sm">
-                                    {{ $visitor->status }}
-                                </span>
-                            @else
-                                <span class="bg-success-100 dark:bg-success-600/25 text-success-600 dark:text-success-400 px-6 py-1.5 rounded-full font-medium text-sm">
-                                    {{ $visitor->status }}
-                                </span>
-                            @endif
-                        </td>
+                {{-- Submit --}}
+                <div>
+                    <button type="submit"
+                            style="background-color: #007BFF;" class="px-4 py-2 rounded-md text-white text-bold">
+                        Filter
+                    </button>
+                </div>
+            </form>
 
-                        {{-- Action --}}
-                        <td class="px-4 py-3 text-sm">
-                            @if ($visitor->status_level == 1)
-                                @php
-                                    $approveUrl = $isEmployee
-                                        ? route('registered.approve', $visitor->id)
-                                        : route('registered.approve.visitor', $visitor->id);
-                                @endphp
-
-                                <a href="{{ $approveUrl }}"
-                                class="w-8 h-8 bg-success-100 dark:bg-success-600/25 text-success-600 dark:text-success-400 rounded-full inline-flex items-center justify-center">
-                                    <iconify-icon icon="solar:check-circle-outline"></iconify-icon>
-                                </a>
-
-                            @elseif ($visitor->status_level == 2 && $isEmployee)
-                                <a href="{{ route('registered.edit', $visitor->id) }}"
-                                class="w-8 h-8 bg-warning-100 dark:bg-warning-600/25 text-warning-600 dark:text-warning-400 rounded-full inline-flex items-center justify-center">
-                                    <iconify-icon icon="solar:pen-2-outline"></iconify-icon>
-                                </a>
-                            @endif
-                        </td>
+            <table class="w-full border-collapse text-sm">
+                <thead>
+                    <tr class="bg-neutral-100 dark:bg-neutral-700">
+                        <th class="px-4 py-3">No</th>
+                        <th class="px-4 py-3">NID</th>
+                        <th class="px-4 py-3">Name</th>
+                        <th class="px-4 py-3">Company</th>
+                        <th class="px-4 py-3 text-center">Status</th>
+                        <th class="px-4 py-3 text-center">Action</th>
                     </tr>
-                @endforeach
-            </tbody>
+                </thead>
 
-         </table>
+                <tbody class="divide-y">
+                    @forelse ($visitors as $index => $visitor)
+                        <tr class="hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">
+                            <td class="px-4 py-3 text-center">{{ $index + 1 }}</td>
+                            <td class="px-4 py-3 text-center">{{ $visitor->user->nid ?? '-' }}</td>
+                            <td class="px-4 py-3 font-medium text-center">{{ $visitor->user->name ?? '-' }}</td>
+
+                            <td class="px-4 py-3 text-center">
+                                {{ $visitor->user->is_employee ? '-' : ($visitor->user->company ?? '-') }}
+                            </td>
+
+                            <td class="px-4 py-3 text-center">
+                                @if ($visitor->status_level == 1)
+                                    <span style="background-color: yellow" class="px-2 py-1 bg-yellow-100 bg-yellow-800 text-black rounded-full text-xs">{{ $visitor->status }}</span>
+                                @elseif ($visitor->status_level == 0)
+                                    <span style="background-color: red" class="px-2 py-1 bg-red-100 bg-red-800 text-white rounded-full text-xs">{{ $visitor->status }}</span>
+                                @elseif ($visitor->status_level == 3)
+                                    <span style="background-color: gray" class="px-2 py-1 bg-gray-100 bg-gray-800 text-white rounded-full text-xs">{{ $visitor->status }}</span>
+                                @else
+                                    <span style="background-color: rgb(20, 216, 53)" class="px-2 py-1 bg-green-100 bg-green-800 text-white rounded-full text-xs">{{ $visitor->status }}</span>
+                                @endif
+                            </td>
+
+                            <td class="px-4 py-3 text-center">
+                                @if ($visitor->status_level == 1)
+                                    <a href="{{ $visitor->user->is_employee
+                                        ? route('registered.approve', $visitor->id)
+                                        : route('registered.approve.visitor', $visitor->id) }}"
+                                    class="action-btn success">
+                                        <iconify-icon icon="solar:check-circle-outline"></iconify-icon>
+                                    </a>
+                                @endif
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="px-4 py-6 text-center text-neutral-500">
+                                Data tidak ditemukan
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+
       </div>
    </div>
 </div>
-@endsection
-
-@section('scripts')
-<script>
-// $(function () {
-//     let table = $('#selection-table').DataTable({
-//         processing: true,
-//         serverSide: true,
-//         ajax: "{{ route('registered.data') }}?is_employee=0",
-//         autoWidth: false,
-//         responsive: true,
-//         columns: [
-//             { data: 'DT_RowIndex', name: 'DT_RowIndex', searchable: false },
-//             { data: 'nid', name: 'user.nid' },
-//             { data: 'name', name: 'user.name' },
-//             { data: 'company', name: 'company' },
-//             { data: 'status', name: 'status', searchable: false },
-//             { data: 'action', name: 'action', searchable: false }
-//         ],
-//         language: {
-//             search: "Search ",
-//             lengthMenu: "Show _MENU_",
-//             info: "Showing _START_ to _END_ of _TOTAL_ entries",
-//             paginate: {
-//                 previous: "←",
-//                 next: "→"
-//             }
-//         },
-//         pagingType: "simple"
-//     });
-
-//     // trigger adjust kalau ada resize atau navbar expand/collapse
-//     $(window).on('resize', function () {
-//         table.columns.adjust().responsive.recalc();
-//     });
-
-//     // kalau kamu punya tombol untuk toggle navbar, panggil ini setelah expand/collapse
-//     $(document).on('click', '#toggle-navbar', function () {
-//         setTimeout(() => {
-//             table.columns.adjust().responsive.recalc();
-//         }, 300); // kasih delay dikit biar animasi navbar selesai
-//     });
-// });
-
-</script>
 @endsection

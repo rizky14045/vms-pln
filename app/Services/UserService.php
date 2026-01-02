@@ -34,6 +34,31 @@ class UserService{
         ]);
     }
 
+    public function updateUser($user_id, array $data): User
+    {
+        $user = User::findOrFail($user_id);
+
+        $fillable = [
+            'name',
+            'nid',
+            'id_card_number',
+            'identity_number',
+            'phone',
+            'company',
+        ];
+
+        $updateData = array_intersect_key(
+            $data,
+            array_flip($fillable)
+        );
+
+        $user->fill($updateData);
+        $user->save();
+
+        return $user;
+    }
+
+
     public function updateStatusRegistered(User $user){
         $user->is_registered = true;
         $user->save();

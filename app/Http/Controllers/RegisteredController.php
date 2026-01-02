@@ -30,14 +30,39 @@ class RegisteredController extends Controller
         protected FormatRequestUser $formatRequestUser,
     ) {}
 
-    public function index(): View {
-        return view('pages.registered.index');
+    public function index(Request $request) {
+        $filters = [
+            'is_employee' => 1,
+            'search'      => $request->search,
+            'order_by'    => in_array($request->order_by, ['created_at', 'name', 'status_level'])
+                                ? $request->order_by
+                                : 'created_at',
+            'order_dir'   => $request->order_dir === 'asc' ? 'asc' : 'desc',
+        ];
+
+        $data['visitors'] = $this->registerPersonService
+            ->getAllRegisteredPerson($filters);
+        return view('pages.registered.index', $data);
     }
 
-    public function indexVisitor() {
-        $data['visitors'] = $this->registerPersonService->getAllRegisteredPerson(0);
+    public function indexVisitor(Request $request)
+    {
+        $filters = [
+            'is_employee' => 0,
+            'search'      => $request->search,
+            'order_by'    => in_array($request->order_by, ['created_at', 'name', 'status_level'])
+                                ? $request->order_by
+                                : 'created_at',
+            'order_dir'   => $request->order_dir === 'asc' ? 'asc' : 'desc',
+        ];
+
+        $data['visitors'] = $this->registerPersonService
+            ->getAllRegisteredPerson($filters);
+
         return view('pages.registered.index-visitor', $data);
     }
+
+
 
     public function createVisitor(): View {
         $data['areas'] = $this->areaService->getAllAreas(['limit' => 1000], "visitor")['data'] ;
@@ -160,9 +185,67 @@ class RegisteredController extends Controller
     }
 
     public function updateCard(Request $request,$id) {
-
         try {
+            $registeredPerson = $this->registerPersonService->getRegisteredPersonById($id);
+            $user = $this->userService->getUserById($registeredPerson->user->id);
+
+            $validator = Validator::make($request->all(), RegisterRequestValidation::rulesForEditEmployee($user->id), RegisterRequestValidation::messages());
+            if($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+            
+            if ($request->hasFile('person_image')) {
+                $base64Only = FileHelper::toResizedBase64(
+                    $request->file('person_image'),
+                    false // tanpa prefix
+                );
+                $result = $this->vaultSiteService->checkFacePhoto($base64Only);
+
+                if ($result['error']) {
+                    return redirect()
+                        ->back()
+                        ->withErrors([
+                            'person_image' => $result['message'] 
+                        ])
+                        ->withInput();
+                }
+
+                $getFilename = FileHelper::generatedFileName('Person', $request->person_image->extension());
+                $request->merge(['image_name' => $getFilename, 'is_registered' => false]);
+                $this->registerPersonService->updateStatusRegisteredPersonById($id, $request->all());
+                $this->userService->updateUser($registeredPerson->user->id, $request->all());
+                $base64 = FileHelper::toResizedBase64($request->file('person_image'), false);
+
+                $dataBinary = base64_decode($base64);
+
+                file_put_contents(
+                    public_path('uploads/person_images/' . $getFilename),
+                    $dataBinary
+                );
+
+                
+                $this->vaultSiteService->deleteFaceCard($user->id_card_number);
+                $this->vaultSiteService->deleteCard($user->id_card_number);
+            }
+
            return $this->approveRegistered($request, $id);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function delete(Request $request, $id) {
+        try {
+            $registeredPerson = $this->registerPersonService->getRegisteredPersonById($id);
+            $user = $this->userService->getUserById($registeredPerson->user->id);
+
+            $this->vaultSiteService->deleteFaceCard($user->id_card_number);
+            $this->vaultSiteService->deleteCard($user->id_card_number);
+            $request->merge(['status_level' => 4, 'status' => 'Deleted']);
+            $this->registerPersonService->updateStatusRegisteredPersonById($id, $request->all());
+
+            Alert::success('Success', 'Berhasil menghapus registrasi.');
+            return redirect()->route('registered.index');
         } catch (\Throwable $th) {
             throw $th;
         }
