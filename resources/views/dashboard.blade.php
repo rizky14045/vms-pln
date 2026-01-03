@@ -125,7 +125,7 @@
             </div>
 
             @foreach ($latestEmployeeByArea as $areaId => $employees)
-                <div class="xl:col-span-8 mt-6">
+                <div class="xl:col-span-6 mt-6">
                     <div class="card p-6 rounded-lg">
                         <h6 class="text-lg font-semibold mb-4">
                             Data Karyawan @if($areaId == 1) VVIP @elseif($areaId == 2) VIP @endif
