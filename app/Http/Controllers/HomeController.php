@@ -52,10 +52,10 @@ class HomeController extends Controller
                 $user = $this->userService->createUser($formatRequest);
             }
             // misal hari ini belum di approve , maka kasih notice masih menunggu persetujuan , data ga masukin ke transaction
-            // $check_today = $this->registerPersonService->getRegisteredPersonToday($request->nid);
-            // if($check_today){
-            //     return redirect()->route('register-employee')->with('info', 'Anda sudah melakukan registrasi kunjungan hari ini!');
-            // }
+            $check_today = $this->registerPersonService->getRegisteredPersonToday($request->nid);
+            if($check_today){
+                return redirect()->route('register-employee')->with('info', 'User sudah terdaftar / menunggu persetujuan petugas!');
+            }
             if ($request->hasFile('person_image')) {
                 $base64Only = FileHelper::toResizedBase64(
                     $request->file('person_image'),
@@ -119,10 +119,10 @@ class HomeController extends Controller
                 $user = $this->userService->createUser($formatRequest);
             }
             // misal hari ini belum di approve , maka kasih notice masih menunggu persetujuan , data ga masukin ke transaction
-            // $check_today = $this->registerPersonService->getRegisteredPersonToday($request->nid);
-            // if($check_today){
-            //     return redirect()->route('register-employee')->with('info', 'Anda sudah melakukan registrasi kunjungan hari ini!');
-            // }
+            $check_today = $this->registerPersonService->getRegisteredPersonToday($request->nid);
+            if($check_today){
+                return redirect()->route('register-employee')->with('info', 'User sudah terdaftar / menunggu persetujuan petugas!');
+            }
             if ($request->hasFile('person_image')) {
                 $base64Only = FileHelper::toResizedBase64(
                     $request->file('person_image'),

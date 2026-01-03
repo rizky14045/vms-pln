@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Models\RegisteredPerson;
 use App\Models\TransactionHistory;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -88,6 +89,27 @@ class DashboardController extends Controller
         $latestVisitors = TransactionHistory::orderByDesc('tr_date')
             ->orderByDesc('tr_time')
             ->limit(10)->get();
+        
+        $subQuery = DB::table('registered_persons')
+            ->selectRaw('
+                registered_persons.*,
+                ROW_NUMBER() OVER (
+                    PARTITION BY registered_persons.user_id
+                    ORDER BY registered_persons.created_at DESC
+                ) as rn
+            ')
+            ->where('registered_persons.status_level', 2)
+            ->where('registered_persons.is_employee', 1)
+            ->where('registered_persons.is_deleted_card', 0)
+            ->whereIn('registered_persons.area_id', [1, 2]);
+
+        $latestEmployeeByArea = DB::table(DB::raw("({$subQuery->toSql()}) as rp"))
+            ->mergeBindings($subQuery)
+            ->where('rp.rn', 1)
+            ->orderBy('rp.area_id')
+            ->orderByDesc('rp.created_at')
+            ->get()
+            ->groupBy('area_id');
 
         // RETURN TO BLADE
         return view('dashboard', compact(
@@ -108,7 +130,8 @@ class DashboardController extends Controller
             'areaNames',
             'areaCounts',
 
-            'latestVisitors'
+            'latestVisitors',
+            'latestEmployeeByArea'
         ));
     }
 }

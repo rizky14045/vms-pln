@@ -124,6 +124,44 @@
                 </div>
             </div>
 
+            @foreach ($latestEmployeeByArea as $areaId => $employees)
+                <div class="xl:col-span-8 mt-6">
+                    <div class="card p-6 rounded-lg">
+                        <h6 class="text-lg font-semibold mb-4">
+                            Data Karyawan @if($areaId == 1) VVIP @elseif($areaId == 2) VIP @endif
+                        </h6>
+
+                        <div class="overflow-x-auto">
+                            <table class="table bordered-table w-full">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @forelse ($employees as $index => $emp)
+                                        <tr>
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{ $emp->name }}</td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="5" class="text-center text-neutral-500">
+                                                Tidak ada data
+                                            </td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
+
         </div>
 
     </div>

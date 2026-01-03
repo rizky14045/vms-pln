@@ -106,13 +106,14 @@ class RegisterPersonService{
         $registeredPerson->save();
     }
 
-    public function getRegisteredPersonToday($nid){
-        $today = now()->format('Y-m-d');
-        return RegisteredPerson::whereHas('user', function($query) use ($nid) {
-            $query->where('nid', $nid);
-        })
-        ->where('status_level' , 1)
-        ->orWhere('status_level',2)
-        ->whereDate('created_at', $today)->first();
+    public function getRegisteredPersonToday($nid)
+    {
+        return RegisteredPerson::whereHas('user', function ($query) use ($nid) {
+                $query->where('nid', $nid);
+            })
+            ->whereIn('status_level', [1, 2])
+            ->orderByDesc('created_at')
+            ->first();
     }
+
 }
