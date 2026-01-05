@@ -91,8 +91,10 @@ class RegisteredController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->first();
 
-            if ($latestRegisteredPerson->expired_at && $latestRegisteredPerson->expired_at > now()) {
-                return redirect()->route('registered.create-visitor')->with('info', 'Visitor masih berlaku hingga ' . $latestRegisteredPerson->expired_at->format('d-m-Y') . '.');
+            if($latestRegisteredPerson != null){
+                if ($latestRegisteredPerson->expired_at && $latestRegisteredPerson->expired_at > now()) {
+                    return redirect()->route('registered.create-visitor')->with('info', 'Visitor masih berlaku hingga ' . $latestRegisteredPerson->expired_at->format('d-m-Y') . '.');
+                }
             }
             
             if ($request->hasFile('person_image')) {
