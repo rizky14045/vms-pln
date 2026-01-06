@@ -97,8 +97,24 @@ class RegisteredController extends Controller
 
             if($latestRegisteredPerson != null){
                 if ($latestRegisteredPerson->expired_at && $latestRegisteredPerson->expired_at > now()) {
-                    return redirect()->route('registered.create-visitor')->with('info', 'Visitor masih berlaku hingga ' . $latestRegisteredPerson->expired_at->format('d-m-Y') . '.');
-                }
+                    $expiredText = '';
+                    if (!empty($latestRegisteredPerson->expired_at)) {
+                        try {
+                            $expiredText = Carbon::parse($latestRegisteredPerson->expired_at)
+                                ->format('d-m-Y');
+                        } catch (\Exception $e) {
+                            // tidak bisa diparse → abaikan
+                            $expiredText = '';
+                        }
+                    }
+
+                    return redirect()->route('registered.create-visitor')
+                        ->with(
+                            'info',
+                            $expiredText
+                                ? 'Visitor masih berlaku hingga ' . $expiredText . '.'
+                                : null
+                        );                }
             }
             
             if ($request->hasFile('person_image')) {
