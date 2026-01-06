@@ -383,8 +383,12 @@ class RegisteredController extends Controller
                 return redirect()->back();
             }
 
-            if(strtotime($request->expired_at) <= strtotime(now())){
-                Alert::warning('Warning', 'Tanggal kedaluwarsa harus lebih besar dari hari ini');
+            if (
+                Carbon::parse($request->expired_at)
+                    ->startOfDay()
+                    ->lt(Carbon::today())
+            ) {
+                Alert::warning('Warning', 'Tanggal kedaluwarsa tidak boleh kurang dari hari ini');
                 return redirect()->back();
             }
         }
