@@ -87,7 +87,7 @@ class RegisteredController extends Controller
             //check if user exist by nid
             $user = $this->userService->getUserByNid($request->nid);
             if(!$user) {
-                $request->merge(['is_employee' => false]);
+                $request->merge(['is_employee' => 0]);
                 $formatRequest = $this->formatRequestUser->employeeUser($request->all()); 
                 $user = $this->userService->createUser($formatRequest);
             }
