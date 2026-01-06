@@ -78,7 +78,7 @@ class RegisteredController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
             }
 
-            $request->merge(['is_employee' => false ]);
+            $request->merge(['is_employee' => 0 ]);
 
             if (!$request->pic_phone){
                 $request->merge(['pic_phone' => '0000000000']);
@@ -139,7 +139,7 @@ class RegisteredController extends Controller
             }
 
             $getFilename = FileHelper::generatedFileName('Person', $request->person_image->extension());
-            $request->merge(['image_name' => $getFilename,'user_id' => $user->id, 'is_employee' => false]);
+            $request->merge(['image_name' => $getFilename,'user_id' => $user->id, 'is_employee' => 0]);
             
             $createdRegister = $this->registerPersonService->createRegisteredPerson($request->all());
             $base64WithPrefix = FileHelper::toResizedBase64(
@@ -365,7 +365,7 @@ class RegisteredController extends Controller
     }
     protected function approveRegistered(Request $request, $id)
     {
-        $isEmployee = request()->query('is_employee', 1);
+        $isEmployee = request('is_employee', 1);
         //check area not null
         if($request->area_id == null){
             Alert::warning('Warning', 'Area tidak boleh kosong');
