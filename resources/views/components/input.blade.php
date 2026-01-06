@@ -13,7 +13,7 @@
     {{-- Label --}}
     @if($label)
         <label for="{{ $id }}" class="block mb-2 text-sm font-medium text-black-700 dark:text-black-200">
-            {{ $label }}
+            {{ $label }} @if($required) <span class="text-red-500">*</span> @endif
         </label>
     @endif
 

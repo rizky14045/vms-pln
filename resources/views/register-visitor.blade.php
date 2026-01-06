@@ -139,8 +139,8 @@
               'name' => 'pic_phone',
               'id' => 'pic_phone',
               'placeholder' => 'Nomor HP PIC yang dikunjungi',
-              'required' => true,
-              'autofocus' => true,
+              'required' => false,
+              'autofocus' => false,
               'label' => 'Nomor HP PIC yang dikunjungi/Phone Number of Person In Charge to Visit',
           ])
       </div>

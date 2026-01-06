@@ -111,6 +111,10 @@ class HomeController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
             }
 
+            if (!$request->pic_phone){
+                $request->merge(['pic_phone' => '0000000000']);
+            }
+
             //check if user exist by nid
             $user = $this->userService->getUserByNid($request->nid);
             if(!$user) {
