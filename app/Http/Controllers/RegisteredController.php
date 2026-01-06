@@ -78,6 +78,8 @@ class RegisteredController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
             }
 
+            $request->merge(['is_employee' => false ]);
+
             if (!$request->pic_phone){
                 $request->merge(['pic_phone' => '0000000000']);
             }
