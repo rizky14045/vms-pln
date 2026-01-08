@@ -45,9 +45,6 @@ class FileHelper {
         int $maxHeight = 1920,
         int $maxSizeKB = 300
     ) {
-        // ======================
-        // VALIDATION
-        // ======================
         if (!extension_loaded('gd')) {
             throw new \Exception('GD extension is not enabled');
         }
@@ -74,11 +71,9 @@ class FileHelper {
             case 'image/jpg':
                 $src = imagecreatefromjpeg($path);
                 break;
-
             case 'image/png':
                 $src = imagecreatefrompng($path);
                 break;
-
             default:
                 return null;
         }
@@ -88,35 +83,23 @@ class FileHelper {
         }
 
         // ======================
-        // FIX ROTATION (EXIF)
+        // AUTO ROTATE (EXIF)
         // ======================
-        if ($mime === 'image/jpeg' && function_exists('exif_read_data')) {
-            $exif = @exif_read_data($path);
-
-            if (!empty($exif['Orientation'])) {
-                switch ($exif['Orientation']) {
-                    case 3:
-                        $src = imagerotate($src, 180, 0);
-                        break;
-                    case 6: // rotate right
-                        $src = imagerotate($src, -90, 0);
-                        [$width, $height] = [$height, $width];
-                        break;
-                    case 8: // rotate left
-                        $src = imagerotate($src, 90, 0);
-                        [$width, $height] = [$height, $width];
-                        break;
-                }
-            }
+        if ($mime === 'image/jpeg') {
+            $src = self::autoRotateImage($src, $path);
         }
 
+        // UPDATE SIZE AFTER ROTATE
+        $width  = imagesx($src);
+        $height = imagesy($src);
+
         // ======================
-        // RESIZE (NO CROP, NO PADDING)
+        // RESIZE (NO CROP)
         // ======================
         $ratio = min(
             $maxWidth / $width,
             $maxHeight / $height,
-            1 // jangan upscale
+            1
         );
 
         $newWidth  = (int) round($width * $ratio);
@@ -124,7 +107,7 @@ class FileHelper {
 
         $dst = imagecreatetruecolor($newWidth, $newHeight);
 
-        // Background putih (hindari black space)
+        // white background
         $white = imagecolorallocate($dst, 255, 255, 255);
         imagefill($dst, 0, 0, $white);
 
@@ -137,7 +120,7 @@ class FileHelper {
         );
 
         // ======================
-        // COMPRESS BY FILE SIZE
+        // COMPRESS BY SIZE
         // ======================
         $quality = 90;
         $maxBytes = $maxSizeKB * 1024;
@@ -146,13 +129,6 @@ class FileHelper {
             ob_start();
             imagejpeg($dst, null, $quality);
             $data = ob_get_clean();
-
-            if (!$data) {
-                imagedestroy($src);
-                imagedestroy($dst);
-                return null;
-            }
-
             $quality -= 5;
         } while (strlen($data) > $maxBytes && $quality >= 40);
 
@@ -166,10 +142,6 @@ class FileHelper {
             : $base64;
     }
 
-
-    // ======================
-    // AUTO ROTATE EXIF
-    // ======================
     private static function autoRotateImage($src, string $path)
     {
         if (!function_exists('exif_read_data')) {
@@ -185,7 +157,7 @@ class FileHelper {
         switch ($exif['Orientation']) {
             case 3:
                 return imagerotate($src, 180, 0);
-            case 6:
+            case 6: // portrait
                 return imagerotate($src, -90, 0);
             case 8:
                 return imagerotate($src, 90, 0);
@@ -193,5 +165,4 @@ class FileHelper {
                 return $src;
         }
     }
-
 }
