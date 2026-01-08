@@ -154,15 +154,22 @@ class FileHelper {
             return $src;
         }
 
-        switch ($exif['Orientation']) {
+        switch ((int) $exif['Orientation']) {
             case 3:
+                // upside down
                 return imagerotate($src, 180, 0);
-            case 6: // portrait
-                return imagerotate($src, -90, 0);
+
+            case 6:
+                // portrait (rotate RIGHT)
+                return imagerotate($src, 270, 0);
+
             case 8:
+                // portrait (rotate LEFT)
                 return imagerotate($src, 90, 0);
+
             default:
                 return $src;
         }
     }
+
 }
