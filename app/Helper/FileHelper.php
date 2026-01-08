@@ -38,60 +38,160 @@ class FileHelper {
         return $base64;
     }
 
-   public static function toResizedBase64($file, $withPrefix = true, $maxWidth = 1920, $maxHeight = 1080)
-    {
-        $path = $file->getRealPath();
-        $size = getimagesize($path);
+   public static function toResizedBase64(
+        $file,
+        bool $withPrefix = true,
+        int $maxWidth = 810,
+        int $maxHeight = 1920,
+        int $maxSizeKB = 300
+    ) {
+        // ======================
+        // VALIDATION
+        // ======================
+        if (!extension_loaded('gd')) {
+            throw new \Exception('GD extension is not enabled');
+        }
 
-        if (!$size) {
+        if (!$file || !$file->isValid()) {
             return null;
         }
 
-        list($width, $height) = $size;
-        $mime = $size['mime'];
+        $path = $file->getRealPath();
+        $info = getimagesize($path);
 
-        // Load image
-        $src = imagecreatefromstring(file_get_contents($path));
-
-        // Jika resolusi masih aman → langsung convert
-        if ($width <= $maxWidth && $height <= $maxHeight) {
-            $base64 = base64_encode(file_get_contents($path));
-
-            return $withPrefix
-                ? "data:$mime;base64," . $base64
-                : $base64;
+        if (!$info) {
+            return null;
         }
 
-        // Resize (maintain aspect ratio)
-        $ratio = min($maxWidth / $width, $maxHeight / $height);
+        [$width, $height] = $info;
+        $mime = $info['mime'];
 
-        $newWidth = intval($width * $ratio);
-        $newHeight = intval($height * $ratio);
+        // ======================
+        // LOAD IMAGE
+        // ======================
+        switch ($mime) {
+            case 'image/jpeg':
+            case 'image/jpg':
+                $src = imagecreatefromjpeg($path);
+                break;
+
+            case 'image/png':
+                $src = imagecreatefrompng($path);
+                break;
+
+            default:
+                return null;
+        }
+
+        if (!$src) {
+            return null;
+        }
+
+        // ======================
+        // FIX ROTATION (EXIF)
+        // ======================
+        if ($mime === 'image/jpeg' && function_exists('exif_read_data')) {
+            $exif = @exif_read_data($path);
+
+            if (!empty($exif['Orientation'])) {
+                switch ($exif['Orientation']) {
+                    case 3:
+                        $src = imagerotate($src, 180, 0);
+                        break;
+                    case 6: // rotate right
+                        $src = imagerotate($src, -90, 0);
+                        [$width, $height] = [$height, $width];
+                        break;
+                    case 8: // rotate left
+                        $src = imagerotate($src, 90, 0);
+                        [$width, $height] = [$height, $width];
+                        break;
+                }
+            }
+        }
+
+        // ======================
+        // RESIZE (NO CROP, NO PADDING)
+        // ======================
+        $ratio = min(
+            $maxWidth / $width,
+            $maxHeight / $height,
+            1 // jangan upscale
+        );
+
+        $newWidth  = (int) round($width * $ratio);
+        $newHeight = (int) round($height * $ratio);
 
         $dst = imagecreatetruecolor($newWidth, $newHeight);
+
+        // Background putih (hindari black space)
+        $white = imagecolorallocate($dst, 255, 255, 255);
+        imagefill($dst, 0, 0, $white);
 
         imagecopyresampled(
             $dst,
             $src,
-            0,
-            0,
-            0,
-            0,
-            $newWidth,
-            $newHeight,
-            $width,
-            $height
+            0, 0, 0, 0,
+            $newWidth, $newHeight,
+            $width, $height
         );
 
-        // Output buffer → JPEG
-        ob_start();
-        imagejpeg($dst, null, 85); // compress 85%
-        $data = ob_get_clean();
+        // ======================
+        // COMPRESS BY FILE SIZE
+        // ======================
+        $quality = 90;
+        $maxBytes = $maxSizeKB * 1024;
+
+        do {
+            ob_start();
+            imagejpeg($dst, null, $quality);
+            $data = ob_get_clean();
+
+            if (!$data) {
+                imagedestroy($src);
+                imagedestroy($dst);
+                return null;
+            }
+
+            $quality -= 5;
+        } while (strlen($data) > $maxBytes && $quality >= 40);
+
+        imagedestroy($src);
+        imagedestroy($dst);
 
         $base64 = base64_encode($data);
 
         return $withPrefix
-            ? "data:image/jpeg;base64," . $base64
+            ? 'data:image/jpeg;base64,' . $base64
             : $base64;
     }
+
+
+    // ======================
+    // AUTO ROTATE EXIF
+    // ======================
+    private static function autoRotateImage($src, string $path)
+    {
+        if (!function_exists('exif_read_data')) {
+            return $src;
+        }
+
+        $exif = @exif_read_data($path);
+
+        if (!$exif || empty($exif['Orientation'])) {
+            return $src;
+        }
+
+        switch ($exif['Orientation']) {
+            case 3:
+                return imagerotate($src, 180, 0);
+            case 6:
+                return imagerotate($src, -90, 0);
+            case 8:
+                return imagerotate($src, 90, 0);
+            default:
+                return $src;
+        }
+    }
+
 }
