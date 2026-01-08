@@ -85,9 +85,7 @@ class FileHelper {
         // ======================
         // AUTO ROTATE (EXIF)
         // ======================
-        if ($mime === 'image/jpeg') {
-            $src = self::autoRotateImage($src, $path);
-        }
+        $src = self::autoRotateImage($src, $path);
 
         // UPDATE SIZE AFTER ROTATE
         $width  = imagesx($src);
