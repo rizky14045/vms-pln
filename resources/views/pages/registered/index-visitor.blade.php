@@ -123,6 +123,13 @@
                                     class="action-btn success">
                                         <iconify-icon icon="solar:check-circle-outline"></iconify-icon>
                                     </a>
+                                @elseif($visitor->status_level > 1)
+                                <a href="{{ $visitor->user->is_employee
+                                        ? route('registered.approve', $visitor->id)
+                                        : route('registered.edit-visitor', $visitor->id) }}"
+                                    class="action-btn success">
+                                        <iconify-icon icon="iconoir:arrow-right" class="icon active"></iconify-icon>
+                                    </a>
                                 @endif
                             </td>
                         </tr>

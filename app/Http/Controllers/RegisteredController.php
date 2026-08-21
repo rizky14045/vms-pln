@@ -59,7 +59,7 @@ class RegisteredController extends Controller
         $data['visitors'] = $this->registerPersonService
             ->getAllRegisteredPerson($filters);
 
-        return view('pages.registered.index-visitor', $data);
+        return view('pages.registered.index-visitor', $data); 
     }
 
 
@@ -67,6 +67,68 @@ class RegisteredController extends Controller
     public function createVisitor(): View {
         $data['areas'] = $this->areaService->getAllAreas(['limit' => 1000], "visitor")['data'] ;
         return view('pages.registered.create-visitor', $data);
+    }
+
+    public function editVisitor($id) {
+        $data['registeredPerson'] = $this->registerPersonService->getRegisteredPersonById($id);
+        if($data['registeredPerson']->is_employee || $data['registeredPerson']->status_level <= 1) {
+            return abort(404);
+        } 
+        $data['areas'] = $this->areaService->getAllAreas(['limit' => 1000], "employee")['data'] ;
+
+        return view('pages.registered.edit-visitor', $data);
+    }
+
+    public function updateCardVisitor(Request $request,$id) {
+        try {
+            $registeredPerson = $this->registerPersonService->getRegisteredPersonById($id);
+            $user = $this->userService->getUserById($registeredPerson->user->id);
+
+            $validator = Validator::make($request->all(), RegisterRequestValidation::rulesForEditEmployee($user->id), RegisterRequestValidation::messages());
+            if($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+            
+            if ($request->hasFile('person_image')) {
+                $base64Only = FileHelper::toResizedBase64(
+                    $request->file('person_image'),
+                    false // tanpa prefix
+                );
+                $result = $this->vaultSiteService->checkFacePhoto($base64Only);
+
+                if ($result['error']) {
+                    return redirect()
+                        ->back()
+                        ->withErrors([
+                            'person_image' => $result['message'] 
+                        ])
+                        ->withInput();
+                }
+
+                $getFilename = FileHelper::generatedFileName('Person', $request->person_image->extension());
+                $request->merge(['image_name' => $getFilename, 'is_registered' => false]);
+                $this->registerPersonService->updateStatusRegisteredPersonById($id, $request->all());
+                $this->userService->updateUser($registeredPerson->user->id, $request->all());
+                $base64 = FileHelper::toResizedBase64($request->file('person_image'), false);
+
+                $dataBinary = base64_decode($base64);
+
+                file_put_contents(
+                    public_path('uploads/person_images/' . $getFilename),
+                    $dataBinary
+                );
+                
+                $this->vaultSiteService->deleteFaceCard($user->id_card_number);
+                $this->vaultSiteService->deleteCard($user->id_card_number);
+            }
+            $this->registerPersonService->updateVisitorToEmployee($id);
+            $request->merge([
+                'is_employee' => 1,
+            ]);
+            return $this->approveRegistered($request, $id);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     public function storeVisitor(Request $request) {
@@ -366,6 +428,7 @@ class RegisteredController extends Controller
     protected function approveRegistered(Request $request, $id)
     {
         $isEmployee = request('is_employee', 1);
+
         //check area not null
         if($request->area_id == null){
             Alert::warning('Warning', 'Area tidak boleh kosong');

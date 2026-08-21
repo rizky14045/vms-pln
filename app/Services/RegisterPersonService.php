@@ -116,4 +116,19 @@ class RegisterPersonService{
             ->first();
     }
 
+    public function updateVisitorToEmployee($id)
+    {
+        $registered = RegisteredPerson::findOrFail($id);
+
+        RegisteredPerson::where('id', $id)->update([
+            'expired_at' => null,
+            'is_employee' => 1,
+        ]);
+
+        User::where('id', $registered->user_id)->update(['is_employee' => 1]);
+
+
+        return $registered;
+    }
+
 }

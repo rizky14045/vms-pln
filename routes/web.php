@@ -63,6 +63,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/registered-visitor','indexVisitor')->name('registered.index.visitor');
         Route::get('/registered-visitor/create-visitor','createVisitor')->name('registered.create-visitor');
         Route::post('/registered-visitor','storeVisitor')->name('registered.store-visitor');
+        Route::get('/registered-visitor/{id}/edit','editVisitor')->name('registered.edit-visitor');
+        Route::patch('/registered/{id}/edit-card-visitor','updateCardVisitor')->name('registered.update-card-visitor');
         Route::get('/registered/{id}','show')->name('registered.show');
         Route::get('/registered/{id}/approve','approve')->name('registered.approve');
         Route::get('/registered/{id}/approve-visitor','approveVisitor')->name('registered.approve.visitor');
