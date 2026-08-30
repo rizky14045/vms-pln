@@ -9,7 +9,9 @@ use App\Services\AreaService;
 use App\Services\UserService;
 use App\Services\VaultSiteService;
 use App\Services\RegisterPersonService;
+use App\Services\VisitorCardService;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Exports\RegisteredPersonsExport;
 use App\FormatRequest\FormatRequestVaultsite;
 use App\Helper\FileHelper;
 use App\Models\RegisteredPerson;
@@ -19,6 +21,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Colors\Rgb\Channels\Red;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RegisteredController extends Controller
 {
@@ -28,16 +31,20 @@ class RegisteredController extends Controller
         protected VaultSiteService $vaultSiteService,
         protected UserService $userService,
         protected FormatRequestUser $formatRequestUser,
+        protected VisitorCardService $visitorCardService,
     ) {}
 
     public function index(Request $request) {
         $filters = [
-            'is_employee' => 1,
-            'search'      => $request->search,
-            'order_by'    => in_array($request->order_by, ['created_at', 'name', 'status_level'])
+            'is_employee'  => 1,
+            'search'       => $request->search,
+            'order_by'     => in_array($request->order_by, ['created_at', 'name', 'status_level'])
                                 ? $request->order_by
                                 : 'created_at',
-            'order_dir'   => $request->order_dir === 'asc' ? 'asc' : 'desc',
+            'order_dir'    => $request->order_dir === 'asc' ? 'asc' : 'desc',
+            'status_level' => in_array($request->status_level, ['0', '1', '2', '3', '4'], true)
+                                ? $request->status_level
+                                : null,
         ];
 
         $data['visitors'] = $this->registerPersonService
@@ -48,18 +55,64 @@ class RegisteredController extends Controller
     public function indexVisitor(Request $request)
     {
         $filters = [
-            'is_employee' => 0,
-            'search'      => $request->search,
-            'order_by'    => in_array($request->order_by, ['created_at', 'name', 'status_level'])
+            'is_employee'  => 0,
+            'search'       => $request->search,
+            'order_by'     => in_array($request->order_by, ['created_at', 'name', 'status_level'])
                                 ? $request->order_by
                                 : 'created_at',
-            'order_dir'   => $request->order_dir === 'asc' ? 'asc' : 'desc',
+            'order_dir'    => $request->order_dir === 'asc' ? 'asc' : 'desc',
+            'status_level' => in_array($request->status_level, ['0', '1', '2', '3', '4'], true)
+                                ? $request->status_level
+                                : null,
         ];
 
         $data['visitors'] = $this->registerPersonService
             ->getAllRegisteredPerson($filters);
+        $data['inUseCards'] = $this->visitorCardService->getInUseCards();
 
-        return view('pages.registered.index-visitor', $data); 
+        return view('pages.registered.index-visitor', $data);
+    }
+
+    public function export(Request $request)
+    {
+        $filters = [
+            'is_employee'  => 1,
+            'search'       => $request->search,
+            'order_by'     => in_array($request->order_by, ['created_at', 'name', 'status_level'])
+                                ? $request->order_by
+                                : 'created_at',
+            'order_dir'    => $request->order_dir === 'asc' ? 'asc' : 'desc',
+            'status_level' => in_array($request->status_level, ['0', '1', '2', '3', '4'], true)
+                                ? $request->status_level
+                                : null,
+        ];
+
+        $registeredPersons = $this->registerPersonService->getAllRegisteredPerson($filters);
+
+        $fileName = 'registered-employee-' . now()->format('Y-m-d_His') . '.xlsx';
+
+        return Excel::download(new RegisteredPersonsExport($registeredPersons, true), $fileName);
+    }
+
+    public function exportVisitor(Request $request)
+    {
+        $filters = [
+            'is_employee'  => 0,
+            'search'       => $request->search,
+            'order_by'     => in_array($request->order_by, ['created_at', 'name', 'status_level'])
+                                ? $request->order_by
+                                : 'created_at',
+            'order_dir'    => $request->order_dir === 'asc' ? 'asc' : 'desc',
+            'status_level' => in_array($request->status_level, ['0', '1', '2', '3', '4'], true)
+                                ? $request->status_level
+                                : null,
+        ];
+
+        $registeredPersons = $this->registerPersonService->getAllRegisteredPerson($filters);
+
+        $fileName = 'registered-visitor-' . now()->format('Y-m-d_His') . '.xlsx';
+
+        return Excel::download(new RegisteredPersonsExport($registeredPersons, false), $fileName);
     }
 
 
@@ -256,6 +309,7 @@ class RegisteredController extends Controller
     public function approveVisitor($id) {
         $data['registeredPerson'] = $this->registerPersonService->getRegisteredPersonById($id);
         $data['areas'] = $this->areaService->getAllAreas(['limit' => 1000], "visitor")['data'] ;
+        $data['availableCards'] = $this->visitorCardService->getAvailableCards();
 
         return view('pages.registered.approve-visitor', $data);
     }
@@ -325,12 +379,29 @@ class RegisteredController extends Controller
             $registeredPerson = $this->registerPersonService->getRegisteredPersonById($id);
             $user = $this->userService->getUserById($registeredPerson->user->id);
 
+            // User bisa pegang beberapa kartu visitor sekaligus. Selama masih ada kartu
+            // yang belum dikembalikan (returned_at masih null), user TIDAK boleh
+            // dihapus/dinonaktifkan dulu -- supaya kartu yang lagi dipegang tidak jadi
+            // "hilang" (terkunci status 0 selamanya, tidak ada yang bisa mengembalikan).
+            $unreturnedCards = $this->visitorCardService->getUnreturnedCardsForUser($user->id);
+            if ($unreturnedCards->isNotEmpty()) {
+                $cardNumbers = $unreturnedCards->pluck('visitorCard.card_number')->filter()->implode(', ');
+                Alert::error('Error', "User ini masih memegang kartu visitor yang belum dikembalikan ({$cardNumbers}). Kembalikan semua kartu tersebut terlebih dahulu sebelum menghapus user ini.");
+                return redirect()->route('registered.index');
+            }
+
+            // Cabut akses fisik (kartu & face) di vault site
             $this->vaultSiteService->deleteFaceCard($user->id_card_number);
             $this->vaultSiteService->deleteCard($user->id_card_number);
-            $request->merge(['status_level' => 4, 'status' => 'Deleted']);
-            $this->registerPersonService->updateStatusRegisteredPersonById($id, $request->all());
 
-            Alert::success('Success', 'Berhasil menghapus registrasi.');
+            // Hapus semua file foto registrasi milik user ini (termasuk riwayat lama)
+            $this->registerPersonService->deleteAllPersonImagesByUserId($user->id);
+
+            // Hapus user -> seluruh baris registered_persons miliknya ikut terhapus
+            // otomatis lewat cascade delete (foreign key registered_persons.user_id)
+            $user->delete();
+
+            Alert::success('Success', 'Berhasil menghapus data registrasi, foto, dan akun user.');
             return redirect()->route('registered.index');
         } catch (\Throwable $th) {
             throw $th;
@@ -357,6 +428,10 @@ class RegisteredController extends Controller
 
         try {
            if($request->action === 'approve'){
+                // Assign kartu (kalau dipilih) ditangani di dalam approveRegistered(),
+                // dan sengaja dilakukan PALING TERAKHIR setelah semua validasi & proses
+                // approval berhasil — supaya kalau ada validasi yang gagal (area/tanggal
+                // kedaluwarsa kosong, dsb), status kartu tidak ikut berubah jadi "dipakai".
                 return $this->approveRegistered($request, $id);
             }elseif($request->action === 'reject'){
                 return $this->rejectRegistered($id);
@@ -457,8 +532,16 @@ class RegisteredController extends Controller
         }
         $registeredPerson = $this->registerPersonService->getRegisteredPersonById($id);
         $userRegistered = $this->userService->getUserById($registeredPerson->user->id);
+
+        // Simpan perubahan nama/NID/email/perusahaan yang diedit di form approve.
+        // Sebelumnya field-field ini cuma tampil sebagai input tapi tidak pernah
+        // benar-benar disimpan -- makanya edit-an (termasuk email) hilang lagi.
+        $this->userService->updateUser($userRegistered->id, $request->all());
+        $registeredPerson->load('user');
+        $userRegistered = $registeredPerson->user;
+
         $areaAccessNumber = $this->areaService->getAreaAccessNumber($request->area_id);
-        
+
         $expired_date = Carbon::parse($request->expired_at)->setTime(23, 59, 0);
         $formatRequest = FormatRequestVaultsite::formatAddCard($registeredPerson, $areaAccessNumber->access_no,$request->all());
         
@@ -501,6 +584,18 @@ class RegisteredController extends Controller
             Alert::success('Success', 'Berhasil menyetujui registrasi karyawan');
             return redirect()->route('registered.index');
         }
+
+        // Assign kartu visitor (opsional). Dilakukan di sini, PALING TERAKHIR setelah
+        // registrasi benar-benar disetujui, supaya kalau proses approve gagal di atas
+        // (validasi area/tanggal, dsb), status kartu tidak ikut berubah jadi "dipakai".
+        if ($request->filled('card_ids')) {
+            $cardAssignResult = $this->visitorCardService->assignCardsToVisitor($request->card_ids, $id);
+            if (!$cardAssignResult['status']) {
+                Alert::error('Error', 'Registrasi disetujui, tetapi gagal assign kartu: ' . $cardAssignResult['message']);
+                return redirect()->route('registered.index.visitor');
+            }
+        }
+
         Alert::success('Success', 'Berhasil menyetujui registrasi kunjungan');
         return redirect()->route('registered.index.visitor');
     }

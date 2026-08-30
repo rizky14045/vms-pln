@@ -35,10 +35,11 @@ class RegisterPersonService{
 
     public function getAllRegisteredPerson(array $filters = [])
     {
-        $isEmployee = $filters['is_employee'] ?? 0;
-        $search     = $filters['search'] ?? null;
-        $orderBy    = $filters['order_by'] ?? 'created_at';
-        $orderDir   = $filters['order_dir'] ?? 'desc';
+        $isEmployee  = $filters['is_employee'] ?? 0;
+        $search      = $filters['search'] ?? null;
+        $orderBy     = $filters['order_by'] ?? 'created_at';
+        $orderDir    = $filters['order_dir'] ?? 'desc';
+        $statusLevel = $filters['status_level'] ?? null;
 
         $query = RegisteredPerson::query()
             ->selectRaw("
@@ -56,11 +57,15 @@ class RegisterPersonService{
                 }
             });
 
-        return RegisteredPerson::fromSub($query, 'rp')
+        $query = RegisteredPerson::fromSub($query, 'rp')
             ->with('user')
-            ->where('rp.rn', 1)
-            ->orderBy($orderBy, $orderDir)
-            ->get();
+            ->where('rp.rn', 1);
+
+        if ($statusLevel !== null && $statusLevel !== '') {
+            $query->where('rp.status_level', $statusLevel);
+        }
+
+        return $query->orderBy($orderBy, $orderDir)->get();
     }
 
 
@@ -101,15 +106,34 @@ class RegisterPersonService{
         return $registeredPerson;
     }
 
+    /**
+     * Hapus semua file foto registered_person milik satu user (termasuk riwayat lama).
+     * Baris registered_persons-nya sendiri tidak dihapus di sini karena akan ikut
+     * terhapus otomatis lewat cascade delete saat User-nya dihapus.
+     */
+    public function deleteAllPersonImagesByUserId(int $userId): void
+    {
+        $registeredPersons = RegisteredPerson::where('user_id', $userId)->get();
+
+        foreach ($registeredPersons as $registeredPerson) {
+            if ($registeredPerson->person_image) {
+                $photoPath = public_path('uploads/person_images/' . $registeredPerson->person_image);
+                if (file_exists($photoPath)) {
+                    @unlink($photoPath);
+                }
+            }
+        }
+    }
+
     public function updateAreaId(RegisteredPerson $registeredPerson, $area_id){
         $registeredPerson->area_id = $area_id;
         $registeredPerson->save();
     }
 
-    public function getRegisteredPersonToday($nid)
+    public function getRegisteredPersonToday($email)
     {
-        return RegisteredPerson::whereHas('user', function ($query) use ($nid) {
-                $query->where('nid', $nid);
+        return RegisteredPerson::whereHas('user', function ($query) use ($email) {
+                $query->where('email', $email);
             })
             ->whereIn('status_level', [1, 2])
             ->orderByDesc('created_at')

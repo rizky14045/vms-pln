@@ -51,6 +51,22 @@
           </a>
         </li>
         @endcan
+        @role('super-admin')
+        <li>
+          <a href="{{route('products.index')}}">
+            <iconify-icon icon="solar:box-minimalistic-broken" class="menu-icon"></iconify-icon>
+            <span>Product</span>
+          </a>
+        </li>
+        @endrole
+        @can('manage visitor card')
+        <li>
+          <a href="{{route('visitor-cards.index')}}">
+            <iconify-icon icon="solar:card-2-outline" class="menu-icon"></iconify-icon>
+            <span>Kartu Visitor</span>
+          </a>
+        </li>
+        @endcan
       </ul>
     </div>
   </aside>

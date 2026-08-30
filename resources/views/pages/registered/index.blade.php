@@ -64,14 +64,33 @@
                             </option>
                         </select>
                     </div>
+
+                    {{-- Status --}}
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Status</label>
+                        <select name="status_level"
+                                onchange="this.form.submit()"
+                                class="px-3 py-2 border rounded w-44">
+                            <option value="" @selected(request('status_level', '') === '')>Semua Status</option>
+                            <option value="1" @selected(request('status_level') == '1')>Waiting for approval</option>
+                            <option value="2" @selected(request('status_level') == '2')>Approved</option>
+                            <option value="0" @selected(request('status_level') == '0')>Rejected</option>
+                            <option value="3" @selected(request('status_level') == '3')>Expired</option>
+                            <option value="4" @selected(request('status_level') == '4')>Deleted</option>
+                        </select>
+                    </div>
                 </div>
 
                 {{-- Submit --}}
-                <div>
+                <div class="flex items-end gap-2">
                     <button type="submit"
                             style="background-color: #007BFF;" class="px-4 py-2 rounded-md text-white text-bold">
                         Filter
                     </button>
+                    <a href="{{ route('registered.export', request()->query()) }}"
+                       style="background-color: #198754;" class="px-4 py-2 rounded-md text-white text-bold">
+                        Export Excel
+                    </a>
                 </div>
             </form>
 
@@ -79,7 +98,7 @@
                 <thead>
                     <tr class="bg-neutral-100 dark:bg-neutral-700">
                         <th class="px-4 py-3">No</th>
-                        <th class="px-4 py-3">NID</th>
+                        <th class="px-4 py-3">Email</th>
                         <th class="px-4 py-3">Name</th>
                         <th class="px-4 py-3 text-center">Status</th>
                         <th class="px-4 py-3 text-center">Action</th>
@@ -90,7 +109,7 @@
                     @forelse ($visitors as $index => $visitor)
                         <tr class="hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">
                             <td class="px-4 py-3 text-center">{{ $index + 1 }}</td>
-                            <td class="px-4 py-3 text-center">{{ $visitor->user->nid ?? '-' }}</td>
+                            <td class="px-4 py-3 text-center">{{ $visitor->user->email ?? '-' }}</td>
                             <td class="px-4 py-3 font-medium text-center">{{ $visitor->user->name ?? '-' }}</td>
                             <td class="px-4 py-3 text-center">
                                 @if ($visitor->status_level == 1)
@@ -99,6 +118,8 @@
                                     <span style="background-color: red" class="px-2 py-1 bg-red-100 bg-red-800 text-white rounded-full text-xs">{{ $visitor->status }}</span>
                                 @elseif ($visitor->status_level == 3)
                                     <span style="background-color: gray" class="px-2 py-1 bg-gray-100 bg-gray-800 text-white rounded-full text-xs">{{ $visitor->status }}</span>
+                                @elseif ($visitor->status_level == 5)
+                                    <span style="background-color: #6c757d" class="px-2 py-1 text-white rounded-full text-xs">{{ $visitor->status }}</span>
                                 @else
                                     <span style="background-color: rgb(20, 216, 53)" class="px-2 py-1 bg-green-100 bg-green-800 text-white rounded-full text-xs">{{ $visitor->status }}</span>
                                 @endif

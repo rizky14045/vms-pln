@@ -44,15 +44,15 @@ class HomeController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
             }
 
-            //check if user exist by nid
-            $user = $this->userService->getUserByNid($request->nid);
+            //check if user exist by email
+            $user = $this->userService->getUserByEmail($request->email);
             if(!$user) {
                 $request->merge(['company' => 'PLN Nusantara Power', 'is_employee' => true]);
-                $formatRequest = $this->formatRequestUser->employeeUser($request->all()); 
+                $formatRequest = $this->formatRequestUser->employeeUser($request->all());
                 $user = $this->userService->createUser($formatRequest);
             }
             // misal hari ini belum di approve , maka kasih notice masih menunggu persetujuan , data ga masukin ke transaction
-            $check_today = $this->registerPersonService->getRegisteredPersonToday($request->nid);
+            $check_today = $this->registerPersonService->getRegisteredPersonToday($request->email);
             if($check_today){
                 return redirect()->route('register-employee')->with('info', 'User sudah terdaftar / menunggu persetujuan petugas!');
             }
@@ -115,15 +115,15 @@ class HomeController extends Controller
                 $request->merge(['pic_phone' => '0000000000']);
             }
 
-            //check if user exist by nid
-            $user = $this->userService->getUserByNid($request->nid);
+            //check if user exist by email
+            $user = $this->userService->getUserByEmail($request->email);
             if(!$user) {
                 $request->merge(['is_employee' => false]);
-                $formatRequest = $this->formatRequestUser->employeeUser($request->all()); 
+                $formatRequest = $this->formatRequestUser->employeeUser($request->all());
                 $user = $this->userService->createUser($formatRequest);
             }
             // misal hari ini belum di approve , maka kasih notice masih menunggu persetujuan , data ga masukin ke transaction
-            $check_today = $this->registerPersonService->getRegisteredPersonToday($request->nid);
+            $check_today = $this->registerPersonService->getRegisteredPersonToday($request->email);
             if($check_today){
                 return redirect()->route('register-employee')->with('info', 'User sudah terdaftar / menunggu persetujuan petugas!');
             }

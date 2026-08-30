@@ -61,20 +61,6 @@
               'autofocus' => true,
               'label' => 'NID',
           ])
-          <p id="nid-message" class="text-sm mt-1"></p>
-      </div>
-      <p class="text-xs text-gray-600 italic mt-2">
-          Tekan <strong>Check NID</strong> untuk memeriksa apakah nomor NID sudah pernah terdaftar.
-          Jika data sudah ada di sistem, maka form akan otomatis menampilkan data sebelumnya. Jika belum pernah terdaftar, maka Anda dapat melanjutkan pengisian form seperti biasa.
-      </p>
-      <div class="flex justify-end">
-          @include('components.button', [
-              'text' => 'Check NID',
-              'type' => 'button',
-              'variant' => 'primary',
-              'size' => 'sm',
-              'class' => 'bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-2 rounded-md transition '
-          ])
       </div>
       <div>
           @include('components.input', [
@@ -167,13 +153,6 @@
   </div>
 
 <script>
-  const checkNidBtn = document.querySelector('button[type="button"]')
-  const nidInput = document.getElementById('nid')
-  const nameInput = document.getElementById('name')
-  const emailInput = document.getElementById('email')
-  const phoneInput = document.getElementById('phone')
-  const nidMessage = document.getElementById('nid-message')
-
   const fileInput = document.getElementById("fileInput");
   const imagePreview = document.getElementById("imagePreview");
 
@@ -190,35 +169,6 @@
       alert("Silakan pilih file gambar yang valid.");
     }
   });
-
-  // 🔹 Fungsi check NID
-  checkNidBtn.addEventListener('click', async () => {
-    nameInput.value = "" 
-    emailInput.value = "" 
-    phoneInput.value = "" 
-    const nid = nidInput.value.trim()
-    nidMessage.textContent = ""
-    nidMessage.className = "text-sm mt-1" 
-
-    if (!nid) {
-      nidMessage.textContent = "Silakan masukkan NID terlebih dahulu"
-      nidMessage.classList.add("text-red-600")
-      return
-    }
-
-    try {
-      const res = await axios.get("{{ url('api/v1/get-user-by-nid') }}/" + nid)
-      nameInput.value = res.data.data.user.name
-      emailInput.value = res.data.data.user.email
-      phoneInput.value = res.data.data.user.phone
-      nidMessage.textContent = res.data.message
-      nidMessage.classList.add("text-green-600")
-    } catch (err) {
-      nidMessage.textContent = err.response.data.message
-      nidMessage.classList.add("text-red-600")
-    }
-  })
-
 </script>
 
 </body>

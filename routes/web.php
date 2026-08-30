@@ -4,9 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MyProfileController;
 use App\Http\Controllers\RegisteredController;
+use App\Http\Controllers\VisitorCardController;
 use App\Http\Controllers\AuthenticationController;
 
 /*
@@ -57,10 +59,33 @@ Route::middleware('auth')->group(function () {
         Route::get('/devices/{id}/edit','edit')->name('devices.edit');
         Route::put('/devices/{id}','update')->name('devices.update');
     });
+
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('/products','index')->name('products.index');
+        Route::get('/products/export','export')->name('products.export');
+        Route::get('/products/create','create')->name('products.create');
+        Route::post('/products','store')->name('products.store');
+        Route::get('/products/{id}/edit','edit')->name('products.edit');
+        Route::put('/products/{id}','update')->name('products.update');
+    });
+
+    Route::controller(VisitorCardController::class)->group(function () {
+        Route::get('/visitor-cards','index')->name('visitor-cards.index');
+        Route::get('/visitor-cards/create','create')->name('visitor-cards.create');
+        Route::post('/visitor-cards','store')->name('visitor-cards.store');
+        Route::get('/visitor-cards/histories','histories')->name('visitor-cards.histories');
+        Route::get('/visitor-cards/histories/export','historyExport')->name('visitor-cards.histories.export');
+        Route::post('/visitor-cards/return','returnCards')->name('visitor-cards.return');
+        Route::get('/visitor-cards/{id}/edit','edit')->name('visitor-cards.edit');
+        Route::put('/visitor-cards/{id}','update')->name('visitor-cards.update');
+    });
+
     Route::controller(RegisteredController::class)->group(function () {
         Route::get('/registered/datas','getDataIndex')->name('registered.data');
         Route::get('/registered','index')->name('registered.index');
+        Route::get('/registered/export','export')->name('registered.export');
         Route::get('/registered-visitor','indexVisitor')->name('registered.index.visitor');
+        Route::get('/registered-visitor/export','exportVisitor')->name('registered.export.visitor');
         Route::get('/registered-visitor/create-visitor','createVisitor')->name('registered.create-visitor');
         Route::post('/registered-visitor','storeVisitor')->name('registered.store-visitor');
         Route::get('/registered-visitor/{id}/edit','editVisitor')->name('registered.edit-visitor');

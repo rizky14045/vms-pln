@@ -41,6 +41,7 @@ class UserService{
         $fillable = [
             'name',
             'nid',
+            'email',
             'id_card_number',
             'identity_number',
             'phone',

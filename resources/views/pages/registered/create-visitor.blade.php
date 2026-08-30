@@ -36,6 +36,17 @@
                     'value' => $registeredPerson->user->nid ?? ''
                 ])
             </div>
+            <div class="mb-5">
+                @include('components.input', [
+                    'type' => 'email',
+                    'name' => 'email',
+                    'id' => 'email',
+                    'placeholder' => 'Email Visitor',
+                    'required' => true,
+                    'label' => 'Email Visitor',
+                    'value' => $registeredPerson->user->email ?? ''
+                ])
+            </div>
             <div>
                 @include('components.input', [
                     'type' => 'text',

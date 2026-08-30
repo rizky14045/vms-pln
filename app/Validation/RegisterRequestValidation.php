@@ -20,6 +20,7 @@ class RegisterRequestValidation
         return [
             'nid' => 'required|string|max:255',
             'name' => 'required|string|max:255',
+            'email' => 'required|email:rfc,dns',
             'person_image' => 'required|file|mimes:png,jpeg,jpg',
             'phone' => 'required',
             'company' => 'required|string|max:255',
@@ -33,6 +34,7 @@ class RegisterRequestValidation
         return [
             'nid' => 'required|string|max:255',
             'name' => 'required|string|max:255',
+            'email' => 'required|email:rfc,dns',
             'person_image' => 'required|file|mimes:png,jpeg,jpg',
             'phone' => 'required',
             'company' => 'required|string|max:255',

@@ -39,6 +39,17 @@
                     'value' => $registeredPerson->user->nid ?? ''
                 ])
             </div>
+            <div class="mb-5">
+                @include('components.input', [
+                    'type' => 'email',
+                    'name' => 'email',
+                    'id' => 'email',
+                    'placeholder' => 'Email Visitor',
+                    'required' => true,
+                    'label' => 'Email Visitor',
+                    'value' => $registeredPerson->user->email ?? ''
+                ])
+            </div>
 
             <div class="mb-5">
                 @include('components.input', [
@@ -119,6 +130,46 @@
                     'autofocus' => true,
                     'label' => 'Tanggal Expired'
                 ])
+            </div>
+
+            {{-- Pilih Kartu Visitor (opsional) --}}
+            <div class="mb-5">
+                <div class="flex items-center justify-between mb-2">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                        Pilih Kartu Visitor <span class="text-xs text-gray-500">(opsional)</span>
+                    </label>
+                    <span id="cardSelectedCount" class="text-xs text-gray-500">0 dipilih</span>
+                </div>
+
+                @if($availableCards->count() > 0)
+                    <input
+                        type="text"
+                        id="cardSearchInput"
+                        placeholder="Cari nomor kartu..."
+                        class="form-control h-[44px] ps-4 mb-2 border-neutral-300 bg-neutral-50 dark:bg-dark-2 rounded-xl w-full"
+                    >
+                @endif
+
+                <div class="space-y-2 border rounded-lg p-4 max-h-72 overflow-y-auto bg-neutral-50 dark:bg-dark-2">
+                    @forelse ($availableCards as $card)
+                        <label class="card-option flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700" data-card-number="{{ strtolower($card->card_number) }}">
+                            <input
+                                type="checkbox"
+                                name="card_ids[]"
+                                value="{{ $card->id }}"
+                                id="card-{{ $card->id }}"
+                                {{ in_array($card->id, old('card_ids', [])) ? 'checked' : '' }}
+                                class="card-checkbox w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                            >
+                            <span class="text-sm font-medium text-gray-800 dark:text-gray-100">
+                                {{ $card->card_number }}
+                            </span>
+                        </label>
+                    @empty
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Tidak ada kartu yang tersedia saat ini.</p>
+                    @endforelse
+                    <p id="cardNoMatch" class="hidden text-sm text-gray-500 dark:text-gray-400">Kartu tidak ditemukan.</p>
+                </div>
             </div>
 
             {{-- Button --}}
@@ -202,5 +253,41 @@
     });
 </script>
 
+<script>
+    // 🔍 Search/filter kartu visitor, supaya tetap enak dipakai walau ada ratusan kartu
+    document.addEventListener('DOMContentLoaded', function () {
+        const cardSearchInput = document.getElementById('cardSearchInput');
+        const cardOptions = document.querySelectorAll('.card-option');
+        const cardCheckboxes = document.querySelectorAll('.card-checkbox');
+        const cardSelectedCount = document.getElementById('cardSelectedCount');
+        const cardNoMatch = document.getElementById('cardNoMatch');
+
+        function updateSelectedCount() {
+            if (!cardSelectedCount) return;
+            const checked = document.querySelectorAll('.card-checkbox:checked').length;
+            cardSelectedCount.textContent = checked + ' dipilih';
+        }
+
+        cardCheckboxes.forEach(cb => cb.addEventListener('change', updateSelectedCount));
+        updateSelectedCount();
+
+        if (cardSearchInput) {
+            cardSearchInput.addEventListener('input', function () {
+                const term = this.value.trim().toLowerCase();
+                let visibleCount = 0;
+
+                cardOptions.forEach(option => {
+                    const match = option.dataset.cardNumber.includes(term);
+                    option.style.display = match ? '' : 'none';
+                    if (match) visibleCount++;
+                });
+
+                if (cardNoMatch) {
+                    cardNoMatch.classList.toggle('hidden', visibleCount !== 0 || cardOptions.length === 0);
+                }
+            });
+        }
+    });
+</script>
 
 @endsection
