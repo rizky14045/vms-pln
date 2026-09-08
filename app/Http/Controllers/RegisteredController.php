@@ -199,14 +199,15 @@ class RegisteredController extends Controller
                 $request->merge(['pic_phone' => '0000000000']);
             }
 
-            //check if user exist by nid
-            $user = $this->userService->getUserByNid($request->nid);
+            //check if user exist by email (bukan nid -- nid boleh sama dengan user lain,
+            // email yang jadi identitas unik supaya tidak bentrok dengan unique constraint)
+            $user = $this->userService->getUserByEmail($request->email);
             if(!$user) {
                 $request->merge(['is_employee' => 0]);
-                $formatRequest = $this->formatRequestUser->employeeUser($request->all()); 
+                $formatRequest = $this->formatRequestUser->employeeUser($request->all());
                 $user = $this->userService->createUser($formatRequest);
             }
-            
+
             // get get latest registered person
             $latestRegisteredPerson = RegisteredPerson::where('user_id', $user->id)
                 ->orderBy('created_at', 'desc')
