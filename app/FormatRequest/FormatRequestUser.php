@@ -12,7 +12,9 @@ class FormatRequestUser
         return [
             'name' => $request['name'],
             'email' => $request['email'] ?? null,
-            'nid' => $request['nid'],
+            // Kolom nid NOT NULL di database -- visitor boleh tidak isi NID,
+            // jadi fallback ke string kosong, bukan null.
+            'nid' => $request['nid'] ?? '',
             'id_card_number' => self::generateCardNo(),
             'identity_number' => null,
             'phone' => $request['phone'],

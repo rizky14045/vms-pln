@@ -57,9 +57,9 @@
               'name' => 'nid',
               'id' => 'nid',
               'placeholder' => 'Nomor Identitas/Identity Number (NID/Nomor Induk Pegawai)',
-              'required' => true,
+              'required' => false,
               'autofocus' => true,
-              'label' => 'NID',
+              'label' => 'NID (opsional)',
           ])
       </div>
       <div>

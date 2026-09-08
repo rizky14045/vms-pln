@@ -39,13 +39,21 @@ class HomeController extends Controller
         try {
             DB::beginTransaction();
 
-            $validator = Validator::make($request->all(), RegisterRequestValidation::rulesForCreate(), RegisterRequestValidation::messages());
+            // Cari user berdasarkan email DULU (sebelum validasi), supaya kalau ini
+            // karyawan lama yang registrasi ulang (email sama -> akun di-reuse),
+            // validasi unique NID di bawah bisa mengecualikan NID miliknya sendiri.
+            $existingUser = $this->userService->getUserByEmail($request->email);
+
+            $validator = Validator::make(
+                $request->all(),
+                RegisterRequestValidation::rulesForCreate($existingUser->id ?? null),
+                RegisterRequestValidation::messages()
+            );
             if($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
             }
 
-            //check if user exist by email
-            $user = $this->userService->getUserByEmail($request->email);
+            $user = $existingUser;
             if(!$user) {
                 $request->merge(['company' => 'PLN Nusantara Power', 'is_employee' => true]);
                 $formatRequest = $this->formatRequestUser->employeeUser($request->all());

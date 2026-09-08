@@ -4,10 +4,17 @@ namespace App\Validation;
 
 class RegisterRequestValidation
 {
-    public static function rulesForCreate()
+    /**
+     * Employee: NID wajib & unique. $excludeUserId dipakai supaya karyawan lama yang
+     * registrasi ulang (email sama -> akun di-reuse) tidak ditolak gara-gara NID
+     * miliknya sendiri dianggap "sudah dipakai".
+     */
+    public static function rulesForCreate($excludeUserId = null)
     {
+        $nidUnique = 'unique:users,nid' . ($excludeUserId ? ',' . $excludeUserId : '');
+
         return [
-            'nid' => 'required|string|max:255',
+            'nid' => 'required|string|max:255|' . $nidUnique,
             'name' => 'required|string|max:255',
             'person_image' => 'required|file|mimes:png,jpeg,jpg',
             'email' => 'required|email:rfc,dns',
@@ -15,10 +22,11 @@ class RegisterRequestValidation
         ];
     }
 
+    // Visitor: NID opsional, tidak perlu unique (identitas visitor pakai email).
     public static function rulesForVisitor()
     {
         return [
-            'nid' => 'required|string|max:255',
+            'nid' => 'nullable|string|max:255',
             'name' => 'required|string|max:255',
             'email' => 'required|email:rfc,dns',
             'person_image' => 'required|file|mimes:png,jpeg,jpg',
@@ -29,10 +37,11 @@ class RegisterRequestValidation
         ];
     }
 
+    // Visitor (form internal "Tambah Visitor"): sama, NID opsional.
     public static function rulesForCreateVisitor()
     {
         return [
-            'nid' => 'required|string|max:255',
+            'nid' => 'nullable|string|max:255',
             'name' => 'required|string|max:255',
             'email' => 'required|email:rfc,dns',
             'person_image' => 'required|file|mimes:png,jpeg,jpg',
@@ -61,6 +70,7 @@ class RegisterRequestValidation
             'nid.required' => 'NID wajib diisi.',
             'nid.string' => 'NID harus berupa teks.',
             'nid.max' => 'NID maksimal 255 karakter.',
+            'nid.unique' => 'NID sudah terdaftar atas nama karyawan lain.',
 
             'name.required' => 'Nama wajib diisi.',
             'name.string' => 'Nama harus berupa teks.',

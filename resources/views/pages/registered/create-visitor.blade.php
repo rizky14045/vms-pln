@@ -30,9 +30,9 @@
                     'name' => 'nid',
                     'id' => 'nid',
                     'placeholder' => 'NID Visitor',
-                    'required' => true,
+                    'required' => false,
                     'autofocus' => true,
-                    'label' => 'NID Visitor',
+                    'label' => 'NID Visitor (opsional)',
                     'value' => $registeredPerson->user->nid ?? ''
                 ])
             </div>
