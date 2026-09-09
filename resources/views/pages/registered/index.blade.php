@@ -98,6 +98,7 @@
                 <thead>
                     <tr class="bg-neutral-100 dark:bg-neutral-700">
                         <th class="px-4 py-3">No</th>
+                        <th class="px-4 py-3">NID</th>
                         <th class="px-4 py-3">Email</th>
                         <th class="px-4 py-3">Name</th>
                         <th class="px-4 py-3 text-center">Status</th>
@@ -109,6 +110,7 @@
                     @forelse ($visitors as $index => $visitor)
                         <tr class="hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">
                             <td class="px-4 py-3 text-center">{{ $index + 1 }}</td>
+                            <td class="px-4 py-3 text-center">{{ $visitor->user->nid ?: '-' }}</td>
                             <td class="px-4 py-3 text-center">{{ $visitor->user->email ?? '-' }}</td>
                             <td class="px-4 py-3 font-medium text-center">{{ $visitor->user->name ?? '-' }}</td>
                             <td class="px-4 py-3 text-center">
