@@ -5,19 +5,21 @@ namespace App\Validation;
 class RegisterRequestValidation
 {
     /**
-     * Employee: NID wajib & unique. $excludeUserId dipakai supaya karyawan lama yang
-     * registrasi ulang (email sama -> akun di-reuse) tidak ditolak gara-gara NID
-     * miliknya sendiri dianggap "sudah dipakai".
+     * Employee: identitas dikenali dari NID. NID wajib & unique. $excludeUserId
+     * dipakai supaya karyawan lama yang registrasi ulang (NID sama -> akun di-reuse)
+     * tidak ditolak gara-gara NID/email miliknya sendiri dianggap "sudah dipakai".
+     * Email juga divalidasi unique (bukan cuma NID) supaya tidak crash SQL kalau
+     * ternyata email itu sudah dipakai orang lain yang NID-nya berbeda.
      */
     public static function rulesForCreate($excludeUserId = null)
     {
-        $nidUnique = 'unique:users,nid' . ($excludeUserId ? ',' . $excludeUserId : '');
+        $exclude = $excludeUserId ? ',' . $excludeUserId : '';
 
         return [
-            'nid' => 'required|string|max:255|' . $nidUnique,
+            'nid' => 'required|string|max:255|unique:users,nid' . $exclude,
             'name' => 'required|string|max:255',
             'person_image' => 'required|file|mimes:png,jpeg,jpg',
-            'email' => 'required|email:rfc,dns',
+            'email' => 'required|email:rfc,dns|unique:users,email' . $exclude,
             'phone' => 'required',
         ];
     }
@@ -83,6 +85,7 @@ class RegisterRequestValidation
 
             'email.required' => 'Email wajib diisi.',
             'email.email' => 'Format email tidak sesuai.',
+            'email.unique' => 'Email sudah terdaftar atas nama karyawan lain.',
 
             'phone.required' => 'Nomor telepon wajib diisi.',
             'phone.regex' => 'Format nomor telepon tidak sesuai. Contoh: 628XXXXXXXX.',

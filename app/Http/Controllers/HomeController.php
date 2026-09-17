@@ -39,10 +39,14 @@ class HomeController extends Controller
         try {
             DB::beginTransaction();
 
-            // Cari user berdasarkan email DULU (sebelum validasi), supaya kalau ini
-            // karyawan lama yang registrasi ulang (email sama -> akun di-reuse),
-            // validasi unique NID di bawah bisa mengecualikan NID miliknya sendiri.
-            $existingUser = $this->userService->getUserByEmail($request->email);
+            // Employee dikenali dari NID (bukan email) -- konsisten dengan aturan
+            // "NID wajib & unique untuk employee". Dicari DULU sebelum validasi,
+            // supaya kalau ini karyawan lama registrasi ulang (NID sama, meskipun
+            // email yang dipakai beda), validasi unique NID di bawah bisa
+            // mengecualikan NID miliknya sendiri -- bukan dianggap "milik orang lain".
+            $existingUser = !empty($request->nid)
+                ? $this->userService->getUserByNid($request->nid)
+                : null;
 
             $validator = Validator::make(
                 $request->all(),
