@@ -48,6 +48,15 @@ class HomeController extends Controller
                 ? $this->userService->getUserByNid($request->nid)
                 : null;
 
+            // Fallback ke email kalau NID tidak ketemu siapa-siapa. Ini menutup kasus
+            // orang yang sebelumnya visitor (NID opsional, bisa kosong/beda) lalu
+            // sekarang daftar jadi employee dengan NID baru -- supaya dikenali sebagai
+            // orang yang sama lewat email lamanya, bukan dianggap dua orang berbeda
+            // yang kebetulan email-nya bentrok.
+            if (!$existingUser && !empty($request->email)) {
+                $existingUser = $this->userService->getUserByEmail($request->email);
+            }
+
             $validator = Validator::make(
                 $request->all(),
                 RegisterRequestValidation::rulesForCreate($existingUser->id ?? null),
@@ -62,6 +71,12 @@ class HomeController extends Controller
                 $request->merge(['company' => 'PLN Nusantara Power', 'is_employee' => true]);
                 $formatRequest = $this->formatRequestUser->employeeUser($request->all());
                 $user = $this->userService->createUser($formatRequest);
+            } else {
+                // Reuse akun lama -- simpan NID/nama/phone yang baru diisi di form ini.
+                // Penting terutama untuk kasus fallback-by-email di atas: NID lama
+                // akun ini bisa saja kosong/beda, jadi NID baru yang diketik sekarang
+                // harus benar-benar tersimpan, bukan cuma numpang reuse tanpa update.
+                $user = $this->userService->updateUser($user->id, $request->all());
             }
             // misal hari ini belum di approve , maka kasih notice masih menunggu persetujuan , data ga masukin ke transaction
             $check_today = $this->registerPersonService->getRegisteredPersonToday($request->email);

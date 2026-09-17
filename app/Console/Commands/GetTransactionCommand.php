@@ -71,20 +71,30 @@ class GetTransactionCommand extends Command
         $newData = [];
 
         foreach ($transactions as $trx) {
+            // Kadang API vault balikin satu elemen sebagai string biasa (bukan
+            // array record) kalau hasilnya cuma 1 baris -- skip supaya tidak
+            // "Cannot access offset of type string on string".
+            if (!is_array($trx)) {
+                continue;
+            }
+
             $trxTimestamp = Carbon::parse($trx['TrDate'].' '.$trx['TrTime']);
 
             if ($trxTimestamp->greaterThan($lastHit)) {
                 $newData[] = [
                     'tr_date'     => $trx['TrDate'],
                     'tr_time'     => $trx['TrTime'],
-                    'card_no'     => $trx['CardNo'],
-                    'transaction' => $trx['Transaction'],
-                    'tr_code'     => $trx['TrCode'],
-                    'door_name'   => $trx['DoorName'],
-                    'card_name'   => $trx['CardName'],
-                    'department'  => $trx['Department'],
-                    'staff_no'    => $trx['StaffNo'],
-                    'nric'        => $trx['Nric'],
+                    // Field2 di bawah ini nullable di DB dan kadang tidak dikirim
+                    // API vault untuk transaksi tertentu -- pakai fallback null
+                    // supaya tidak "Undefined array key" tiap kali field itu absen.
+                    'card_no'     => $trx['CardNo'] ?? null,
+                    'transaction' => $trx['Transaction'] ?? null,
+                    'tr_code'     => $trx['TrCode'] ?? null,
+                    'door_name'   => $trx['DoorName'] ?? null,
+                    'card_name'   => $trx['CardName'] ?? null,
+                    'department'  => $trx['Department'] ?? null,
+                    'staff_no'    => $trx['StaffNo'] ?? null,
+                    'nric'        => $trx['Nric'] ?? null,
                     'created_at'  => now(),
                     'updated_at'  => now(),
                 ];
